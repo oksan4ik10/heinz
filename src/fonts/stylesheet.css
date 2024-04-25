@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'CoFo Sans';
+    src: url('CoFoSans-Bold.eot');
+    src: local('CoFo Sans Bold'), local('CoFoSans-Bold'),
+        url('CoFoSans-Bold.eot?#iefix') format('embedded-opentype'),
+        url('CoFoSans-Bold.woff2') format('woff2'),
+        url('CoFoSans-Bold.woff') format('woff'),
+        url('CoFoSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+
+@font-face {
+    font-family: 'CoFo Sans';
+    src: url('CoFoSans-Regular.eot');
+    src: local('CoFo Sans'), local('CoFoSans-Regular'),
+        url('CoFoSans-Regular.eot?#iefix') format('embedded-opentype'),
+        url('CoFoSans-Regular.woff2') format('woff2'),
+        url('CoFoSans-Regular.woff') format('woff'),
+        url('CoFoSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CoFo Sans';
+    src: url('CoFoSans-Medium.eot');
+    src: local('CoFo Sans Medium'), local('CoFoSans-Medium'),
+        url('CoFoSans-Medium.eot?#iefix') format('embedded-opentype'),
+        url('CoFoSans-Medium.woff2') format('woff2'),
+        url('CoFoSans-Medium.woff') format('woff'),
+        url('CoFoSans-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CoFo Robert';
+    src: url("CoFoSans-MediumItalic.otf");
+
+    font-weight: 500;
+    font-style: italic;
+}
