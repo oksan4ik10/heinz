@@ -1,0 +1,14 @@
+.person {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--color-miamie);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.person img {
+    width: 60px;
+}
