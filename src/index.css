@@ -28,7 +28,7 @@
 }
 
 .scroll__elem {
-  overflow: auto;
+  overflow-y: auto;
   scrollbar-width: var(--scrollbar-width);
   scrollbar-color: var(--scrollbar-color) var(--scrollbar-track-color);
 }

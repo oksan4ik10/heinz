@@ -16,7 +16,7 @@ function App() {
             <Profile></Profile>
           </div>
           <section className="sections">
-            <div className="section__item"><span>Раздел 1</span></div>
+            <div className="section__item answer"><span>Сертификаты с различных конкурсов</span></div>
             <div className="section__item"><span>Раздел 1</span></div>
             <div className="section__item"><span>Раздел 1</span></div>
             <div className="section__item"><span>Раздел 1</span></div>
@@ -24,16 +24,30 @@ function App() {
             <div className="section__item"><span>Раздел 1</span></div>
           </section>
           <section className="answers">
-            <div className="answer__item">Интересные факты о себе</div>
-            <div className="answer__item">Отзывы работодателей</div>
-            <div className="answer__item">Хобби</div>
-            <div className="answer__item">Образование и дополнительные курсы</div>
-            <div className="answer__item">Опыт работы</div>
-            <div className="answer__item">Навыки</div>
-            <div className="answer__item">Фотография</div>
-            <div className="answer__item">Сертификаты с различных конкурсов</div>
-            <div className="answer__item">Желаемая должность</div>
-            <div className="answer__item">Личная и контактная информация</div>
+            <div className="answers__row">
+              <div className="answer__item">Интересные<br />факты о себе</div>
+              <div className="answer__item">Отзывы<br />работодателей</div>
+              <div className="answer__item">Хобби</div>
+            </div>
+            <div className="answers__row">
+              <div className="answer__item">Образование и дополнительные курсы</div>
+            </div>
+            <div className="answers__row">
+              <div className="answer__item">Опыт работы</div>
+              <div className="answer__item">Навыки</div>
+              <div className="answer__item">Фотография</div>
+            </div>
+            <div className="answers__row">
+              <div className="answer__item">Сертификаты<br />с различных конкурсов</div>
+              <div className="answer__item">Желаемая<br />должность</div>
+            </div>
+            <div className="answers__row">
+              <div className="answer__item">Личная и контактная информация</div>
+            </div>
+
+
+
+
 
           </section>
           <button className="btn btn_grey">
