@@ -34,6 +34,11 @@
 
 .wrapper {
   padding: 16px;
+  position: relative;
+}
+
+.wrapper * {
+  user-select: none;
 }
 
 .btn {
@@ -104,12 +109,13 @@
 
 .section__item {
   color: var(--color-white);
-  font-size: 18px;
+  font-size: 14px;
   line-height: 10px;
   padding: 14px 0px;
   position: relative;
   font-weight: 500;
   text-align: center;
+
 }
 
 .section__item:first-child {
@@ -170,6 +176,10 @@
   justify-content: center;
 }
 
+.answer__item:active {
+  opacity: 1;
+}
+
 .section__item.check,
 .section__item.answer:hover {
   color: var(--color-miamie);
@@ -203,7 +213,7 @@
   content: url("./assets/4arrow.svg");
   color: var(--color-miamie);
   opacity: .8;
-  margin-top: -1px;
+
 
 }
 
@@ -213,4 +223,20 @@
 
 .section__item.answer:hover span::after {
   content: url("./assets/4arrow-2.svg");
+}
+
+.facke__elem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
+.cursor {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: url("./assets/cursor.svg")
 }
