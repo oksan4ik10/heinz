@@ -218,11 +218,13 @@
 }
 
 .section__item.check,
-.section__item.hover {
+.section__item.hover,
+.section__item.hoverAnswer {
   color: var(--color-miamie);
 }
 
-.section__item.answer {
+.section__item.answer,
+.section__item.hoverAnswer {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -230,7 +232,8 @@
 
 }
 
-.section__item.answer span {
+.section__item.answer span,
+.section__item.hoverAnswer span {
   display: flex;
   align-items: start;
   justify-content: center;
@@ -287,14 +290,19 @@
   line-height: 10px;
 }
 
-.facke__elem.sectionItem::before {
+
+.section__item.hoverAnswer {}
+
+.facke__elem.sectionItem::before,
+.section__item.hoverAnswer span::before {
   content: url("./assets/4arrow-2.svg");
   color: var(--color-miamie);
   opacity: .8;
   transform: rotate(180deg);
 }
 
-.facke__elem.sectionItem::after {
+.facke__elem.sectionItem::after,
+.section__item.hoverAnswer span::after {
   content: url("./assets/4arrow-2.svg");
 
   opacity: .8;

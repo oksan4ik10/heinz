@@ -25,7 +25,7 @@ interface IAnswerCoordinate {
 function App() {
 
 
-  const refFackeElem = useRef<HTMLDivElement>(null);
+
   const refAnswerElem = useRef<HTMLDivElement>(null);
   const refWrapperElem = useRef<HTMLDivElement>(null);
   const refWrapperSection = useRef<HTMLDivElement>(null);
@@ -127,7 +127,7 @@ function App() {
   useEffect(() => {
     if (!refSection.current) return
 
-    let defSectionWrapper = refSection.current.offsetTop - 1;
+    let defSectionWrapper = refSection.current.getBoundingClientRect().top - wrapperCoordinate.y - 1;
     const arr: IAnswerCoordinate[] = []
     for (let index = 1; index < 7; index++) {
       const bottom = (index === 1) ? defSectionWrapper + 43 : ((index === 6)) ? defSectionWrapper + 43 : defSectionWrapper + 37;
@@ -272,6 +272,7 @@ function App() {
   }
 
 
+  const [idAnswerCheck, setIdAnswerCheck] = useState(0); //для перезаписи ответа
   const moveTouch = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!targetFackeElem || !targetElem || !refWrapperSection.current || !refAnswerElem.current) return;
     const data = e.changedTouches[0];
@@ -299,14 +300,22 @@ function App() {
     setAnswersList(answersList.map((item, index) => {
       const coordinate = answersListCoordinate[index];
       const isGoal = coordinate.top <= y && coordinate.bottom >= y;
-      if ((isGoal && item.hover) || item.id) return item
-      const obj = Object.assign({}, item)
-      if (isGoal && !obj.id) {
-        obj.hover = true;
+      if ((isGoal && item.hover)) return item
 
-      } else {
-        obj.hover = false
+      const obj = Object.assign({}, item)
+      if (isGoal) {
+        obj.hover = true;
+        setIdAnswerCheck(0)
+
       }
+      else {
+        obj.hover = false
+        obj.hoverAnswer = false;
+      }
+      if (isGoal && obj.id) {
+        setIdAnswerCheck(obj.id)
+      }
+
 
       return obj
 
@@ -350,6 +359,10 @@ function App() {
     setTargetFackeElem(undefined)
     targetFackeElem.remove();
     setUserAnswers(arr)
+    if (idAnswerCheck) {
+      changeAnswersItem(idAnswerCheck)
+
+    }
     if (isWin && id) {
       changeAnswersItem(+id)
 
@@ -518,7 +531,7 @@ function App() {
         <div className="wrapper" ref={refWrapperElem}>
           <img src={urlBgCircle} alt="circle" className='bg__circle bg' />
           <img src={urlBgStar} alt="star" className='bg__star bg' />
-          <div className="facke__elem answer__item" ref={refFackeElem}><div className='cursor'></div></div>
+
           <div className="head">
             <img src={urlSheet} alt="sheet" className="img__sheet" />
             <Profile></Profile>
@@ -529,7 +542,7 @@ function App() {
                 onTouchStart={startAnswerTouch}
                 onTouchMove={moveAnswerTouch}
                 onTouchEnd={endAnswerTouch}
-                data-id={index} data-iduser={item.id} key={index} className={"section__item " + (item.hover ? "hover" : (item.check && !item.hoverAnswer) ? "answer" : item.hoverAnswer ? "none" : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
+                data-id={index} data-iduser={item.id} key={index} className={"section__item " + ((item.hover && item.id) ? "hoverAnswer" : item.hover ? "hover" : (item.check && !item.hoverAnswer) ? "answer" : item.hoverAnswer ? "none" : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
             </section>
 
             <section className="answers"
