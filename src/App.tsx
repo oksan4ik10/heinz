@@ -8,13 +8,15 @@ import { useEffect, useRef, useState } from 'react'
 
 interface IAnswerUser {
   id: number,
-  top: number,
-  bottom: number,
   text: string,
   check: boolean,
   hover: boolean,
   rightAnswer: number[],
   win: boolean
+}
+interface IAnswerCoordinate {
+  top: number,
+  bottom: number,
 }
 
 function App() {
@@ -63,20 +65,16 @@ function App() {
 
 
   //задаем начальные данные для разделов
-  const [answersList, setAnswersList] = useState([{
+  const [answersList, setAnswersList] = useState<IAnswerUser[]>([{
     id: 0,
-    top: 0,
-    bottom: 0,
-    text: `Раздел`,
+    text: ``,
     check: false,
     hover: false,
     rightAnswer: [10, 7],
     win: false
   }, {
     id: 0,
-    top: 0,
-    bottom: 0,
-    text: `Раздел`,
+    text: ``,
     check: false,
     hover: false,
     rightAnswer: [10, 7],
@@ -84,9 +82,7 @@ function App() {
   },
   {
     id: 0,
-    top: 0,
-    bottom: 0,
-    text: `Раздел`,
+    text: ``,
     check: false,
     hover: false,
     rightAnswer: [9],
@@ -94,9 +90,7 @@ function App() {
   },
   {
     id: 0,
-    top: 0,
-    bottom: 0,
-    text: `Раздел`,
+    text: ``,
     check: false,
     hover: false,
     rightAnswer: [4],
@@ -104,9 +98,7 @@ function App() {
   },
   {
     id: 0,
-    top: 0,
-    bottom: 0,
-    text: `Раздел`,
+    text: ``,
     check: false,
     hover: false,
     rightAnswer: [5],
@@ -114,38 +106,30 @@ function App() {
   },
   {
     id: 0,
-    top: 0,
-    bottom: 0,
-    text: `Раздел`,
+    text: ``,
     check: false,
     hover: false,
     rightAnswer: [6],
     win: false
   },
   ]);
+  const [answersListCoordinate, setAnswersListCoordinate] = useState<IAnswerCoordinate[]>([]);
   useEffect(() => {
     if (!refSection.current) return
 
     let defSectionWrapper = refSection.current.offsetTop - 1;
-    const arr: IAnswerUser[] = []
+    const arr: IAnswerCoordinate[] = []
     for (let index = 1; index < 7; index++) {
       const bottom = (index === 1) ? defSectionWrapper + 43 : ((index === 6)) ? defSectionWrapper + 60 : defSectionWrapper + 37;
-      const obj: IAnswerUser = {
-        id: 0,
+      const obj: IAnswerCoordinate = {
         top: defSectionWrapper,
         bottom: bottom - 4,
-        text: `Раздел ${index}`,
-        check: false,
-        hover: false,
-        rightAnswer: answersList[index - 1].rightAnswer,
-        win: false
-
       }
       arr.push(obj)
       defSectionWrapper = bottom - 3
 
     }
-    setAnswersList(arr)
+    setAnswersListCoordinate(arr)
 
 
   }, [])
@@ -160,11 +144,7 @@ function App() {
     const targetDrag = e.changedTouches[0].target as HTMLElement;
     const target = targetDrag.closest(".answer__item") as HTMLElement;
 
-    console.log(target.matches(".none"));
-
     if ((!target) || (target.matches(".none"))) return;
-    console.log(34);
-
 
     const fackeElem = document.createElement("div");
     fackeElem.className = "facke__elem answer__item";
@@ -226,8 +206,9 @@ function App() {
 
 
 
-    setAnswersList(answersList.map((item) => {
-      const isGoal = item.top < y && item.bottom > y;
+    setAnswersList(answersList.map((item, index) => {
+      const coordinate = answersListCoordinate[index];
+      const isGoal = coordinate.top < y && coordinate.bottom > y;
       if ((isGoal && item.hover) || item.id) return item
       const obj = Object.assign({}, item)
       if (isGoal && !obj.id) {
@@ -322,7 +303,7 @@ function App() {
           </div>
           <div className="wrapper__section" ref={refWrapperSection}>
             <section className="sections" ref={refSection}>
-              {answersList.map((item, index) => <div key={index} className={"section__item " + (item.hover ? "hover" : "")}><span>{item.text}</span></div>)}
+              {answersList.map((item, index) => <div key={index} className={"section__item " + (item.hover ? "hover" : item.id ? "answer" : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
               {/* <div className="section__item answer"><span>Сертификаты с различных конкурсов</span></div> */}
               {/* <div className={"section__item " + (answersList[0].hover ? "hover" : "")}><span>Раздел 1</span></div>
               <div className={"section__item " + (answersList[1].hover ? "hover" : "")}><span>Раздел 2</span></div>
