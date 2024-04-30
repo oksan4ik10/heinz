@@ -392,12 +392,7 @@ function App() {
     setIdLast(+idAnswer)
     createFackeElem("facke__elem sectionItem", idAnswer, target)
 
-
-
   }
-
-
-
 
   const moveAnswerTouch = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!targetFackeElem || !targetElem || !refWrapperSection.current || !refAnswerElem.current) return;
@@ -440,10 +435,31 @@ function App() {
       answersList[idLast] = temp1;
       setAnswersList(answersList)
       setIdLast(id)
+      return
+    }
+
+    if (id === -1 && idLast === 5) {
+
+      setAnswersList(answersList.map((item, index) => {
+        if (index === 5) {
+          item.check = false;
+          item.hover = false;
+          item.hoverAnswer = false;
+          item.win = false;
+          item.text = "";
+          item.id = 0
+        }
+        return item
+      }))
 
     }
 
   }
+  const endAnswerTouch = () => {
+
+  }
+  console.log(answersList);
+
 
 
 
@@ -469,7 +485,7 @@ function App() {
               {answersList.map((item, index) => <div
                 onTouchStart={startAnswerTouch}
                 onTouchMove={moveAnswerTouch}
-                onTouchEnd={endTouch}
+                onTouchEnd={endAnswerTouch}
                 data-id={index} key={index} className={"section__item " + (item.hover ? "hover" : (item.id && !item.hoverAnswer) ? "answer" : item.hoverAnswer ? "none" : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
             </section>
 
@@ -478,9 +494,10 @@ function App() {
               onTouchStart={startTouch}
               onTouchMove={moveTouch}
               onTouchEnd={endTouch}
+
             >
-              {answersItem.map(item => <div className="answers__row">
-                {item.map(i => <div className={"answer__item " + (i.check ? "none" : "")} data-id={i.id}>{i.text}</div>)}
+              {answersItem.map((item, index) => <div className="answers__row" key={index}>
+                {item.map(i => <div key={i.id} className={"answer__item " + (i.check ? "none" : "")} data-id={i.id}>{i.text}</div>)}
               </div>)}
               {/* <div className="answers__row">
                 <div className="answer__item" data-id={1}>Интересные <br />факты о себе</div>
