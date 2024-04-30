@@ -10,7 +10,8 @@ interface IAnswerUser {
   id: number,
   text: string,
   check: boolean,
-  hover: boolean,
+  hover: boolean, //при наведении элемента из ответов
+  hoverAnswer: boolean, //при перестановке разделов
   rightAnswer: number[],
   win: boolean
 }
@@ -71,14 +72,16 @@ function App() {
     check: false,
     hover: false,
     rightAnswer: [10, 7],
-    win: false
+    win: false,
+    hoverAnswer: false
   }, {
     id: 0,
     text: ``,
     check: false,
     hover: false,
     rightAnswer: [10, 7],
-    win: false
+    win: false,
+    hoverAnswer: false
   },
   {
     id: 0,
@@ -86,7 +89,8 @@ function App() {
     check: false,
     hover: false,
     rightAnswer: [9],
-    win: false
+    win: false,
+    hoverAnswer: false
   },
   {
     id: 0,
@@ -94,7 +98,8 @@ function App() {
     check: false,
     hover: false,
     rightAnswer: [4],
-    win: false
+    win: false,
+    hoverAnswer: false
   },
   {
     id: 0,
@@ -102,7 +107,8 @@ function App() {
     check: false,
     hover: false,
     rightAnswer: [5],
-    win: false
+    win: false,
+    hoverAnswer: false
   },
   {
     id: 0,
@@ -110,9 +116,11 @@ function App() {
     check: false,
     hover: false,
     rightAnswer: [6],
-    win: false
+    win: false,
+    hoverAnswer: false
   },
   ]);
+  //координаты разделов
   const [answersListCoordinate, setAnswersListCoordinate] = useState<IAnswerCoordinate[]>([]);
   useEffect(() => {
     if (!refSection.current) return
@@ -120,13 +128,13 @@ function App() {
     let defSectionWrapper = refSection.current.offsetTop - 1;
     const arr: IAnswerCoordinate[] = []
     for (let index = 1; index < 7; index++) {
-      const bottom = (index === 1) ? defSectionWrapper + 43 : ((index === 6)) ? defSectionWrapper + 60 : defSectionWrapper + 37;
+      const bottom = (index === 1) ? defSectionWrapper + 43 : ((index === 6)) ? defSectionWrapper + 43 : defSectionWrapper + 37;
       const obj: IAnswerCoordinate = {
         top: defSectionWrapper,
-        bottom: bottom - 4,
+        bottom: bottom,
       }
       arr.push(obj)
-      defSectionWrapper = bottom - 3
+      defSectionWrapper = bottom + 1
 
     }
     setAnswersListCoordinate(arr)
@@ -135,37 +143,116 @@ function App() {
   }, [])
 
 
+
+  //данные для ответов
+  const [answersItem, setAnswersItem] = useState([
+    [
+      {
+        id: 1,
+        text: "Хобби",
+        check: false
+      },
+      {
+        id: 2,
+        text: "Хобби2",
+        check: false
+      },
+      {
+        id: 3,
+        text: "Хобби3",
+        check: false
+      },
+    ],
+    [
+      {
+        id: 4,
+        text: "Хобби3",
+        check: false
+      },
+    ],
+    [
+      {
+        id: 5,
+        text: "Хобби3",
+        check: false
+      },
+      {
+        id: 6,
+        text: "Хобби3",
+        check: false
+      },
+      {
+        id: 7,
+        text: "Хобби3",
+        check: false
+      },
+    ],
+    [
+      {
+        id: 8,
+        text: "Хобби3",
+        check: false
+      },
+      {
+        id: 9,
+        text: "Хобби3",
+        check: false
+      },
+    ],
+    [
+      {
+        id: 10,
+        text: "Хобби3",
+        check: false
+      },
+    ]
+  ])
+
+
   const [targetFackeElem, setTargetFackeElem] = useState<HTMLElement | undefined>(undefined);
   const [targetElem, setTargetElem] = useState<HTMLElement | undefined>(undefined);
   const [userAnswers, setUserAnswers] = useState<number[]>([])
   // let cursor: HTMLElement | undefined;
 
-  const startTouch = (e: React.TouchEvent<HTMLSpanElement>) => {
-    const targetDrag = e.changedTouches[0].target as HTMLElement;
-    const target = targetDrag.closest(".answer__item") as HTMLElement;
-
-    if ((!target) || (target.matches(".none"))) return;
-
+  const createFackeElem = (classFacke: string, id: string, target: HTMLElement) => {
     const fackeElem = document.createElement("div");
-    fackeElem.className = "facke__elem answer__item";
-    target.classList.add("none");
-    setTargetElem(target)
+    fackeElem.className = classFacke;
+
     const { width, height, left, top } = target.getBoundingClientRect();
+    target.classList.add("none");
 
-    const id = target.dataset.id;
+    setTargetElem(target)
 
-    fackeElem.setAttribute("data-id", id + "");
+    fackeElem.setAttribute("data-id", id);
     fackeElem.style.width = width + "px";
     fackeElem.style.height = height + "px";
     fackeElem.style.left = left - answerCoordinate.x + 16 + "px";
     fackeElem.style.opacity = "1";
     fackeElem.style.top = top - wrapperCoordinate.y + "px";
     fackeElem.innerHTML = target.innerHTML;
-    fackeElem.style.background = "red";
     fackeElem.style.zIndex = "99";
 
-
     refWrapperElem.current?.append(fackeElem);
+    setTargetFackeElem(fackeElem)
+
+  }
+
+  const startTouch = (e: React.TouchEvent<HTMLSpanElement>) => {
+    const targetDrag = e.changedTouches[0].target as HTMLElement;
+    const target = targetDrag.closest(".answer__item") as HTMLElement;
+
+    if ((!target) || (target.matches(".none"))) return;
+    const id = target.dataset.id ? target.dataset.id : "0";
+    createFackeElem("facke__elem answer__item", id, target)
+
+
+    // const fackeElem = document.createElement("div");
+    // fackeElem.className = "facke__elem answer__item";
+
+
+
+
+    // refWrapperElem.current?.append(fackeElem);
     // const newCursor = document.createElement("div");
     // newCursor.classList.add("cursor");
 
@@ -178,7 +265,7 @@ function App() {
     // newCursor.style.top = y + "px";
     // fackeElem.append(newCursor);
     // cursor = newCursor;
-    setTargetFackeElem(fackeElem)
+
   }
 
 
@@ -208,7 +295,7 @@ function App() {
 
     setAnswersList(answersList.map((item, index) => {
       const coordinate = answersListCoordinate[index];
-      const isGoal = coordinate.top < y && coordinate.bottom > y;
+      const isGoal = coordinate.top <= y && coordinate.bottom >= y;
       if ((isGoal && item.hover) || item.id) return item
       const obj = Object.assign({}, item)
       if (isGoal && !obj.id) {
@@ -258,6 +345,7 @@ function App() {
     setTargetFackeElem(undefined)
     targetFackeElem.remove();
     if (isWin && id) {
+      changeAnswersItem(+id)
       setUserAnswers([...userAnswers, +id])
       return
     }
@@ -265,6 +353,8 @@ function App() {
     targetElem.classList.remove("none")
 
   }
+
+  //алгоритм для кнопки Проверить
   const clickCheckWin = () => {
 
     if (userAnswers.length !== 6) return
@@ -291,6 +381,79 @@ function App() {
 
   }
 
+  const [idLast, setIdLast] = useState(-1); //для перестановки ответов
+  const startAnswerTouch = (e: React.TouchEvent<HTMLDivElement>) => {
+    const targetDrag = e.changedTouches[0].target as HTMLElement;
+    const targetDiv = targetDrag.closest(".answer") as HTMLElement;
+    if (!targetDiv) return
+    const target = targetDiv.querySelector("span") as HTMLElement;
+    if (!target) return;
+    const idAnswer = targetDiv.dataset.id ? targetDiv.dataset.id : "-1";
+    setIdLast(+idAnswer)
+    createFackeElem("facke__elem sectionItem", idAnswer, target)
+
+
+
+  }
+
+
+
+
+  const moveAnswerTouch = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!targetFackeElem || !targetElem || !refWrapperSection.current || !refAnswerElem.current) return;
+    const data = e.changedTouches[0];
+    const clientX = data.clientX;
+    const clientY = data.clientY;
+
+    let y = clientY - wrapperCoordinate.y - (targetFackeElem.offsetHeight / 2);
+    let x = clientX - wrapperCoordinate.x - (targetFackeElem.offsetWidth / 2);
+    if (x < 0) x = 0
+    if (x + targetFackeElem.clientWidth > wrapperCoordinate.width) x = wrapperCoordinate.width - targetFackeElem.clientWidth;
+
+    const defWrapperSection = refWrapperSection.current.offsetTop;
+
+
+    if (y < defWrapperSection) y = defWrapperSection;
+
+    const yTopAnswer = refAnswerElem.current.getBoundingClientRect().y + answerCoordinate.height - wrapperCoordinate.y;
+    if (y + targetFackeElem.clientHeight > yTopAnswer) y = yTopAnswer - targetFackeElem.clientHeight;
+    targetFackeElem.style.top = y + "px";
+    targetFackeElem.style.left = x + "px";
+    let id = -1;
+
+    setAnswersList(answersList.map((item, index) => {
+      const coordinate = answersListCoordinate[index];
+      const isGoal = coordinate.top <= y && coordinate.bottom + 1 >= y;
+      const obj = Object.assign({}, item)
+      if (isGoal) {
+        obj.hoverAnswer = true;
+        id = index
+      } else {
+        obj.hoverAnswer = false
+      }
+      return obj
+
+    }))
+    if ((id !== -1) && (idLast !== id)) {
+      const temp1 = answersList[id];
+      answersList[id] = answersList[idLast];
+      answersList[idLast] = temp1;
+      setAnswersList(answersList)
+      setIdLast(id)
+
+    }
+
+  }
+
+
+
+
+  const changeAnswersItem = (id: number) => {
+    setAnswersItem(answersItem.map((item) => item.map((i) => {
+      if (i.id === id) i.check = !i.check;
+      return i
+    })))
+  }
 
   return (
     <>
@@ -303,14 +466,11 @@ function App() {
           </div>
           <div className="wrapper__section" ref={refWrapperSection}>
             <section className="sections" ref={refSection}>
-              {answersList.map((item, index) => <div key={index} className={"section__item " + (item.hover ? "hover" : item.id ? "answer" : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
-              {/* <div className="section__item answer"><span>Сертификаты с различных конкурсов</span></div> */}
-              {/* <div className={"section__item " + (answersList[0].hover ? "hover" : "")}><span>Раздел 1</span></div>
-              <div className={"section__item " + (answersList[1].hover ? "hover" : "")}><span>Раздел 2</span></div>
-              <div className={"section__item " + (answersList[2].hover ? "hover" : "")}><span>Раздел 3</span></div>
-              <div className={"section__item " + (answersList[3].hover ? "hover" : "")}><span>Раздел 4</span></div>
-              <div className={"section__item " + (answersList[4].hover ? "hover" : "")}><span>Раздел 5</span></div>
-              <div className={"section__item " + (answersList[5].hover ? "hover" : "")}><span>Раздел 6</span></div> */}
+              {answersList.map((item, index) => <div
+                onTouchStart={startAnswerTouch}
+                onTouchMove={moveAnswerTouch}
+                onTouchEnd={endTouch}
+                data-id={index} key={index} className={"section__item " + (item.hover ? "hover" : (item.id && !item.hoverAnswer) ? "answer" : item.hoverAnswer ? "none" : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
             </section>
 
             <section className="answers"
@@ -319,7 +479,10 @@ function App() {
               onTouchMove={moveTouch}
               onTouchEnd={endTouch}
             >
-              <div className="answers__row">
+              {answersItem.map(item => <div className="answers__row">
+                {item.map(i => <div className={"answer__item " + (i.check ? "none" : "")} data-id={i.id}>{i.text}</div>)}
+              </div>)}
+              {/* <div className="answers__row">
                 <div className="answer__item" data-id={1}>Интересные <br />факты о себе</div>
                 <div className="answer__item" data-id={2}>Отзывы <br />работодателей</div>
                 <div className="answer__item" data-id={3}>Хобби</div>
@@ -338,7 +501,7 @@ function App() {
               </div>
               <div className="answers__row">
                 <div className="answer__item" data-id={10}>Личная и контактная информация</div>
-              </div>
+              </div> */}
             </section>
             <button className={"btn  " + (userAnswers.length !== 6 ? "btn_grey" : "")} onClick={clickCheckWin}>
               Проверить
