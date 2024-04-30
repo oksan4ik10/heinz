@@ -214,7 +214,7 @@ function App() {
   const [userAnswers, setUserAnswers] = useState<number[]>([])
   // let cursor: HTMLElement | undefined;
 
-  const createFackeElem = (classFacke: string, id: string, target: HTMLElement) => {
+  const createFackeElem = (classFacke: string, id: string, target: HTMLElement, iduser?: string) => {
     const fackeElem = document.createElement("div");
     fackeElem.className = classFacke;
 
@@ -224,6 +224,7 @@ function App() {
     setTargetElem(target)
 
     fackeElem.setAttribute("data-id", id);
+    if (iduser) fackeElem.setAttribute("data-iduser", iduser);
     fackeElem.style.width = width + "px";
     fackeElem.style.height = height + "px";
     fackeElem.style.left = left - answerCoordinate.x + 16 + "px";
@@ -329,6 +330,7 @@ function App() {
     if (!targetFackeElem || !targetElem) return
     const id = targetFackeElem.dataset.id;
     let isWin = false;
+    const arr: number[] = []
     setAnswersList(answersList.map((item) => {
       if (item.hover) {
         isWin = true;
@@ -339,14 +341,16 @@ function App() {
         item.win = (item.rightAnswer.indexOf(id ? +id : 0) !== -1)
 
       }
+      arr.push(item.id)
       return item
     }))
     setTargetElem(undefined);
     setTargetFackeElem(undefined)
     targetFackeElem.remove();
+    setUserAnswers(arr)
     if (isWin && id) {
       changeAnswersItem(+id)
-      setUserAnswers([...userAnswers, +id])
+
       return
     }
 
@@ -382,6 +386,7 @@ function App() {
   }
 
   const [idLast, setIdLast] = useState(-1); //для перестановки ответов
+
   const startAnswerTouch = (e: React.TouchEvent<HTMLDivElement>) => {
     const targetDrag = e.changedTouches[0].target as HTMLElement;
     const targetDiv = targetDrag.closest(".answer") as HTMLElement;
@@ -389,8 +394,9 @@ function App() {
     const target = targetDiv.querySelector("span") as HTMLElement;
     if (!target) return;
     const idAnswer = targetDiv.dataset.id ? targetDiv.dataset.id : "-1";
+    const iduser = targetDiv.dataset.iduser ? targetDiv.dataset.iduser : "0";
     setIdLast(+idAnswer)
-    createFackeElem("facke__elem sectionItem", idAnswer, target)
+    createFackeElem("facke__elem sectionItem", idAnswer, target, iduser)
 
   }
 
@@ -442,8 +448,7 @@ function App() {
 
       setAnswersList(answersList.map((item, index) => {
         if (index === 5) {
-          item.check = false;
-          item.hover = false;
+          item.check = false
           item.hoverAnswer = false;
           item.win = false;
           item.text = "";
@@ -456,9 +461,43 @@ function App() {
 
   }
   const endAnswerTouch = () => {
+    if (!targetFackeElem || !targetElem) return
+
+
+    const id = +(targetFackeElem.dataset.id ? targetFackeElem.dataset.id : "");
+    const iduser = +(targetFackeElem.dataset.iduser ? targetFackeElem.dataset.iduser : "")
+
+    let isWin = false;
+
+    const arr: number[] = []
+    setAnswersList(answersList.map((item) => {
+      if (item.hoverAnswer) {
+        isWin = true
+        item.win = true;
+        item.hoverAnswer = false;
+        item.id = iduser;
+        item.check = true;
+        item.text = targetFackeElem.textContent ? targetFackeElem.textContent : "";
+        item.win = (item.rightAnswer.indexOf(id) !== -1)
+
+      }
+      arr.push(item.id)
+      return item
+    }))
+
+
+    setTargetElem(undefined);
+    setTargetFackeElem(undefined)
+    targetFackeElem.remove();
+    setUserAnswers(arr)
+    if (isWin && iduser) {
+
+      return
+    }
+    changeAnswersItem(iduser)
+    targetElem.classList.remove("none")
 
   }
-  console.log(answersList);
 
 
 
@@ -486,7 +525,7 @@ function App() {
                 onTouchStart={startAnswerTouch}
                 onTouchMove={moveAnswerTouch}
                 onTouchEnd={endAnswerTouch}
-                data-id={index} key={index} className={"section__item " + (item.hover ? "hover" : (item.id && !item.hoverAnswer) ? "answer" : item.hoverAnswer ? "none" : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
+                data-id={index} data-iduser={item.id} key={index} className={"section__item " + (item.hover ? "hover" : (item.check && !item.hoverAnswer) ? "answer" : item.hoverAnswer ? "none" : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
             </section>
 
             <section className="answers"
@@ -520,7 +559,7 @@ function App() {
                 <div className="answer__item" data-id={10}>Личная и контактная информация</div>
               </div> */}
             </section>
-            <button className={"btn  " + (userAnswers.length !== 6 ? "btn_grey" : "")} onClick={clickCheckWin}>
+            <button className={"btn  " + (userAnswers.filter(item => item).length !== 6 ? "btn_grey" : "")} onClick={clickCheckWin}>
               Проверить
             </button>
           </div>
