@@ -65,6 +65,21 @@
 /* 
 /=======SCREEN4========/ */
 
+.bg {
+  position: absolute;
+  z-index: 1;
+}
+
+.bg__circle {
+  top: 0px;
+  left: 0px;
+}
+
+.bg__star {
+  top: 0px;
+  right: 0px;
+}
+
 .head {
   display: flex;
   align-items: start;
@@ -73,6 +88,7 @@
   top: 16px;
   left: 16px;
   width: calc(100% - 32px);
+  z-index: 2;
 }
 
 .wrapper {
@@ -87,6 +103,8 @@
   margin-top: 75px;
   flex-shrink: 0;
   flex-grow: 2;
+  position: relative;
+  z-index: 2;
 }
 
 .img__sheet {

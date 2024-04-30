@@ -4,6 +4,8 @@
 import './App.css'
 import Profile from './components/Profile/Profile'
 import urlSheet from "./assets/4sheet.png"
+import urlBgStar from "./assets/4bg-star.svg"
+import urlBgCircle from "./assets/4bg-circle.svg"
 import { useEffect, useRef, useState } from 'react'
 
 interface IAnswerUser {
@@ -149,60 +151,60 @@ function App() {
     [
       {
         id: 1,
-        text: "Хобби",
+        text: "Интересные <br />факты о себе",
         check: false
       },
       {
         id: 2,
-        text: "Хобби2",
+        text: "Отзывы <br />работодателей",
         check: false
       },
       {
         id: 3,
-        text: "Хобби3",
+        text: "Хобби",
         check: false
       },
     ],
     [
       {
         id: 4,
-        text: "Хобби3",
+        text: "Образование и дополнительные курсы",
         check: false
       },
     ],
     [
       {
         id: 5,
-        text: "Хобби3",
+        text: "Опыт работы",
         check: false
       },
       {
         id: 6,
-        text: "Хобби3",
+        text: "Навыки",
         check: false
       },
       {
         id: 7,
-        text: "Хобби3",
+        text: "Фотография",
         check: false
       },
     ],
     [
       {
         id: 8,
-        text: "Хобби3",
+        text: "Сертификаты",
         check: false
       },
       {
         id: 9,
-        text: "Хобби3",
+        text: "Желаемая <br />должность",
         check: false
       },
     ],
     [
       {
         id: 10,
-        text: "Хобби3",
+        text: "Личная и контактная информация",
         check: false
       },
     ]
@@ -514,6 +516,8 @@ function App() {
     <>
       <div className="container scroll__elem">
         <div className="wrapper" ref={refWrapperElem}>
+          <img src={urlBgCircle} alt="circle" className='bg__circle bg' />
+          <img src={urlBgStar} alt="star" className='bg__star bg' />
           <div className="facke__elem answer__item" ref={refFackeElem}><div className='cursor'></div></div>
           <div className="head">
             <img src={urlSheet} alt="sheet" className="img__sheet" />
@@ -536,7 +540,7 @@ function App() {
 
             >
               {answersItem.map((item, index) => <div className="answers__row" key={index}>
-                {item.map(i => <div key={i.id} className={"answer__item " + (i.check ? "none" : "")} data-id={i.id}>{i.text}</div>)}
+                {item.map(i => <div key={i.id} dangerouslySetInnerHTML={{ __html: i.text }} className={"answer__item " + (i.check ? "none" : "")} data-id={i.id} ></div>)}
               </div>)}
               {/* <div className="answers__row">
                 <div className="answer__item" data-id={1}>Интересные <br />факты о себе</div>
@@ -549,7 +553,7 @@ function App() {
               <div className="answers__row">
                 <div className="answer__item" data-id={5}>Опыт работы</div>
                 <div className="answer__item" data-id={6}>Навыки</div>
-                <div className="answer__item" data-id={7}>Фотография</div>
+                <div className="answer__item" data-id={7}>Навыки</div>
               </div>
               <div className="answers__row">
                 <div className="answer__item" data-id={8}>Сертификаты <br />с различных конкурсов</div>
