@@ -8,6 +8,9 @@ import urlBgStar from "./assets/4bg-star.svg"
 import urlBgCircle from "./assets/4bg-circle.svg"
 import { useEffect, useRef, useState } from 'react'
 
+import ScreenBlur from './components/ScreenBlur/ScreenBlur'
+import Modal from './components/Modal/Modal'
+
 interface IAnswerUser {
   id: number,
   text: string,
@@ -125,9 +128,11 @@ function App() {
   //координаты разделов
   const [answersListCoordinate, setAnswersListCoordinate] = useState<IAnswerCoordinate[]>([]);
   useEffect(() => {
-    if (!refSection.current) return
+    if (!refSection.current || !refWrapperElem.current) return
 
-    let defSectionWrapper = refSection.current.getBoundingClientRect().top - wrapperCoordinate.y - 1;
+    let defSectionWrapper = refSection.current.getBoundingClientRect().top - refWrapperElem.current.getBoundingClientRect().top - 1;
+    refErrorModal.current?.style.setProperty("--top-section", defSectionWrapper + "px")
+
     const arr: IAnswerCoordinate[] = []
     for (let index = 1; index < 7; index++) {
       const bottom = (index === 1) ? defSectionWrapper + 43 : ((index === 6)) ? defSectionWrapper + 43 : defSectionWrapper + 37;
@@ -213,6 +218,7 @@ function App() {
 
   const [targetFackeElem, setTargetFackeElem] = useState<HTMLElement | undefined>(undefined);
   const [targetElem, setTargetElem] = useState<HTMLElement | undefined>(undefined);
+
   const [userAnswers, setUserAnswers] = useState<number[]>([])
   // let cursor: HTMLElement | undefined;
 
@@ -224,6 +230,7 @@ function App() {
     target.classList.add("none");
 
     setTargetElem(target)
+
 
     fackeElem.setAttribute("data-id", id);
     if (iduser) fackeElem.setAttribute("data-iduser", iduser);
@@ -240,44 +247,48 @@ function App() {
 
   }
 
+
+  const [idAnswerCheck, setIdAnswerCheck] = useState(0); //для перезаписи ответа
+  const startClick = useRef(false);
   const startTouch = (e: React.TouchEvent<HTMLSpanElement>) => {
     const targetDrag = e.changedTouches[0].target as HTMLElement;
+    start(targetDrag)
+
+  }
+  const startMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+    const targetDrag = e.target as HTMLElement;
+    startClick.current = true;
+    start(targetDrag)
+  }
+
+  const start = (targetDrag: HTMLElement) => {
     const target = targetDrag.closest(".answer__item") as HTMLElement;
 
     if ((!target) || (target.matches(".none"))) return;
     const id = target.dataset.id ? target.dataset.id : "0";
     createFackeElem("facke__elem answer__item", id, target)
 
+  }
 
-    // const fackeElem = document.createElement("div");
-    // fackeElem.className = "facke__elem answer__item";
+  const moveTouch = (e: React.TouchEvent<HTMLDivElement>) => {
 
+    const data = e.changedTouches[0];
+    move(data.clientX, data.clientY)
 
-
-
-    // refWrapperElem.current?.append(fackeElem);
-    // const newCursor = document.createElement("div");
-    // newCursor.classList.add("cursor");
-
-    // const data = e.changedTouches[0];
-    // let x = data.clientX - left - 20;
-    // if (x < 0) x = targetDrag.offsetLeft
-    // let y = data.clientY - top - 20;
-    // if (y < 0) y = 0;
-    // newCursor.style.left = x + "px";
-    // newCursor.style.top = y + "px";
-    // fackeElem.append(newCursor);
-    // cursor = newCursor;
 
   }
 
 
-  const [idAnswerCheck, setIdAnswerCheck] = useState(0); //для перезаписи ответа
-  const moveTouch = (e: React.TouchEvent<HTMLDivElement>) => {
+  const moveMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+    // console.log(e);
+
+    move(e.pageX, e.pageY);
+  }
+  const move = (xUser: number, yUser: number) => {
     if (!targetFackeElem || !targetElem || !refWrapperSection.current || !refAnswerElem.current) return;
-    const data = e.changedTouches[0];
-    const clientX = data.clientX;
-    const clientY = data.clientY;
+
+    const clientX = xUser;
+    const clientY = yUser;
 
     let y = clientY - wrapperCoordinate.y - (targetFackeElem.offsetHeight / 2);
     let x = clientX - wrapperCoordinate.x - (targetFackeElem.offsetWidth / 2);
@@ -320,22 +331,9 @@ function App() {
       return obj
 
     }))
-
-
-
-
-
-
-    // if (!cursor) return;
-    // let xCursor = clientX - x - wrapperCoordinate.x - 20;
-    // if (xCursor < 0) xCursor = 0
-    // let yCursor = clientY - y - wrapperCoordinate.y - 20;
-    // if (yCursor < 0) yCursor = 0;
-    // cursor.style.left = xCursor + "px";
-    // cursor.style.top = yCursor + "px";
-
-
   }
+
+
   const endTouch = () => {
 
     if (!targetFackeElem || !targetElem) return
@@ -349,7 +347,6 @@ function App() {
         item.id = id ? +id : 0;
         item.check = true;
         item.text = targetFackeElem.textContent ? targetFackeElem.textContent : "";
-        item.win = (item.rightAnswer.indexOf(id ? +id : 0) !== -1)
 
       }
       arr.push(item.id)
@@ -372,33 +369,14 @@ function App() {
     targetElem.classList.remove("none")
 
   }
-
-  //алгоритм для кнопки Проверить
-  const clickCheckWin = () => {
-
-    if (userAnswers.length !== 6) return
-
-
-    const sortUserAnswer = [...userAnswers].sort((a, b) => a - b);
-
-    const answersRight = [4, 5, 6, 7, 9, 10];
-    let winOrLouser = sortUserAnswer.toString() !== answersRight.toString() ? "loser" : ""
-
-    if (winOrLouser) {
-      console.log(winOrLouser);
-      return
-      //если есть неверные ответы
-    }
-
-    //если все ответы правильные, проверяем очередность
-    winOrLouser = answersList.filter((item) => !item.win).length === 0 ? "win" : "hash"
-
-
-    console.log(winOrLouser);
-
-
+  const outMouse = () => {
 
   }
+  const endMouse = () => {
+
+  }
+
+
 
   const [idLast, setIdLast] = useState(-1); //для перестановки ответов
 
@@ -465,7 +443,6 @@ function App() {
         if (index === 5) {
           item.check = false
           item.hoverAnswer = false;
-          item.win = false;
           item.text = "";
           item.id = 0
         }
@@ -479,7 +456,6 @@ function App() {
     if (!targetFackeElem || !targetElem) return
 
 
-    const id = +(targetFackeElem.dataset.id ? targetFackeElem.dataset.id : "");
     const iduser = +(targetFackeElem.dataset.iduser ? targetFackeElem.dataset.iduser : "")
 
     let isWin = false;
@@ -488,12 +464,12 @@ function App() {
     setAnswersList(answersList.map((item) => {
       if (item.hoverAnswer) {
         isWin = true
-        item.win = true;
+
         item.hoverAnswer = false;
         item.id = iduser;
         item.check = true;
         item.text = targetFackeElem.textContent ? targetFackeElem.textContent : "";
-        item.win = (item.rightAnswer.indexOf(id) !== -1)
+
 
       }
       arr.push(item.id)
@@ -516,8 +492,52 @@ function App() {
 
 
 
+  const refErrorModal = useRef<HTMLDivElement>(null);
+  const [datakWin, setDataWin] = useState("");
+  //алгоритм для кнопки Проверить
 
 
+
+  const clickCheckWin = () => {
+
+    if (userAnswers.length !== 6) return
+
+
+    const sortUserAnswer = [...userAnswers].sort((a, b) => a - b);
+    const answersRight = [4, 5, 6, 7, 9, 10];
+
+    //если правильность ответов
+    let winOrLouser = sortUserAnswer.toString() !== answersRight.toString() ? "loser" : ""
+
+
+    let countRightAnswer = 0;
+
+    const rightAnswer = [[10, 7], [10, 7], [9], [4], [5], [6]]
+
+    setAnswersList(answersList.map((item, index) => {
+      if (rightAnswer[index].indexOf(item.id) !== -1) {
+        item.win = true;
+        countRightAnswer++
+      }
+      return item
+    }))
+
+    //если все ответы правильные, проверяем очередность
+    if (countRightAnswer !== 6 && !winOrLouser) {
+      winOrLouser = "hash"
+    }
+    if (winOrLouser) {
+      setDataWin(winOrLouser)
+      return
+    }
+
+    //переход на следующий экран
+    console.log("win");
+
+
+
+
+  }
   const changeAnswersItem = (id: number) => {
     setAnswersItem(answersItem.map((item) => item.map((i) => {
       if (i.id === id) i.check = !i.check;
@@ -529,6 +549,15 @@ function App() {
     <>
       <div className="container scroll__elem">
         <div className="wrapper" ref={refWrapperElem}>
+          <ScreenBlur screen={Boolean(datakWin)}>
+            <div className="error__modal" ref={refErrorModal}>
+              <section className="sections ">
+                {answersList.map((item, index) => <div
+                  key={index} className={"section__item " + (item.win ? "" : "error")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
+              </section>
+              <Modal border={false} btnText="Исправить ошибки" funcBtn={() => setDataWin("")} text={datakWin === "loser" ? 'В резюме необходимо размещать только<br/>самую важную информацию, которая<br/>поможет HR-специалисту быстро оценить,<br/>насколько твой опыт соответствует<br/>вакансии. Побольше о себе ты сможешь<br/>рассказать на собеседовании :)' : "Ты молодец и выбрал верные разделы,<br/>однако в составлении резюме важно то,<br/>в каком порядке они расположены.<br/>Попробуй поменять местами те заголовки,<br/>которые загорелись красным."} />
+            </div>
+          </ScreenBlur>
           <img src={urlBgCircle} alt="circle" className='bg__circle bg' />
           <img src={urlBgStar} alt="star" className='bg__star bg' />
 
@@ -545,8 +574,12 @@ function App() {
                 data-id={index} data-iduser={item.id} key={index} className={"section__item " + ((item.hover && item.id) ? "hoverAnswer" : item.hover ? "hover" : (item.check && !item.hoverAnswer) ? "answer" : item.hoverAnswer ? "none" : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
             </section>
 
-            <section className="answers"
+            <section className={"answers " + (datakWin ? "answersError" : "")}
               ref={refAnswerElem}
+              onMouseDown={startMouse}
+              onMouseMove={moveMouse}
+              onMouseOut={outMouse}
+              onMouseUp={endMouse}
               onTouchStart={startTouch}
               onTouchMove={moveTouch}
               onTouchEnd={endTouch}
@@ -555,28 +588,8 @@ function App() {
               {answersItem.map((item, index) => <div className="answers__row" key={index}>
                 {item.map(i => <div key={i.id} dangerouslySetInnerHTML={{ __html: i.text }} className={"answer__item " + (i.check ? "none" : "")} data-id={i.id} ></div>)}
               </div>)}
-              {/* <div className="answers__row">
-                <div className="answer__item" data-id={1}>Интересные <br />факты о себе</div>
-                <div className="answer__item" data-id={2}>Отзывы <br />работодателей</div>
-                <div className="answer__item" data-id={3}>Хобби</div>
-              </div>
-              <div className="answers__row">
-                <div className="answer__item" data-id={4}>Образование и дополнительные курсы</div>
-              </div>
-              <div className="answers__row">
-                <div className="answer__item" data-id={5}>Опыт работы</div>
-                <div className="answer__item" data-id={6}>Навыки</div>
-                <div className="answer__item" data-id={7}>Навыки</div>
-              </div>
-              <div className="answers__row">
-                <div className="answer__item" data-id={8}>Сертификаты <br />с различных конкурсов</div>
-                <div className="answer__item" data-id={9}>Желаемая <br />должность</div>
-              </div>
-              <div className="answers__row">
-                <div className="answer__item" data-id={10}>Личная и контактная информация</div>
-              </div> */}
             </section>
-            <button className={"btn  " + (userAnswers.filter(item => item).length !== 6 ? "btn_grey" : "")} onClick={clickCheckWin}>
+            <button className={"btn  " + (userAnswers.filter(item => item).length !== 6 ? "btn_grey" : datakWin ? "errorBtn" : "")} onClick={clickCheckWin}>
               Проверить
             </button>
           </div>

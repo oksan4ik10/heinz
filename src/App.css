@@ -53,7 +53,7 @@
   border: none;
   outline: none;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 11px;
   cursor: pointer;
 }
@@ -306,4 +306,31 @@
   content: url("./assets/4arrow-2.svg");
 
   opacity: .8;
+}
+
+
+
+.error__modal {
+  position: absolute;
+  top: var(--top-section);
+  left: 16px;
+  width: calc(100% - 32px);
+}
+
+.error__modal .sections::before,
+.error__modal .sections::after {
+  content: none
+}
+
+.error__modal .sections {
+  margin-bottom: 31px;
+}
+
+.section__item.error {
+  color: var(--color-red)
+}
+
+.answersError,
+.errorBtn {
+  opacity: 0;
 }
