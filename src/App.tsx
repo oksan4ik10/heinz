@@ -29,6 +29,8 @@ function App() {
 
 
 
+
+  //логика по таску
   const refAnswerElem = useRef<HTMLDivElement>(null);
   const refWrapperElem = useRef<HTMLDivElement>(null);
   const refWrapperSection = useRef<HTMLDivElement>(null);
@@ -148,6 +150,7 @@ function App() {
 
 
   }, [])
+  console.log(answersListCoordinate);
 
 
 
@@ -222,7 +225,7 @@ function App() {
   const [userAnswers, setUserAnswers] = useState<number[]>([])
   // let cursor: HTMLElement | undefined;
 
-  const createFackeElem = (classFacke: string, id: string, target: HTMLElement, iduser?: string) => {
+  const createFackeElem = (classFacke: string, id: string, target: HTMLElement, iduser?: string, isCursor?: boolean) => {
     const fackeElem = document.createElement("div");
     fackeElem.className = classFacke;
 
@@ -241,8 +244,15 @@ function App() {
     fackeElem.style.top = top - wrapperCoordinate.y + "px";
     fackeElem.innerHTML = target.innerHTML;
     fackeElem.style.zIndex = "99";
+    if (isCursor) {
+      const newCursor = document.createElement("div");
+      newCursor.classList.add("cursor");
+      fackeElem.append(newCursor);
+      refFackeElem.current = fackeElem;
+    }
 
     refWrapperElem.current?.append(fackeElem);
+
     setTargetFackeElem(fackeElem)
 
   }
@@ -270,7 +280,7 @@ function App() {
   const moveMouse = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!startClick.current) return
 
-    if (startClick.current === "answers") move(e.pageX, e.pageY);
+    if (startClick.current === "answers") move(e.pageX, e.pageY, targetFackeElem, targetElem);
     if (startClick.current === "section") moveAnswer(e.pageX, e.pageY);
   }
   const outMouse = () => {
@@ -316,20 +326,21 @@ function App() {
   const moveTouch = (e: React.TouchEvent<HTMLDivElement>) => {
 
     const data = e.changedTouches[0];
-    move(data.clientX, data.clientY)
+    move(data.clientX, data.clientY, targetFackeElem, targetElem)
 
 
   }
-  const move = (xUser: number, yUser: number) => {
-    if (!targetFackeElem || !targetElem || !refWrapperSection.current || !refAnswerElem.current) return;
+  const move = (xUser: number, yUser: number, elemFacke: HTMLElement | undefined, elem: HTMLElement | undefined) => {
+
+    if (!elemFacke || !elem || !refWrapperSection.current || !refAnswerElem.current) return;
 
     const clientX = xUser;
     const clientY = yUser;
 
-    let y = clientY - wrapperCoordinate.y - (targetFackeElem.offsetHeight / 2);
-    let x = clientX - wrapperCoordinate.x - (targetFackeElem.offsetWidth / 2);
+    let y = clientY - wrapperCoordinate.y - (elemFacke.offsetHeight / 2);
+    let x = clientX - wrapperCoordinate.x - (elemFacke.offsetWidth / 2);
     if (x < 0) x = 0
-    if (x + targetFackeElem.clientWidth > wrapperCoordinate.width) x = wrapperCoordinate.width - targetFackeElem.clientWidth;
+    if (x + elemFacke.clientWidth > wrapperCoordinate.width) x = wrapperCoordinate.width - elemFacke.clientWidth;
 
     const defWrapperSection = refWrapperSection.current.offsetTop;
 
@@ -337,9 +348,9 @@ function App() {
     if (y < defWrapperSection) y = defWrapperSection;
 
     const yTopAnswer = refAnswerElem.current.getBoundingClientRect().y + answerCoordinate.height - wrapperCoordinate.y;
-    if (y + targetFackeElem.clientHeight > yTopAnswer) y = yTopAnswer - targetFackeElem.clientHeight;
-    targetFackeElem.style.top = y + "px";
-    targetFackeElem.style.left = x + "px";
+    if (y + elemFacke.clientHeight > yTopAnswer) y = yTopAnswer - elemFacke.clientHeight;
+    elemFacke.style.top = y + "px";
+    elemFacke.style.left = x + "px";
 
 
 
@@ -586,6 +597,167 @@ function App() {
     })))
   }
 
+  //старт таска
+  const [isStartGame, setIsStartGame] = useState(true);
+  const [isStopGame, setIsStopGame] = useState(false);
+  const refAnswer5 = useRef<HTMLDivElement>(null);
+  const refAnswerOther = useRef<HTMLDivElement>(null);
+  const refFackeElem = useRef<HTMLDivElement | null>(null);
+  const startGame = () => {
+    setIsStartGame(false);
+    console.log(refFackeElem.current);
+
+    if (!refWrapperSection.current || !refAnswer5.current || !refFackeElem.current) return
+
+    //включить для ожидания окончания анимации
+    setIsStopGame(true)
+
+    //из ансверс в сектион start
+    const { width, height, left, top } = refAnswer5.current.getBoundingClientRect();
+    refAnswer5.current.classList.add("none");
+
+    refFackeElem.current.style.setProperty("--fackeWidth", width + "px")
+    refFackeElem.current.style.setProperty("--fackeHeight", height + "px")
+    refFackeElem.current.style.setProperty("--fackeLeft", left - answerCoordinate.x + 16 + "px")
+    refFackeElem.current.style.setProperty("--fackeTop", top - wrapperCoordinate.y + "px")
+
+
+    refFackeElem.current.style.opacity = "1";
+
+
+
+    const topMove = answersListCoordinate[4].top + 10;
+    const leftMove = refWrapperSection.current.getBoundingClientRect().width - width + 30
+    refFackeElem.current.classList.add("transition")
+    setTimeout(() => {
+      if (!refFackeElem.current) return
+      refFackeElem.current.style.setProperty("--fackeLeft", leftMove + "px")
+      refFackeElem.current.style.setProperty("--fackeTop", topMove + "px")
+    }, 500)
+    setTimeout(() => {
+      if (!refFackeElem.current) return
+      setAnswersList(answersList.map((item, index) => {
+        const obj = Object.assign({}, item)
+        if (index === 4) {
+          obj.hover = true;
+        }
+        return obj
+
+      }))
+
+    }, 1000)
+
+    setTimeout(() => {
+      if (!refFackeElem.current) return
+      refFackeElem.current.classList.remove("transition")
+      setAnswersList(answersList.map((item, index) => {
+        if (index === 4) {
+          item.hover = false;
+          item.id = 4
+          item.check = true;
+          item.text = "Опыт работы";
+
+        }
+
+        return item
+      }))
+
+      refFackeElem.current.style.opacity = "0";
+
+    }, 1700)
+
+
+    setTimeout(() => {
+      if (!refFackeElem.current || !refWrapperSection.current) return
+
+      const coordElem = answersListCoordinate[4];
+      const topMove = coordElem.top + ((coordElem.bottom - coordElem.top) / 2 - (height / 2)) + 17;
+      const leftMove = 16 + (refWrapperSection.current.offsetWidth / 2) - 62
+
+
+      refFackeElem.current.classList.remove("answer__item")
+      refFackeElem.current.classList.add("sectionItem")
+      setAnswersList(answersList.map((item, index) => {
+        if (!refFackeElem.current) return item
+        if (index === 4) {
+          item.hoverAnswer = true;
+          item.check = false;
+          item.id = 0;
+          item.text = "";
+          refFackeElem.current.style.setProperty("--fackeLeft", leftMove + "px")
+          refFackeElem.current.style.setProperty("--fackeTop", topMove + "px")
+        }
+        return item
+      }))
+
+
+      // refFackeElem.current.classList.add("transitionFast")
+      refFackeElem.current.style.opacity = "1";
+
+    }, 2200)
+    setTimeout(() => {
+      if (!refFackeElem.current || !refWrapperSection.current) return
+
+      const coordElem = answersListCoordinate[3];
+      const topMove = coordElem.top + ((coordElem.bottom - coordElem.top) / 2 - (height / 2)) + 17;
+
+      setAnswersList(answersList.map((item, index) => {
+        if (!refFackeElem.current) return item
+
+        if (index === 3) {
+
+          item.hoverAnswer = true;
+
+        }
+        return item
+      }))
+      setTimeout(() => {
+        setAnswersList(answersList.map((item, index) => {
+          if (index === 4) {
+            item.hoverAnswer = false;
+          }
+          return item
+        }))
+      }, 400)
+
+      refFackeElem.current.style.setProperty("--fackeTop", topMove + "px")
+      refFackeElem.current.classList.add("transitionFast")
+      refFackeElem.current.classList.add("cursorHere")
+
+
+    }, 2400)
+
+    setTimeout(() => {
+      if (!refFackeElem.current || !refWrapperSection.current) return
+
+      setTimeout(() => {
+        setAnswersList(answersList.map((item, index) => {
+          if (index === 3) {
+            item.hoverAnswer = false;
+          }
+          return item
+        }))
+      }, 400)
+
+
+
+
+      refFackeElem.current.classList.remove("transitionFast")
+      refFackeElem.current.classList.add("transition")
+
+      refFackeElem.current.style.setProperty("--fackeLeft", left - answerCoordinate.x + 16 + "px")
+      refFackeElem.current.style.setProperty("--fackeTop", top - wrapperCoordinate.y + 16 + "px")
+
+    }, 4000)
+    setTimeout(() => {
+      if (!refAnswer5.current) return
+      refAnswer5.current.classList.remove("none");
+      setIsStopGame(false)
+    }, 5200)
+
+
+  }
+
   return (
     <>
       <div className="container scroll__elem">
@@ -593,6 +765,14 @@ function App() {
           onMouseMove={moveMouse}
           onMouseLeave={outMouse}
           onMouseUp={endMouse}>
+          {isStopGame && <div className='stopGame'></div>}
+          {(isStartGame || isStopGame) && <div ref={refFackeElem} className="facke__elem answer__item animation" data-id="5">Опыт работы<div className="cursor"></div></div>}
+
+          <ScreenBlur screen={isStartGame}>
+            <div className="modal__start">
+              <Modal border={false} btnText="Приступить" funcBtn={startGame} text={"Сначала выбери, из каких разделов будет<br/>состоять резюме. Перетащи необходимые<br/>пункты в правильном порядке. Ты можешь<br/>менять местами и переносить обратно<br/>выбранные ответы."} />
+            </div>
+          </ScreenBlur>
           <ScreenBlur screen={Boolean(datakWin)}>
             <div className="error__modal" ref={refErrorModal}>
               <section className="sections ">
@@ -620,14 +800,13 @@ function App() {
 
             <section className={"answers " + (datakWin ? "answersError" : "")}
               ref={refAnswerElem}
-
               onTouchStart={startTouch}
               onTouchMove={moveTouch}
               onTouchEnd={endTouch}
 
             >
               {answersItem.map((item, index) => <div className="answers__row" key={index}>
-                {item.map(i => <div key={i.id} dangerouslySetInnerHTML={{ __html: i.text }} className={"answer__item " + (i.check ? "none" : "")} data-id={i.id} ></div>)}
+                {item.map(i => <div key={i.id} dangerouslySetInnerHTML={{ __html: i.text }} ref={i.id === 5 ? refAnswer5 : refAnswerOther} className={"answer__item " + (i.check ? "none" : "")} data-id={i.id} ></div>)}
               </div>)}
             </section>
             <button className={"btn  " + (userAnswers.filter(item => item).length !== 6 ? "btn_grey" : datakWin ? "errorBtn" : "")} onClick={clickCheckWin}>
