@@ -250,11 +250,7 @@ function App() {
 
   const [idAnswerCheck, setIdAnswerCheck] = useState(0); //для перезаписи ответа
   const startClick = useRef("");
-  const startTouch = (e: React.TouchEvent<HTMLSpanElement>) => {
-    const targetDrag = e.changedTouches[0].target as HTMLElement;
-    start(targetDrag)
 
-  }
   const startMouse = (e: React.MouseEvent<HTMLDivElement>) => {
     const targetDrag = e.target as HTMLElement;
     if (targetDrag.closest(".answer__item")) {
@@ -269,6 +265,42 @@ function App() {
 
     }
 
+
+  }
+  const moveMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!startClick.current) return
+
+    if (startClick.current === "answers") move(e.pageX, e.pageY);
+    if (startClick.current === "section") moveAnswer(e.pageX, e.pageY);
+  }
+  const outMouse = () => {
+
+
+    if (!startClick.current) return;
+
+    if (startClick.current === "answers") {
+      startClick.current = "";
+      end()
+      return
+    }
+    startClick.current = "";
+    endAnswer()
+  }
+  const endMouse = () => {
+
+    if (!startClick.current) return
+    if (startClick.current === "answers") {
+      startClick.current = "";
+      end()
+      return
+    }
+    startClick.current = "";
+    endAnswer()
+  }
+
+  const startTouch = (e: React.TouchEvent<HTMLSpanElement>) => {
+    const targetDrag = e.changedTouches[0].target as HTMLElement;
+    start(targetDrag)
 
   }
 
@@ -287,14 +319,6 @@ function App() {
     move(data.clientX, data.clientY)
 
 
-  }
-
-
-  const moveMouse = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!startClick.current) return
-
-    if (startClick.current === "answers") move(e.pageX, e.pageY);
-    if (startClick.current === "section") moveAnswer(e.pageX, e.pageY);
   }
   const move = (xUser: number, yUser: number) => {
     if (!targetFackeElem || !targetElem || !refWrapperSection.current || !refAnswerElem.current) return;
@@ -344,37 +368,9 @@ function App() {
 
     }))
   }
-
-
   const endTouch = () => {
     end()
   }
-  const outMouse = () => {
-
-
-    if (!startClick.current) return;
-
-    if (startClick.current === "answers") {
-      startClick.current = "";
-      end()
-      return
-    }
-    startClick.current = "";
-    endAnswer()
-  }
-  const endMouse = () => {
-    console.log(startClick.current);
-
-    if (!startClick.current) return
-    if (startClick.current === "answers") {
-      startClick.current = "";
-      end()
-      return
-    }
-    startClick.current = "";
-    endAnswer()
-  }
-
   const end = () => {
     if (!targetFackeElem || !targetElem) return
     const id = targetFackeElem.dataset.id;
@@ -411,7 +407,7 @@ function App() {
 
 
 
-  const [idLast, setIdLast] = useState(-1); //для перестановки ответов
+  const [idLast, setIdLast] = useState(-1); //для перестановки ответов в sections
 
   const startAnswerTouch = (e: React.TouchEvent<HTMLDivElement>) => {
     const targetDrag = e.changedTouches[0].target as HTMLElement;
@@ -541,9 +537,6 @@ function App() {
   const refErrorModal = useRef<HTMLDivElement>(null);
   const [datakWin, setDataWin] = useState("");
   //алгоритм для кнопки Проверить
-
-
-
   const clickCheckWin = () => {
 
     if (userAnswers.length !== 6) return
@@ -584,6 +577,7 @@ function App() {
 
 
   }
+  //для появления/исчезновения ответов в answers
   const changeAnswersItem = (id: number, value: boolean) => {
     setAnswersItem(answersItem.map((item) => item.map((i) => {
       if (i.id === id) i.check = value;
