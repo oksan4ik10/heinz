@@ -672,7 +672,7 @@ function App() {
 
       const coordElem = answersListCoordinate[4];
       const topMove = coordElem.top + ((coordElem.bottom - coordElem.top) / 2 - (height / 2)) + 17;
-      const leftMove = 16 + (refWrapperSection.current.offsetWidth / 2) - 62
+      const leftMove = 16 + (refWrapperSection.current.offsetWidth / 2) - (width / 2)
 
 
       refFackeElem.current.classList.remove("answer__item")
@@ -757,6 +757,7 @@ function App() {
 
 
   }
+
 
   return (
     <>
