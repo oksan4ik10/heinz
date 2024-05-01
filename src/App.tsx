@@ -249,7 +249,7 @@ function App() {
 
 
   const [idAnswerCheck, setIdAnswerCheck] = useState(0); //для перезаписи ответа
-  const startClick = useRef(false);
+  const startClick = useRef("");
   const startTouch = (e: React.TouchEvent<HTMLSpanElement>) => {
     const targetDrag = e.changedTouches[0].target as HTMLElement;
     start(targetDrag)
@@ -257,8 +257,19 @@ function App() {
   }
   const startMouse = (e: React.MouseEvent<HTMLDivElement>) => {
     const targetDrag = e.target as HTMLElement;
-    startClick.current = true;
-    start(targetDrag)
+    if (targetDrag.closest(".answer__item")) {
+      startClick.current = "answers";
+      start(targetDrag)
+    }
+    if (targetDrag.closest(".section__item")) {
+      const targetDiv = targetDrag.closest(".answer") as HTMLElement;
+      if (!targetDiv) return
+      startClick.current = "section";
+      startAnswer(targetDiv);
+
+    }
+
+
   }
 
   const start = (targetDrag: HTMLElement) => {
@@ -280,9 +291,10 @@ function App() {
 
 
   const moveMouse = (e: React.MouseEvent<HTMLDivElement>) => {
-    // console.log(e);
+    if (!startClick.current) return
 
-    move(e.pageX, e.pageY);
+    if (startClick.current === "answers") move(e.pageX, e.pageY);
+    if (startClick.current === "section") moveAnswer(e.pageX, e.pageY);
   }
   const move = (xUser: number, yUser: number) => {
     if (!targetFackeElem || !targetElem || !refWrapperSection.current || !refAnswerElem.current) return;
@@ -335,7 +347,35 @@ function App() {
 
 
   const endTouch = () => {
+    end()
+  }
+  const outMouse = () => {
 
+
+    if (!startClick.current) return;
+
+    if (startClick.current === "answers") {
+      startClick.current = "";
+      end()
+      return
+    }
+    startClick.current = "";
+    endAnswer()
+  }
+  const endMouse = () => {
+    console.log(startClick.current);
+
+    if (!startClick.current) return
+    if (startClick.current === "answers") {
+      startClick.current = "";
+      end()
+      return
+    }
+    startClick.current = "";
+    endAnswer()
+  }
+
+  const end = () => {
     if (!targetFackeElem || !targetElem) return
     const id = targetFackeElem.dataset.id;
     let isWin = false;
@@ -356,24 +396,17 @@ function App() {
     setTargetFackeElem(undefined)
     targetFackeElem.remove();
     setUserAnswers(arr)
-    if (idAnswerCheck) {
-      changeAnswersItem(idAnswerCheck)
+    if (idAnswerCheck && isWin) {
+      changeAnswersItem(idAnswerCheck, false)
 
     }
     if (isWin && id) {
-      changeAnswersItem(+id)
+      changeAnswersItem(+id, true)
 
       return
     }
 
     targetElem.classList.remove("none")
-
-  }
-  const outMouse = () => {
-
-  }
-  const endMouse = () => {
-
   }
 
 
@@ -383,6 +416,12 @@ function App() {
   const startAnswerTouch = (e: React.TouchEvent<HTMLDivElement>) => {
     const targetDrag = e.changedTouches[0].target as HTMLElement;
     const targetDiv = targetDrag.closest(".answer") as HTMLElement;
+    startAnswer(targetDiv);
+
+  }
+
+  const startAnswer = (targetDiv: HTMLElement) => {
+
     if (!targetDiv) return
     const target = targetDiv.querySelector("span") as HTMLElement;
     if (!target) return;
@@ -391,13 +430,19 @@ function App() {
     setIdLast(+idAnswer)
     createFackeElem("facke__elem sectionItem", idAnswer, target, iduser)
 
+
   }
 
   const moveAnswerTouch = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!targetFackeElem || !targetElem || !refWrapperSection.current || !refAnswerElem.current) return;
     const data = e.changedTouches[0];
-    const clientX = data.clientX;
-    const clientY = data.clientY;
+    moveAnswer(data.clientX, data.clientY)
+
+  }
+  const moveAnswer = (userX: number, userY: number) => {
+    if (!targetFackeElem || !targetElem || !refWrapperSection.current || !refAnswerElem.current) return;
+
+    const clientX = userX;
+    const clientY = userY;
 
     let y = clientY - wrapperCoordinate.y - (targetFackeElem.offsetHeight / 2);
     let x = clientX - wrapperCoordinate.x - (targetFackeElem.offsetWidth / 2);
@@ -450,9 +495,12 @@ function App() {
       }))
 
     }
-
   }
   const endAnswerTouch = () => {
+    endAnswer()
+  }
+
+  const endAnswer = () => {
     if (!targetFackeElem || !targetElem) return
 
 
@@ -485,12 +533,10 @@ function App() {
 
       return
     }
-    changeAnswersItem(iduser)
+    changeAnswersItem(iduser, false)
     targetElem.classList.remove("none")
 
   }
-
-
 
   const refErrorModal = useRef<HTMLDivElement>(null);
   const [datakWin, setDataWin] = useState("");
@@ -538,9 +584,10 @@ function App() {
 
 
   }
-  const changeAnswersItem = (id: number) => {
+  const changeAnswersItem = (id: number, value: boolean) => {
     setAnswersItem(answersItem.map((item) => item.map((i) => {
-      if (i.id === id) i.check = !i.check;
+      if (i.id === id) i.check = value;
+
       return i
     })))
   }
@@ -548,7 +595,10 @@ function App() {
   return (
     <>
       <div className="container scroll__elem">
-        <div className="wrapper" ref={refWrapperElem}>
+        <div className="wrapper" ref={refWrapperElem} onMouseDown={startMouse}
+          onMouseMove={moveMouse}
+          onMouseLeave={outMouse}
+          onMouseUp={endMouse}>
           <ScreenBlur screen={Boolean(datakWin)}>
             <div className="error__modal" ref={refErrorModal}>
               <section className="sections ">
@@ -576,10 +626,7 @@ function App() {
 
             <section className={"answers " + (datakWin ? "answersError" : "")}
               ref={refAnswerElem}
-              onMouseDown={startMouse}
-              onMouseMove={moveMouse}
-              onMouseOut={outMouse}
-              onMouseUp={endMouse}
+
               onTouchStart={startTouch}
               onTouchMove={moveTouch}
               onTouchEnd={endTouch}
