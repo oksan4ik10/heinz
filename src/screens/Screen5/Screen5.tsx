@@ -9,8 +9,14 @@ import urlPlusMiamie from "../../assets/5miamiePlus.svg"
 
 import photoMen from "../../assets/5photoMen.png"
 
+import data from "../../data/screen5data.json"
+
 
 function Screen5() {
+    console.log(data);
+    const { info, job, experience, education, photo, skills } = data[0];
+    const index = 3; //для блока навыки для последнего персонажа
+
     return (
         <div className={style.wrapper + " wrapper"}>
             <div className={style.head}>
@@ -23,106 +29,82 @@ function Screen5() {
                 <Profile></Profile>
 
             </div>
-            <div className={style.section + " " + style.check}>
-                <div className={style.section__item + " " + style.personInfo + " " + style.check} >
+            <div className={style.section + " " + ((info.check || photo.check || job.check) ? style.check : "")}>
+                <div className={style.section__item + " " + style.personInfo + " " + (info.check ? style.check : "")} >
                     <div className={style.section__head}>Личная и контактная информация</div>
-                    <div className={style.section__content + " " + style.check}>
+                    <div className={style.section__content + " " + (info.check ? style.check : "")}>
                         <img src={urlPlusYellow} className={style.plus} alt="plus" />
                         {/* Стажёр-химик в пищевой промышленности */}
-                        <ul className={style.list}>
-                            <li>
-                                <span>  Приоритетный способ:</span>
-
-                            </li>
-                            <li>
-                                <span>  Приоритетный способ :</span>
-
-                            </li>
-                            <li>
-                                <span>  Приоритетный способ:</span>
-
-                            </li>
-                            <li>
-                                <span>  Приоритетный способ связи: Telegram/WhatsApp</span>
-
-                            </li>
-
+                        {info.check && <ul className={style.list}>
+                            {info.text.map((item, index) => <li key={index}>
+                                <span>  {item}</span>
+                            </li>)}
                         </ul>
-                    </div>
-                </div>
-                <div className={style.section__item + " " + style.personJob}>
-                    <div className={style.section__head}>Желаемая должность</div>
-                    <div className={style.section__content}>
-                        <img src={urlPlusYellow} className={style.plus} alt="plus" />
+                        }
 
                     </div>
                 </div>
-                <div className={style.section__item + " " + style.personPhoto + " " + style.check}>
+                <div className={style.section__item + " " + (job.check ? style.check : "")}>
+                    <div className={style.section__head}>Желаемая должность</div>
+                    <div className={style.section__content + " " + (job.check ? style.check : "")}>
+                        <img src={urlPlusYellow} className={style.plus} alt="plus" />
+                        {job.check && job.text}
+
+                    </div>
+                </div>
+                <div className={style.section__item + " " + style.personPhoto + " " + (photo.check ? style.check : "")}>
                     <div className={style.section__head}>Фото</div>
                     <div className={style.section__content}>
                         <img src={urlPlusYellow} className={style.plus} alt="plus" />
                         <img src={photoMen} alt="photo" className={style.photo} />
                     </div>
                 </div>
-                <div className={style.section__item + " " + style.personEducation}>
+                <div className={style.section__item + " " + style.personEducation + " " + (education.check ? style.check : "")}>
                     <div className={style.section__head}>Образование и дополнительные курсы</div>
-                    <div className={style.section__content}>
+                    <div className={style.section__content + " " + (education.check ? style.check : "")}>
                         <img src={urlPlusBlue} className={style.plus} alt="plus" />
+                        {education.check && <ul className={style.list}>
+                            {education.text.map((item, index) => <li key={index}>
+                                <span>  {item}</span>
+                            </li>)}
+                        </ul>
+                        }
                     </div>
+
                 </div>
-                <div className={style.section__item + " " + style.personExper + " " + style.check}>
+                <div className={style.section__item + " " + style.personExper + " " + (experience.check ? style.check : "")}>
                     <div className={style.section__head}>Опыт работы</div>
-                    <div className={style.section__content + " " + style.check}>
+                    <div className={style.section__content + " " + (experience.check ? style.check : "")}>
                         <img src={urlPlusRed} className={style.plus} alt="plus" />
-                        <ul className={style.list}>
-                            <li>
-                                <span>Приоритетный способ связи: Telegram/WhatsApp</span>
-                            </li>
-                            <li> <span>Приоритетный способ связи: Telegram/WhatsApp</span>
-                                <ul className={style.list + " " + style.listSecond}>
-                                    <li>
-                                        <span>TEST</span>
-                                    </li>
-                                    <li>
-                                        <span>TEST</span>
-                                    </li>
-                                    <li>
-                                        <span>TEST</span>
-                                    </li></ul>
-                            </li>
-                            <li> <span>Приоритетный способ связи: Telegram/WhatsApp</span></li>
-                            <li> <span>Приоритетный способ связи: Telegram/WhatsApp</span></li>
-
+                        {experience.check && <ul className={style.list}>
+                            {experience.text.map((item, index) => {
+                                if (index === 2) return <li> <span>{item}</span>
+                                    <ul className={style.list + " " + style.listSecond}>
+                                        {experience.textIN.map((i, j) =>
+                                            <li key={j}>
+                                                <span>{i}</span>
+                                            </li>)
+                                        }
+                                    </ul>
+                                </li>
+                                return <li key={index}>
+                                    <span>  {item}</span>
+                                </li>
+                            })}
                         </ul>
+                        }
                     </div>
                 </div>
-                <div className={style.section__item + " " + style.personInfo + " " + style.check}>
+                <div className={style.section__item + " " + style.personSkills + " " + (skills.check ? style.check : "")}>
                     <div className={style.section__head}>Навыки</div>
-                    <div className={style.section__content + " " + style.check}>
+                    <div className={style.section__content + " " + (skills.check ? style.check : "")}>
                         <img src={urlPlusMiamie} className={style.plus} alt="plus" />
-                        <ul className={style.list + " " + style.listMenLast}>
-                            <li>
-                                <span>  Приоритетный способ:</span>
-
-                            </li>
-                            <li>
-                                <span>  Приоритетный способ :</span>
-
-                            </li>
-                            <li>
-                                <span>  Приоритетный способ:</span>
-
-                            </li>
-                            <li>
-                                <span>  Приоритетный способ связи: Telegram/WhatsApp</span>
-
-                            </li>
-                            <li>
-                                <span>  Приоритетный способ:</span>
-
-                            </li>
-
+                        {skills.check && <ul className={style.list + " " + (index === 3 ? style.listMenLast : "")}>
+                            {skills.text.map((item, index) => <li key={index}>
+                                <span>  {item}</span>
+                            </li>)}
                         </ul>
+                        }
                     </div>
                 </div>
             </div>

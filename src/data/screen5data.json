@@ -1,0 +1,49 @@
+[
+    {
+        "info": {
+            "check": true,
+            "text": [
+                "test",
+                "test",
+                "test"
+            ]
+        },
+        "job": {
+            "text": "work",
+            "check": true
+        },
+        "photo": {
+            "check": true
+        },
+        "education": {
+            "check": true,
+            "text": [
+                "test",
+                "test",
+                "test"
+            ]
+        },
+        "experience": {
+            "check": true,
+            "text": [
+                "test",
+                "test",
+                "test",
+                "test"
+            ],
+            "textIN": [
+                "test2",
+                "test2",
+                "test2"
+            ]
+        },
+        "skills": {
+            "check": true,
+            "text": [
+                "test",
+                "test",
+                "test"
+            ]
+        }
+    }
+]

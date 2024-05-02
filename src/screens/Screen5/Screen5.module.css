@@ -186,7 +186,7 @@
     flex-grow: 0;
     flex-basis: auto;
     position: relative;
-    padding-bottom: 145%;
+    padding-bottom: min(145%, 250px);
     cursor: auto;
 }
 
