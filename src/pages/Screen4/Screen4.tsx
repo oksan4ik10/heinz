@@ -228,7 +228,7 @@ function Screen4() {
         fackeElem.className = classFacke;
 
         const { width, height, left, top } = target.getBoundingClientRect();
-        target.classList.add("none");
+        target.classList.add(style.none);
 
         setTargetElem(target)
 
@@ -261,12 +261,12 @@ function Screen4() {
 
     const startMouse = (e: React.MouseEvent<HTMLDivElement>) => {
         const targetDrag = e.target as HTMLElement;
-        if (targetDrag.closest(".answer__item")) {
+        if (targetDrag.closest(`.${style.answer__item}`)) {
             startClick.current = "answers";
             start(targetDrag)
         }
-        if (targetDrag.closest(".section__item")) {
-            const targetDiv = targetDrag.closest(".answer") as HTMLElement;
+        if (targetDrag.closest(`.${style.section__item}`)) {
+            const targetDiv = targetDrag.closest(`.${style.answer}`) as HTMLElement;
             if (!targetDiv) return
             startClick.current = "section";
             startAnswer(targetDiv);
@@ -313,9 +313,10 @@ function Screen4() {
     }
 
     const start = (targetDrag: HTMLElement) => {
-        const target = targetDrag.closest(".answer__item") as HTMLElement;
 
-        if ((!target) || (target.matches(".none"))) return;
+        const target = targetDrag.closest(`.${style.answer__item}`) as HTMLElement;
+
+        if ((!target) || (target.matches(`.${style.none}`))) return;
         const id = target.dataset.id ? target.dataset.id : "0";
         createFackeElem(`${style.facke__elem} ${style.answer__item}`, id, target)
 
@@ -420,7 +421,7 @@ function Screen4() {
 
     const startAnswerTouch = (e: React.TouchEvent<HTMLDivElement>) => {
         const targetDrag = e.changedTouches[0].target as HTMLElement;
-        const targetDiv = targetDrag.closest(".answer") as HTMLElement;
+        const targetDiv = targetDrag.closest(`.${style.answer}`) as HTMLElement;
         startAnswer(targetDiv);
 
     }
@@ -776,7 +777,7 @@ function Screen4() {
                     <div className={style.error__modal} ref={refErrorModal}>
                         <section className={style.sections}>
                             {answersList.map((item, index) => <div
-                                key={index} className={style.section__item + (item.win ? "" : style.error)}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
+                                key={index} className={style.section__item + " " + (item.win ? "" : style.error)}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
                         </section>
                         <Modal border={false} btnText="Исправить ошибки" funcBtn={() => setDataWin("")} text={datakWin === "loser" ? 'В резюме необходимо размещать только<br/>самую важную информацию, которая<br/>поможет HR-специалисту быстро оценить,<br/>насколько твой опыт соответствует<br/>вакансии. Побольше о себе ты сможешь<br/>рассказать на собеседовании :)' : "Ты молодец и выбрал верные разделы,<br/>однако в составлении резюме важно то,<br/>в каком порядке они расположены.<br/>Попробуй поменять местами те заголовки,<br/>которые загорелись красным."} />
                     </div>
