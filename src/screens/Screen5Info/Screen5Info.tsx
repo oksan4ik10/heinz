@@ -16,6 +16,7 @@ import bgSheet from "../../assets/5bg-sheet.png"
 import photoMen from "../../assets/5photoMen.png"
 
 import data from "../../data/screen5data.json"
+import { arrNameQuestion } from "../../models/type";
 
 interface IProps {
     changeInfoTask: (str: string) => void
@@ -32,8 +33,6 @@ function Screen5Info(props: IProps) {
         if (!elem) return
         const dataInfo = elem.dataset.id;
         if (!dataInfo) return;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if (((data[0] as any)[dataInfo]).check) return;
         changeInfoTask(dataInfo)
         console.log(dataInfo);
 
@@ -58,7 +57,7 @@ function Screen5Info(props: IProps) {
 
             </div>
             <div className={style.section + " " + ((info.check || photo.check || job.check) ? style.check : "")} onClick={openTask}>
-                <div className={style.section__item + " " + style.personInfo + " " + (info.check ? style.check : "")} data-id="info">
+                <div className={style.section__item + " " + style.personInfo + " " + (info.check ? style.check : "")} data-id={arrNameQuestion[0]}>
                     <div className={style.section__head}>Личная и контактная информация</div>
                     <div className={style.section__content + " " + (info.check ? style.check : "")}>
                         <img src={urlPlusYellow} className={style.plus} alt="plus" />
@@ -72,7 +71,7 @@ function Screen5Info(props: IProps) {
 
                     </div>
                 </div>
-                <div className={style.section__item + " " + (job.check ? style.check : "")} data-id="job">
+                <div className={style.section__item + " " + (job.check ? style.check : "")} data-id={arrNameQuestion[1]}>
                     <div className={style.section__head}>Желаемая должность</div>
                     <div className={style.section__content + " " + (job.check ? style.check : "")}>
                         <img src={urlPlusYellow} className={style.plus} alt="plus" />
@@ -80,14 +79,14 @@ function Screen5Info(props: IProps) {
 
                     </div>
                 </div>
-                <div className={style.section__item + " " + style.personPhoto + " " + (photo.check ? style.check : "")} data-id="photo">
+                <div className={style.section__item + " " + style.personPhoto + " " + (photo.check ? style.check : "")} data-id={arrNameQuestion[2]}>
                     <div className={style.section__head}>Фото</div>
                     <div className={style.section__content}>
                         <img src={urlPlusYellow} className={style.plus} alt="plus" />
                         <img src={photoMen} alt="photo" className={style.photo} />
                     </div>
                 </div>
-                <div className={style.section__item + " " + style.personEducation + " " + (education.check ? style.check : "")} data-id="education">
+                <div className={style.section__item + " " + style.personEducation + " " + (education.check ? style.check : "")} data-id={arrNameQuestion[3]}>
                     <div className={style.section__head}>Образование и дополнительные курсы</div>
                     <div className={style.section__content + " " + (education.check ? style.check : "")}>
                         <img src={urlPlusBlue} className={style.plus} alt="plus" />
@@ -100,7 +99,7 @@ function Screen5Info(props: IProps) {
                     </div>
 
                 </div>
-                <div data-id="experience" className={style.section__item + " " + style.personExper + " " + (experience.check ? style.check : "")}>
+                <div data-id={arrNameQuestion[4]} className={style.section__item + " " + style.personExper + " " + (experience.check ? style.check : "")}>
                     <div className={style.section__head}>Опыт работы</div>
                     <div className={style.section__content + " " + (experience.check ? style.check : "")}>
                         <img src={urlPlusRed} className={style.plus} alt="plus" />
@@ -123,7 +122,7 @@ function Screen5Info(props: IProps) {
                         }
                     </div>
                 </div>
-                <div data-id="skills" className={style.section__item + " " + style.personSkills + " " + (skills.check ? style.check : "")}>
+                <div data-id={arrNameQuestion[5]} className={style.section__item + " " + style.personSkills + " " + (skills.check ? style.check : "")}>
                     <div className={style.section__head}>Навыки</div>
                     <div className={style.section__content + " " + (skills.check ? style.check : "")}>
                         <img src={urlPlusMiamie} className={style.plus} alt="plus" />
