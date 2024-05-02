@@ -7,10 +7,10 @@ function Screen5() {
         setInfoTask(str);
     }
     return (
-        <div>
+        <>
             {!infoTask && <Screen5Info changeInfoTask={changeInfoTask}></Screen5Info>}
             {infoTask && <Screen5Test infoSection={infoTask}></Screen5Test>}
-        </div>
+        </>
     );
 }
 

@@ -10,13 +10,13 @@
         },
         "job": {
             "text": "work",
-            "check": true
+            "check": false
         },
         "photo": {
-            "check": true
+            "check": false
         },
         "education": {
-            "check": true,
+            "check": false,
             "text": [
                 "test",
                 "test",
@@ -24,7 +24,7 @@
             ]
         },
         "experience": {
-            "check": true,
+            "check": false,
             "text": [
                 "test",
                 "test",
@@ -38,7 +38,7 @@
             ]
         },
         "skills": {
-            "check": true,
+            "check": false,
             "text": [
                 "test",
                 "test",

@@ -219,7 +219,8 @@ img.photo {
     position: absolute;
     z-index: 1;
     left: 0;
-    top: calc(100vh - 220px);
+    width: 94px;
+    top: calc(100vh - 136px);
 }
 
 .bgCircle {
@@ -233,7 +234,8 @@ img.photo {
     position: absolute;
     z-index: 1;
     right: 0;
-    top: calc(50vh - 90px);
+    top: calc(50vh - 30px);
+    width: 104px;
 }
 
 .bgStart {
@@ -252,4 +254,5 @@ img.photo {
 
 .wrapper {
     overflow: hidden;
+    min-height: 100%;
 }

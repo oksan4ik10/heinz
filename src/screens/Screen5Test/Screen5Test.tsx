@@ -47,10 +47,10 @@ function Screen5Test(props: IProps) {
             </div>
 
 
-            {/* <Modal border={true} btnText="Выбрать заново" text="блаблаблаблаблабла" funcBtn={() => console.log(23)
-            } /> */}
+            <Modal border={true} btnText="Выбрать заново" text="блаблаблаблаблабла" funcBtn={() => console.log(23)
+            } />
 
-            <button className={"btn btn_grey " + style.btn}>Выбрать</button>
+            {/* <button className={"btn btn_grey " + style.btn}>Выбрать</button> */}
 
 
         </div>
