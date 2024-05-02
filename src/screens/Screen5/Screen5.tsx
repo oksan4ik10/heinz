@@ -7,18 +7,28 @@ import urlPlusBlue from "../../assets/5bluePlus.svg"
 import urlPlusRed from "../../assets/5redPlus.svg"
 import urlPlusMiamie from "../../assets/5miamiePlus.svg"
 
+import bgStart from "../../assets/5bg-star.svg"
+import bgCircle from "../../assets/5bg-circle.svg"
+import bgCircle2 from "../../assets/5bg-circle2.svg"
+import bgTomato from "../../assets/5bg-tomato.png"
+import bgSheet from "../../assets/5bg-sheet.png"
+
 import photoMen from "../../assets/5photoMen.png"
 
 import data from "../../data/screen5data.json"
 
 
 function Screen5() {
-    console.log(data);
     const { info, job, experience, education, photo, skills } = data[0];
     const index = 3; //для блока навыки для последнего персонажа
 
     return (
         <div className={style.wrapper + " wrapper"}>
+            <img src={bgCircle} alt="" className={style.bgCircle} />
+            <img src={bgCircle2} alt="" className={style.bgCircle2} />
+            <img src={bgStart} alt="" className={style.bgStart} />
+            <img src={bgTomato} alt="" className={style.bgTomato} />
+            <img src={bgSheet} alt="" className={style.bgSheet} />
             <div className={style.head}>
                 <div className={style.head__info}>
                     <div className={style.infoIcon}>

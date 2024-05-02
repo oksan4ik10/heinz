@@ -4,6 +4,8 @@
     justify-content: space-between;
     width: 100%;
     margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
 }
 
 .head__info {
@@ -25,6 +27,8 @@
     grid-template-columns: 1.45fr .55fr;
     grid-row-gap: 20px;
     grid-column-gap: 8px;
+    position: relative;
+    z-index: 2;
 
 }
 
@@ -209,4 +213,43 @@ img.photo {
 .listMenLast {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+.bgSheet {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: calc(100vh - 220px);
+}
+
+.bgCircle {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: calc(50vh - 112px);
+}
+
+.bgTomato {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: calc(50vh - 90px);
+}
+
+.bgStart {
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    right: 0px;
+}
+
+.bgCircle2 {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    top: calc(100vh - 180px);
+}
+
+.wrapper {
+    overflow: hidden;
 }

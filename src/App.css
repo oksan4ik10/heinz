@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-grey);
+  background-color: var(--bg-root);
 }
 
 .container {
