@@ -15,6 +15,6 @@
     text-align: center;
 }
 
-.modal__text.border {
+.modal.border .modal__text {
     border: 1px solid var(--color-darkBlue);
 }

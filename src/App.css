@@ -59,7 +59,8 @@
 }
 
 .btn_grey {
-  background: var(--color-grey)
+  background: var(--color-grey);
+  cursor: auto;
 }
 
 /* 
