@@ -26,10 +26,12 @@ interface IAnswerCoordinate {
     bottom: number,
 }
 
-function Screen4() {
+interface IProps {
+    changeScreen: () => void;
+}
 
-
-
+function Screen4(props: IProps) {
+    const { changeScreen } = props;
 
     //логика по таску
     const refAnswerElem = useRef<HTMLDivElement>(null);
@@ -581,7 +583,7 @@ function Screen4() {
         }
 
         //переход на следующий экран
-        console.log("win");
+        changeScreen()
 
 
 

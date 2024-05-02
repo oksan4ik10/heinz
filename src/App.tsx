@@ -1,11 +1,15 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+
+import { useState } from 'react'
 import './App.css'
-import Screen4 from './pages/Screen4/Screen4'
+import Screen4 from './screens/Screen4/Screen4'
+import Screen5 from './screens/Screen5/Screen5';
 function App() {
+  const [screen, setScreen] = useState(0);
+  console.log(screen);
+
   return <div className="container scroll__elem">
-    <Screen4></Screen4>
+    <Screen5></Screen5>
+    {screen === 4 && <Screen4 changeScreen={() => setScreen(5)}></Screen4>}
   </div>
 }
 
