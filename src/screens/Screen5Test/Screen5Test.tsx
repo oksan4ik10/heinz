@@ -4,7 +4,7 @@ interface IProps {
 }
 
 import Profile from "../../components/Profile/Profile";
-import Modal from "../../components/Modal/Modal";
+// import Modal from "../../components/Modal/Modal";
 
 import urlArrow from "../../assets/5arrow-prev.svg"
 import urlInfoIcon from "../../assets/infoIcons.svg"
@@ -44,8 +44,8 @@ function Screen5Test(props: IProps) {
 
 
 
-            <Modal border={true} btnText="Выбрать заново" text="блаблаблаблаблабла" funcBtn={() => console.log(23)
-            } />
+            {/* <Modal border={true} btnText="Выбрать заново" text="блаблаблаблаблабла" funcBtn={() => console.log(23)
+            } /> */}
 
             {/* <button className={"btn btn_grey " + style.btn}>Выбрать</button> */}
 

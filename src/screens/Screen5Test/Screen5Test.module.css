@@ -42,10 +42,6 @@
     margin-top: 3px;
 }
 
-.btn {
-    position: relative;
-    z-index: 2;
-}
 
 .wrapper {
     overflow: hidden;

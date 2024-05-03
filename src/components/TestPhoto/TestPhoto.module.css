@@ -24,6 +24,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid transparent;
+    cursor: pointer;
 }
 
 
@@ -46,10 +47,7 @@
 
 }
 
-.photos__item.check {
-    border: 1px solid var(--color-darkBlue);
-
-}
+.photos__item.check {}
 
 .photos__item.error {
     border: 1px solid var(--color-red);
@@ -58,5 +56,22 @@
 
 .photos__item.success {
     border: 1px solid var(--color-green);
+
+}
+
+.inputRadio {
+    appearance: none;
+    position: absolute;
+    height: 0;
+    width: 0;
+    opacity: 0;
+
+}
+
+.inputRadio1:checked~.label1,
+.inputRadio2:checked~.label2,
+.inputRadio3:checked~.label3,
+.inputRadio4:checked~.label4 {
+    border: 1px solid var(--color-darkBlue);
 
 }
