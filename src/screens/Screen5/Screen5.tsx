@@ -8,8 +8,8 @@ function Screen5() {
     }
     return (
         <>
-            {infoTask && <Screen5Info changeInfoTask={changeInfoTask}></Screen5Info>}
-            {!infoTask && <Screen5Test infoSection={infoTask}></Screen5Test>}
+            {!infoTask && <Screen5Info changeInfoTask={changeInfoTask}></Screen5Info>}
+            {infoTask && <Screen5Test infoSection={infoTask}></Screen5Test>}
         </>
     );
 }

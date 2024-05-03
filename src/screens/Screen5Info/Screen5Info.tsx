@@ -13,19 +13,30 @@ import bgCircle2 from "../../assets/5bg-circle2.svg"
 import bgTomato from "../../assets/5bg-tomato.png"
 import bgSheet from "../../assets/5bg-sheet.png"
 
-import photoMen from "../../assets/5photoMen.png"
+import photoPerson0 from "../../assets/5photoMen.png"
+import photoPerson1 from "../../assets/5photoUser1.png"
+import photoPerson2 from "../../assets/5photoUser2.png"
 
 import data from "../../data/screen5data.json"
 import { arrNameQuestion } from "../../models/type";
+
+import { useAppSelector } from "../../store/store";
 
 interface IProps {
     changeInfoTask: (str: string) => void
 }
 
+
+
 function Screen5Info(props: IProps) {
     const { changeInfoTask } = props;
-    const { info, job, experience, education, photo, skills } = data[0];
-    const index = 3; //для блока навыки для последнего персонажа
+
+
+    const user = useAppSelector((state) => state.personaReducer).user;
+    const checkSections = useAppSelector((state) => state.task1InfoReducer);
+    const { info, job, experience, education, skills } = data[user];
+
+    const userPhoto = [photoPerson0, photoPerson1, photoPerson2]
 
     const openTask = (e: React.MouseEvent<HTMLDivElement>) => {
         const target = e.target as HTMLElement;
@@ -35,7 +46,6 @@ function Screen5Info(props: IProps) {
         if (!dataInfo) return;
         changeInfoTask(dataInfo)
         console.log(dataInfo);
-
 
     }
 
@@ -56,13 +66,13 @@ function Screen5Info(props: IProps) {
                 <Profile></Profile>
 
             </div>
-            <div className={style.section + " " + ((info.check || photo.check || job.check) ? style.check : "")} onClick={openTask}>
-                <div className={style.section__item + " " + style.personInfo + " " + (info.check ? style.check : "")} data-id={arrNameQuestion[0]}>
+            <div className={style.section + " " + ((Object.values(checkSections).filter((item) => item)).length !== 0 ? style.check : "")} onClick={openTask}>
+                <div className={style.section__item + " " + style.personInfo + " " + (checkSections.info ? style.check : "")} data-id={arrNameQuestion[0]}>
                     <div className={style.section__head}>Личная и контактная информация</div>
-                    <div className={style.section__content + " " + (info.check ? style.check : "")}>
+                    <div className={style.section__content + " " + (checkSections.info ? style.check : "")}>
                         <img src={urlPlusYellow} className={style.plus} alt="plus" />
                         {/* Стажёр-химик в пищевой промышленности */}
-                        {info.check && <ul className={style.list}>
+                        {checkSections.info && <ul className={style.list}>
                             {info.text.map((item, index) => <li key={index}>
                                 <span>  {item}</span>
                             </li>)}
@@ -71,26 +81,26 @@ function Screen5Info(props: IProps) {
 
                     </div>
                 </div>
-                <div className={style.section__item + " " + (job.check ? style.check : "")} data-id={arrNameQuestion[1]}>
+                <div className={style.section__item + " " + (checkSections.job ? style.check : "")} data-id={arrNameQuestion[1]}>
                     <div className={style.section__head}>Желаемая должность</div>
-                    <div className={style.section__content + " " + (job.check ? style.check : "")}>
+                    <div className={style.section__content + " " + (checkSections.job ? style.check : "")}>
                         <img src={urlPlusYellow} className={style.plus} alt="plus" />
-                        {job.check && job.text}
+                        {checkSections.job && job.text}
 
                     </div>
                 </div>
-                <div className={style.section__item + " " + style.personPhoto + " " + (photo.check ? style.check : "")} data-id={arrNameQuestion[2]}>
+                <div className={style.section__item + " " + style.personPhoto + " " + (checkSections.photo ? style.check : "")} data-id={arrNameQuestion[2]}>
                     <div className={style.section__head}>Фото</div>
                     <div className={style.section__content}>
                         <img src={urlPlusYellow} className={style.plus} alt="plus" />
-                        <img src={photoMen} alt="photo" className={style.photo} />
+                        <img src={userPhoto[user]} alt="photo" className={style.photo} />
                     </div>
                 </div>
-                <div className={style.section__item + " " + style.personEducation + " " + (education.check ? style.check : "")} data-id={arrNameQuestion[3]}>
+                <div className={style.section__item + " " + style.personEducation + " " + (checkSections.education ? style.check : "")} data-id={arrNameQuestion[3]}>
                     <div className={style.section__head}>Образование и дополнительные курсы</div>
-                    <div className={style.section__content + " " + (education.check ? style.check : "")}>
+                    <div className={style.section__content + " " + (checkSections.education ? style.check : "")}>
                         <img src={urlPlusBlue} className={style.plus} alt="plus" />
-                        {education.check && <ul className={style.list}>
+                        {checkSections.education && <ul className={style.list}>
                             {education.text.map((item, index) => <li key={index}>
                                 <span>  {item}</span>
                             </li>)}
@@ -99,11 +109,11 @@ function Screen5Info(props: IProps) {
                     </div>
 
                 </div>
-                <div data-id={arrNameQuestion[4]} className={style.section__item + " " + style.personExper + " " + (experience.check ? style.check : "")}>
+                <div data-id={arrNameQuestion[4]} className={style.section__item + " " + style.personExper + " " + (checkSections.experience ? style.check : "")}>
                     <div className={style.section__head}>Опыт работы</div>
-                    <div className={style.section__content + " " + (experience.check ? style.check : "")}>
+                    <div className={style.section__content + " " + (checkSections.experience ? style.check : "")}>
                         <img src={urlPlusRed} className={style.plus} alt="plus" />
-                        {experience.check && <ul className={style.list}>
+                        {checkSections.experience && <ul className={style.list}>
                             {experience.text.map((item, index) => {
                                 if (index === 2) return <li key={index}> <span>{item}</span>
                                     <ul className={style.list + " " + style.listSecond}>
@@ -122,11 +132,11 @@ function Screen5Info(props: IProps) {
                         }
                     </div>
                 </div>
-                <div data-id={arrNameQuestion[5]} className={style.section__item + " " + style.personSkills + " " + (skills.check ? style.check : "")}>
+                <div data-id={arrNameQuestion[5]} className={style.section__item + " " + style.personSkills + " " + (checkSections.skills ? style.check : "")}>
                     <div className={style.section__head}>Навыки</div>
-                    <div className={style.section__content + " " + (skills.check ? style.check : "")}>
+                    <div className={style.section__content + " " + (checkSections.skills ? style.check : "")}>
                         <img src={urlPlusMiamie} className={style.plus} alt="plus" />
-                        {skills.check && <ul className={style.list + " " + (index === 3 ? style.listMenLast : "")}>
+                        {checkSections.skills && <ul className={style.list + " " + (user === 2 ? style.listMenLast : "")}>
                             {skills.text.map((item, index) => <li key={index}>
                                 <span>  {item}</span>
                             </li>)}

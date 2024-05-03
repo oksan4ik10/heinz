@@ -1,7 +1,6 @@
 [
     {
         "info": {
-            "check": false,
             "text": [
                 "test",
                 "test",
@@ -9,14 +8,10 @@
             ]
         },
         "job": {
-            "text": "work",
-            "check": false
+            "text": "work"
         },
-        "photo": {
-            "check": false
-        },
+        "photo": {},
         "education": {
-            "check": false,
             "text": [
                 "test",
                 "test",
@@ -24,7 +19,6 @@
             ]
         },
         "experience": {
-            "check": false,
             "text": [
                 "test",
                 "test",
@@ -38,7 +32,6 @@
             ]
         },
         "skills": {
-            "check": false,
             "text": [
                 "test",
                 "test",
