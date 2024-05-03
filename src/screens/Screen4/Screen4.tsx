@@ -767,7 +767,7 @@ function Screen4(props: IProps) {
                 onMouseMove={moveMouse}
                 onMouseLeave={outMouse}
                 onMouseUp={endMouse}>
-                {isStopGame && <div className='stopGame'></div>}
+                {isStopGame && <div className={style.stopGame}></div>}
                 {(isStartGame || isStopGame) && <div ref={refFackeElem} className={style.facke__elem + " " + style.answer__item + " " + style.animation} data-id="5">Опыт работы<div className={style.cursor}></div></div>}
 
                 <ScreenBlur screen={isStartGame}>

@@ -29,14 +29,17 @@ import TestMultiple from "../../components/TestMultiple/TestMultiple";
 interface IProps {
     infoSection: TNamesQuestion;
     setInfoSection: () => void
+    user: number
+
 }
 
 function Screen5Test(props: IProps) {
-    const { infoSection, setInfoSection } = props;
+    const { infoSection, setInfoSection, user } = props;
     const dispatch = useAppDispatch();
 
-    const user = useAppSelector((state) => state.personaReducer).user;
+
     const infoState = useAppSelector((state) => state.task1UserAnswerReducer)[infoSection];
+
     const stateUserArr = infoState.user
     const stateAnswer = infoState.stateAnswer
 

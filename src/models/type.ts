@@ -12,4 +12,15 @@ export interface IPropsTask1Test {
     funcCheckUserAnswer: (arr: number[]) => void
 }
 
+export interface ICheckSection {
+    info: boolean;
+    skills: boolean;
+    job: boolean;
+    photo: boolean;
+    education: boolean;
+    experience: boolean;
+
+}
+
+
 export const arrNameQuestion = ["info", "job", "photo", "education", "experience", "skills"]

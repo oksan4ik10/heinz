@@ -1,15 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { TNamesQuestion } from '../../models/type';
-interface ICheckSection {
-    info: boolean;
-    skills: boolean;
-    job: boolean;
-    photo: boolean;
-    education: boolean;
-    experience: boolean;
-
-}
+import { TNamesQuestion, ICheckSection } from '../../models/type';
 
 const initialState: ICheckSection = { info: false, skills: false, education: false, experience: false, job: false, photo: false };
 
