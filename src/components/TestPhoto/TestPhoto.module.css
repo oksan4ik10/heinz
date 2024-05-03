@@ -72,12 +72,13 @@
 
 }
 
-.inputRadio:checked~label.error {
-    border: 1px solid var(--color-red);
+
+label.success {
+    border: 1px solid var(--color-green);
 
 }
 
-.inputRadio:checked~label.success {
-    border: 1px solid var(--color-green);
+label.error {
+    border: 1px solid var(--color-red);
 
 }

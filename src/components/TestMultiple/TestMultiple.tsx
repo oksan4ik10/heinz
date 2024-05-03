@@ -3,8 +3,13 @@ import style from "./TestMultiple.module.css"
 import ScreenBlur from "../ScreenBlur/ScreenBlur";
 import Modal from "../Modal/Modal";
 
-function TestMultiple() {
-    const [checked, setChecked] = useState<number[]>([0])
+import { IPropsTask1Test } from "../../models/type";
+
+function TestMultiple(props: IPropsTask1Test) {
+
+    const { answers, stateAnswer, stateUserArr, funcCheckUserAnswer } = props;
+
+    const [checked, setChecked] = useState<number[]>(stateUserArr)
     const changeInput = (c: number) => {
 
         const clickedCategory = checked.indexOf(c);
@@ -22,53 +27,45 @@ function TestMultiple() {
     const clickBtn = (e: React.FormEvent<HTMLFormElement>) => {
         if (checked.length === 0) return
         e.preventDefault();
-        console.log(checked);
+        funcCheckUserAnswer(checked)
     }
 
-    const [isModal, setIsModal] = useState(0);
+    const [isModal, setIsModal] = useState(-1);
     const clickInfo = (i: number) => {
 
         setIsModal(i)
-        console.log(23);
 
     }
 
 
     return (
         <>
-            <ScreenBlur screen={Boolean(isModal)}>
+            <ScreenBlur screen={Boolean(isModal !== -1)}>
                 <div className="modal__start">
-                    <Modal border={false} btnText="Продолжить" text="Информация" funcBtn={() => setIsModal(0)}></Modal>
+                    <Modal border={false} btnText="Продолжить" text={isModal === -1 ? "" : answers[isModal].info} funcBtn={() => setIsModal(-1)}></Modal>
                 </div>
             </ScreenBlur>
             <form onSubmit={clickBtn} className={style.form}>
                 <div className={style.answers}>
-                    <div>
-                        <input type="checkbox" name="info1" id="photo1" className={style.inputCheck + " " + style.inputRadio} checked={checked.indexOf(0) !== -1} onChange={() => changeInput(0)} />
-                        <label htmlFor="photo1" className={style.answers__item + " " + style.label1}>
+                    {answers.map((item, index) => <div key={index} className={style.infoElem}>
+                        <input type="checkbox" name={`check${index}`} id={`item${index}`} className={style.inputCheck + " " + style.inputRadio} checked={checked.indexOf(index) !== -1} onChange={() => changeInput(index)} disabled={stateAnswer !== "wait" ? true : false} />
+                        <label htmlFor={`item${index}`} className={style.answers__item + " " + ((stateAnswer === "wait" || (stateUserArr.indexOf(index) === -1)) ? "" : (stateUserArr.indexOf(index) !== -1 && item.isWin) ? style.success : style.error)}>
                             <div className={style.answer__wrapper}>
                                 <span className={style.square}></span>
-                                <span>Что следует</span>
-                            </div>
-                        </label>
-                    </div>
-                    <div className={style.infoElem}>
-                        <input type="checkbox" name="info2" id="photo2" className={style.inputCheck + " " + style.inputRadio} checked={checked.indexOf(1) !== -1} onChange={() => changeInput(1)} />
-                        <label htmlFor="photo2" className={style.answers__item + " " + style.success}>
-                            <div className={style.answer__wrapper}>
-                                <span className={style.square}></span>
-                                <span>Что следует указать в</span>
+                                <span dangerouslySetInnerHTML={{ __html: item.text }}></span>
 
                             </div>
                         </label>
-                        <span className={style.info} onClick={() => clickInfo(1)}>
+                        {item.info && <span className={style.info} onClick={() => clickInfo(index)}>
                             {/* <img src={urlInfoIcon} alt="info" /> */}
-                        </span>
-                    </div>
+                        </span>}
+                    </div>)}
+
+
 
 
                 </div>
-                <button className={"btn " + style.btn + (checked.length !== 0 ? "" : " btn_grey")}>Выбрать</button>
+                {stateAnswer === "wait" && <button className={"btn " + style.btn + (checked.length !== 0 ? "" : " btn_grey")}>Выбрать</button>}
 
             </form>
         </>

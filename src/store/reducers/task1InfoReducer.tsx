@@ -14,7 +14,7 @@ interface ICheckSection {
 const initialState: ICheckSection = { info: false, skills: false, education: false, experience: false, job: false, photo: false };
 
 export const task1InfoReducer = createSlice({
-    name: 'nameUser',
+    name: 'taskInfo',
     initialState,
     reducers: {
         setChekSection(state, action: PayloadAction<TNamesQuestion>) {

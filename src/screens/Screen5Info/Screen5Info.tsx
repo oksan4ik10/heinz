@@ -21,9 +21,10 @@ import data from "../../data/screen5data.json"
 import { arrNameQuestion } from "../../models/type";
 
 import { useAppSelector } from "../../store/store";
+import { TNamesQuestion } from "../../models/type";
 
 interface IProps {
-    changeInfoTask: (str: string) => void
+    changeInfoTask: (str: TNamesQuestion) => void
 }
 
 
@@ -42,10 +43,9 @@ function Screen5Info(props: IProps) {
         const target = e.target as HTMLElement;
         const elem = target.closest(`.${style.section__item}`) as HTMLElement;
         if (!elem) return
-        const dataInfo = elem.dataset.id;
+        const dataInfo = elem.dataset.id as TNamesQuestion;
         if (!dataInfo) return;
         changeInfoTask(dataInfo)
-        console.log(dataInfo);
 
     }
 
@@ -71,7 +71,7 @@ function Screen5Info(props: IProps) {
                     <div className={style.section__head}>Личная и контактная информация</div>
                     <div className={style.section__content + " " + (checkSections.info ? style.check : "")}>
                         <img src={urlPlusYellow} className={style.plus} alt="plus" />
-                        {/* Стажёр-химик в пищевой промышленности */}
+
                         {checkSections.info && <ul className={style.list}>
                             {info.text.map((item, index) => <li key={index}>
                                 <span>  {item}</span>

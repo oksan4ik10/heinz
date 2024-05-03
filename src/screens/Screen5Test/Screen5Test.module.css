@@ -91,3 +91,12 @@
     right: 0;
     top: calc(100vh - 200px);
 }
+
+.modal {
+    position: relative;
+    z-index: 2;
+}
+
+.arrowNone {
+    opacity: 0;
+}

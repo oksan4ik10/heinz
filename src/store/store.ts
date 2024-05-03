@@ -3,10 +3,12 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import task1InfoReducer from './reducers/task1InfoReducer';
 import personaReducer from './reducers/personaReducer';
+import task1UserAnswerReducer from './reducers/task1UserAnswerReducer';
 
 const rootReducer = combineReducers({
     task1InfoReducer,
-    personaReducer
+    personaReducer,
+    task1UserAnswerReducer
 
 });
 

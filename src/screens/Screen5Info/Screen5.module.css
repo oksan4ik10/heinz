@@ -119,9 +119,6 @@
 }
 
 
-.personInfo.check .section__head {
-    text-align: left;
-}
 
 
 .section.check .section__content.check {
@@ -255,4 +252,8 @@ img.photo {
 .wrapper {
     overflow: hidden;
     min-height: 100%;
+}
+
+.section.check .personInfo .section__head {
+    text-align: left;
 }

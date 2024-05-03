@@ -72,5 +72,9 @@
   cursor: none;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent
+}
+
 /* 
 /=======SCREEN4========/ */
