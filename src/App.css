@@ -63,5 +63,14 @@
   cursor: auto;
 }
 
+.modal__start {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: calc(100% - 32px);
+  cursor: none;
+}
+
 /* 
 /=======SCREEN4========/ */

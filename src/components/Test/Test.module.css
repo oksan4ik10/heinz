@@ -1,3 +1,8 @@
+.form {
+    position: relative;
+    z-index: 2;
+}
+
 .answers {
     position: relative;
     z-index: 2;

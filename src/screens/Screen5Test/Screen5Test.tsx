@@ -16,9 +16,9 @@ import bgTomato from "../../assets/5bg-tomatoTest.png"
 import bgTomato2 from "../../assets/5bg-tomatoTest2.png"
 import bgSheet from "../../assets/5bg-sheetTest.png"
 
-import TestPhoto from "../../components/TestPhoto/TestPhoto";
+// import TestPhoto from "../../components/TestPhoto/TestPhoto";
 // import Test from "../../components/Test/Test";
-// import TestMultiple from "../../components/TestMultiple/TestMultiple";
+import TestMultiple from "../../components/TestMultiple/TestMultiple";
 function Screen5Test(props: IProps) {
     const { infoSection } = props;
     console.log(infoSection);
@@ -41,8 +41,8 @@ function Screen5Test(props: IProps) {
                 <img src={urlInfoIcon} alt="icon" />
                 <p className={style.question__text}>Выбери, какой из этих вариантов [имя] стоит вписать в раздел «Желаемая должность»:</p>
             </div>
-            {/* <TestMultiple></TestMultiple> */}
-            <TestPhoto></TestPhoto>
+            <TestMultiple></TestMultiple>
+            {/* <TestPhoto></TestPhoto> */}
             {/* <Test></Test> */}
 
 

@@ -15,7 +15,7 @@ function Test() {
     }
 
     return (
-        <form onSubmit={clickBtn}>
+        <form onSubmit={clickBtn} className={style.form}>
             <div className={style.answers}>
                 <div>
                     <input type="radio" name="info" id="photo1" className={style.inputRadio} value={"photo1"} checked={isChecked === "photo1"} onChange={changeInput} disabled={true} />

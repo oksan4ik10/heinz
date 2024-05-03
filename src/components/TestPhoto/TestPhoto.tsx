@@ -11,15 +11,13 @@ function TestPhoto() {
         e.preventDefault();
         if (!isChecked) return
         console.log(isChecked);//функция для записи ответа
-
-
     }
     const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(e.target.value)
     }
     return (
         <>
-            <form onSubmit={clickBtn}>
+            <form onSubmit={clickBtn} className={style.form}>
                 <div className={style.photosWrapper}>
                     <div className={style.photos}>
                         <div className={style.photos__item}>
@@ -58,9 +56,6 @@ function TestPhoto() {
 
                             </label>
                         </div>
-
-
-
                     </div>
                 </div>
                 <button className={"btn " + style.btn + (isChecked ? "" : " btn_grey")}>Выбрать</button>

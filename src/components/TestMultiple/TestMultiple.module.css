@@ -1,3 +1,8 @@
+.form {
+    position: relative;
+    z-index: 2;
+}
+
 .answers {
     display: flex;
     flex-direction: column;
@@ -84,4 +89,23 @@
 
 .inputCheck:checked~label.success .answer__wrapper {
     color: var(--color-green)
+}
+
+.infoElem {
+    position: relative;
+    z-index: 2;
+
+
+}
+
+.info {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 50px;
+    height: 100%;
+    background: url("../../assets/iconInfo2.svg") no-repeat;
+    background-position: center;
+    z-index: 3;
+    cursor: help;
 }

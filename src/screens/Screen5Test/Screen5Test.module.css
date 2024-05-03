@@ -7,10 +7,6 @@
     z-index: 2;
 }
 
-.wrapper>* {
-    position: relative;
-    z-index: 2;
-}
 
 .arrow {
     width: 40px;
