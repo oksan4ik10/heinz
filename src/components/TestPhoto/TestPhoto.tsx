@@ -22,34 +22,45 @@ function TestPhoto() {
             <form onSubmit={clickBtn}>
                 <div className={style.photosWrapper}>
                     <div className={style.photos}>
-                        <input type="radio" name="photo" id="photo1" className={style.inputRadio1 + " " + style.inputRadio} value={"photo1"} checked={isChecked === "photo1"} onChange={changeInput} />
-                        <label htmlFor="photo1" className={style.photos__item + " " + style.label1}>
-                            <div className={style.wrapImg}>
-                                <img src={urlPhoto1} alt="photo3" />
-                            </div>
+                        <div className={style.photos__item}>
+                            <input type="radio" name="photo" id="photo1" className={style.inputRadio1 + " " + style.inputRadio} value={"0"} checked={isChecked === "0"} onChange={changeInput} />
+                            <label htmlFor="photo1" >
+                                <div className={style.wrapImg}>
+                                    <img src={urlPhoto1} alt="photo3" />
+                                </div>
 
-                        </label>
-                        <input checked={isChecked === "photo2"} onChange={changeInput} type="radio" name="photo" id="photo2" className={style.inputRadio2 + " " + style.inputRadio} value={"photo2"} />
-                        <label htmlFor="photo2" className={style.photos__item + " " + style.label2}>
-                            <div className={style.wrapImg}>
-                                <img src={urlPhoto2} alt="photo3" />
-                            </div>
+                            </label>
+                        </div>
+                        <div className={style.photos__item}>
+                            <input type="radio" name="photo" id="photo2" className={style.inputRadio} value={"1"} checked={isChecked === "1"} onChange={changeInput} />
+                            <label htmlFor="photo2">
+                                <div className={style.wrapImg}>
+                                    <img src={urlPhoto2} alt="photo3" />
+                                </div>
 
-                        </label>
-                        <input checked={isChecked === "photo3"} onChange={changeInput} type="radio" name="photo" id="photo3" className={style.inputRadio3 + " " + style.inputRadio} value={"photo3"} />
-                        <label htmlFor="photo3" className={style.photos__item + " " + style.label3}>
-                            <div className={style.wrapImg}>
-                                <img src={urlPhoto2} alt="photo3" />
-                            </div>
+                            </label>
+                        </div>
+                        <div className={style.photos__item}>
+                            <input type="radio" name="photo" id="photo3" className={style.inputRadio} value={"2"} checked={isChecked === "2"} onChange={changeInput} />
+                            <label htmlFor="photo3" >
+                                <div className={style.wrapImg}>
+                                    <img src={urlPhoto2} alt="photo3" />
+                                </div>
 
-                        </label>
-                        <input checked={isChecked === "photo4"} onChange={changeInput} type="radio" name="photo" id="photo4" className={style.inputRadio4 + " " + style.inputRadio} value={"photo4"} />
-                        <label htmlFor="photo4" className={style.photos__item + " " + style.label4}>
-                            <div className={style.wrapImg}>
-                                <img src={urlPhoto2} alt="photo3" />
-                            </div>
+                            </label>
+                        </div>
+                        <div className={style.photos__item}>
+                            <input type="radio" name="photo" id="photo4" className={style.inputRadio} value={"3"} checked={isChecked === "3"} onChange={changeInput} />
+                            <label htmlFor="photo4" >
+                                <div className={style.wrapImg}>
+                                    <img src={urlPhoto1} alt="photo3" />
+                                </div>
 
-                        </label>
+                            </label>
+                        </div>
+
+
+
                     </div>
                 </div>
                 <button className={"btn " + style.btn + (isChecked ? "" : " btn_grey")}>Выбрать</button>

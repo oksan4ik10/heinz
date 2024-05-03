@@ -17,12 +17,19 @@ function Test() {
     return (
         <form onSubmit={clickBtn}>
             <div className={style.answers}>
-                <input type="radio" name="info" id="photo1" className={style.inputRadio1 + " " + style.inputRadio} value={"photo1"} checked={isChecked === "photo1"} onChange={changeInput} />
-                <label htmlFor="photo1" className={style.answers__item + " " + style.label1}>Стажёр</label>
-                <input type="radio" name="info" id="photo2" className={style.inputRadio2 + " " + style.inputRadio} value={"photo2"} checked={isChecked === "photo1"} onChange={changeInput} />
-                <label htmlFor="photo2" className={style.answers__item + " " + style.label2}>Стажёр</label>
-                <input type="radio" name="info" id="photo3" className={style.inputRadio3 + " " + style.inputRadio} value={"photo3"} checked={isChecked === "photo1"} onChange={changeInput} />
-                <label htmlFor="photo3" className={style.answers__item + " " + style.label3}>Стажёр</label>
+                <div>
+                    <input type="radio" name="info" id="photo1" className={style.inputRadio} value={"photo1"} checked={isChecked === "photo1"} onChange={changeInput} disabled={true} />
+                    <label htmlFor="photo1" className={style.answers__item}>Стажёр</label>
+                </div>
+                <div>
+
+                    <input type="radio" name="info" id="photo2" className={style.inputRadio} value={"photo2"} checked={isChecked === "photo2"} onChange={changeInput} />
+                    <label htmlFor="photo2" className={style.answers__item + " " + style.success}>Стажёр</label>
+
+                </div>
+
+
+
             </div>
             <button className={"btn " + style.btn + (isChecked ? "" : " btn_grey")}>Выбрать</button>
         </form>

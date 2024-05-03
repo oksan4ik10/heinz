@@ -16,17 +16,22 @@
 
 .photos__item {
     width: min(calc(50% - 6px), 180px);
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.16);
-    background: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid transparent;
-    cursor: pointer;
+
+
 }
 
+.photos__item label {
+    cursor: pointer;
+    width: 100%;
+    padding: 16px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.16);
+    background: rgb(255, 255, 255);
+}
 
 
 .wrapImg {
@@ -47,17 +52,6 @@
 
 }
 
-.photos__item.check {}
-
-.photos__item.error {
-    border: 1px solid var(--color-red);
-
-}
-
-.photos__item.success {
-    border: 1px solid var(--color-green);
-
-}
 
 .inputRadio {
     appearance: none;
@@ -68,10 +62,17 @@
 
 }
 
-.inputRadio1:checked~.label1,
-.inputRadio2:checked~.label2,
-.inputRadio3:checked~.label3,
-.inputRadio4:checked~.label4 {
+.inputRadio:checked~label {
     border: 1px solid var(--color-darkBlue);
+
+}
+
+.inputRadio:checked~label.error {
+    border: 1px solid var(--color-red);
+
+}
+
+.inputRadio:checked~label.success {
+    border: 1px solid var(--color-green);
 
 }
