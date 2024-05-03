@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
+
 import Profile from "../../components/Profile/Profile"
 
 import urlSheet from "../../assets/4sheet.png"
@@ -584,7 +586,7 @@ function Screen4(props: IProps) {
 
         //переход на следующий экран
         changeScreen()
-
+        enablePageScroll()
 
 
 
@@ -606,6 +608,7 @@ function Screen4(props: IProps) {
     const refFackeElem = useRef<HTMLDivElement | null>(null);
     const startGame = () => {
         setIsStartGame(false);
+        disablePageScroll();
 
 
         if (!refWrapperSection.current || !refAnswer5.current || !refFackeElem.current) return
