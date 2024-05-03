@@ -22,6 +22,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .answers__item.check {
@@ -34,4 +35,22 @@
 
 .answers__item.success {
     color: var(--color-green);
+}
+
+.inputRadio {
+    appearance: none;
+    position: absolute;
+    height: 0;
+    width: 0;
+    opacity: 0;
+
+}
+
+.inputRadio:checked~.label,
+.inputRadio1:checked~.label1,
+.inputRadio2:checked~.label2,
+.inputRadio3:checked~.label3,
+.inputRadio4:checked~.label4 {
+    border: 1px solid var(--color-darkBlue);
+
 }
