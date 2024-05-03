@@ -6,19 +6,11 @@ import { useState } from "react"
 
 function TestPhoto() {
     const [isChecked, setIsChecked] = useState("")
-    console.log(isChecked);
-
 
     const clickBtn = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        const data = new FormData(form);
-        let valueTest = ""
-        for (const value of data.values()) {
-            valueTest = value as string
-        }
-        if (!valueTest) return
-        console.log(valueTest);//функция для записи ответа
+        if (!isChecked) return
+        console.log(isChecked);//функция для записи ответа
 
 
     }

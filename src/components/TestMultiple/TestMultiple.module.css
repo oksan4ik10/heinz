@@ -1,0 +1,75 @@
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputRadio {
+    appearance: none;
+    position: absolute;
+    height: 0;
+    width: 0;
+    opacity: 0;
+}
+
+.answers__item {
+    padding: 8px 16px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.16);
+    background: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.answer__wrapper {
+    flex: 1 0 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    gap: 8px;
+    color: var(--color-darkBlue);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+}
+
+
+.square {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid rgb(219, 219, 219);
+    border-radius: 3px;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.square::after {
+    content: url("../../assets/iconCheck.svg");
+    margin-top: -2px;
+    margin-left: 1px;
+}
+
+.inputCheck:checked~label .square {
+    background-color: var(--color-darkBlue);
+}
+
+.inputCheck:checked~label.error .square {
+    background-color: var(--color-red);
+}
+
+.inputCheck:checked~label.error .answer__wrapper {
+    color: var(--color-red)
+}
+
+.inputCheck:checked~label.success .square {
+    background-color: var(--color-green);
+}
+
+.inputCheck:checked~label.success .answer__wrapper {
+    color: var(--color-green)
+}

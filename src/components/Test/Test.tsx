@@ -2,23 +2,18 @@ import { useState } from "react";
 import style from "./Test.module.css"
 function Test() {
     const [isChecked, setIsChecked] = useState("")
-
-    const clickBtn = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        const data = new FormData(form);
-        let valueTest = ""
-        for (const value of data.values()) {
-            valueTest = value as string
-        }
-        if (!valueTest) return
-        console.log(valueTest);//функция для записи ответа
-
-
-    }
     const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(e.target.value)
     }
+
+    const clickBtn = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!isChecked) return
+        console.log(isChecked);//функция для записи ответа
+
+
+    }
+
     return (
         <form onSubmit={clickBtn}>
             <div className={style.answers}>
