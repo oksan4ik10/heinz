@@ -20,7 +20,7 @@ function App() {
   return <div className="container scroll__elem">
     {isScreenPersona && <ScreenPersona></ScreenPersona>}
 
-    {screen === 2 && <Screen2 />}
+    {screen === 2 && <Screen2 changeScreen={() => setScreen(4)} />}
     {screen === 4 && <Screen4 changeScreen={() => setScreen(5)}></Screen4>}
     {screen === 5 && <Screen5 changeScreen={() => setScreen(6)} />}
     {screen === 6 && <Screen6FinalTask1 />}

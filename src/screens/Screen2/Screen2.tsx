@@ -16,7 +16,12 @@ import { useState } from 'react';
 import { useAppDispatch } from '../../store/store';
 import { setUser } from '../../store/reducers/personaReducer';
 
-function Screen2() {
+
+interface IProps {
+    changeScreen: () => void
+}
+function Screen2(props: IProps) {
+    const { changeScreen } = props;
 
     const dispatch = useAppDispatch();
 
@@ -24,9 +29,10 @@ function Screen2() {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const checkPerson = () => {
-        console.log(arrUser[activeIndex]);
+
 
         dispatch(setUser(arrUser[activeIndex]))
+        changeScreen()
     }
 
 
