@@ -10,7 +10,7 @@ import Screen5 from './screens/Screen5/Screen5';
 import Screen6FinalTask1 from './screens/Screen6FinalTask1/Screen6FinalTask1';
 
 function App() {
-  const [screen, setScreen] = useState(5);
+  const [screen, setScreen] = useState(4);
 
   const isScreenPersona = useAppSelector((state) => state.screenPersonaReducser).isScreen;
 
