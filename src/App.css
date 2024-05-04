@@ -79,3 +79,16 @@
 
 /* 
 /=======SCREEN4========/ */
+
+.mySwiper .swiper-slide {
+  filter: blur(2px);
+}
+
+.mySwiper .swiper-slide-active {
+  filter: blur(0px);
+}
+
+
+.mySwiper .swiper-slide {
+  width: 306px;
+}

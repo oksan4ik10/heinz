@@ -5,6 +5,7 @@ interface IProps {
     btnText: string;
     funcBtn: () => void;
     border: boolean;
+
 }
 
 

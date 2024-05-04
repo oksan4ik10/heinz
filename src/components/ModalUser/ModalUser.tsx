@@ -14,6 +14,7 @@ import dataUsers from "../../data/personaScreen.json"
 
 interface IProps {
     user: number;
+    padding?: boolean
 }
 
 
@@ -22,7 +23,7 @@ const imgArr = [{
 }, { img: urlPhoto2, icon: urlIcon2 }, { img: urlPhoto3, icon: urlIcon3 }
 ]
 function ModalUser(props: IProps) {
-    const { user } = props;
+    const { user, padding } = props;
 
 
     const data = dataUsers[user]
@@ -30,14 +31,14 @@ function ModalUser(props: IProps) {
 
 
     return (
-        <div className={style.modal}>
+        <div className={style.modal + " " + (padding ? style.modalFirst : "")}>
             <h3 className={style.modal__name}>{data.name}</h3>
             <p className={style.modal__text} dangerouslySetInnerHTML={{ __html: data.education }}></p>
             <div className={style.modal__img}>
                 <img src={images.img} alt="photo" />
             </div>
             <ul className={style.modal__list}>
-                {data.skills.map((item) => <li className={style.list__item}>
+                {data.skills.map((item, index) => <li key={index} className={style.list__item}>
                     <span className={style.icon}><img src={images.icon} alt="icon" /></span>
                     <span className={style.modal__text} dangerouslySetInnerHTML={{ __html: item }}></span>
                 </li>)}

@@ -62,3 +62,18 @@
     flex: 0 0 20px;
 
 }
+
+.modalFirst {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.modalFirst .modal__name {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.modalFirst .modal__text {
+    font-size: 12px;
+    line-height: 15px;
+}

@@ -1,0 +1,23 @@
+.infoText {
+    display: flex;
+    align-items: start;
+    color: var(--color-darkBlue);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+    gap: 12px;
+}
+
+.btn {
+    margin-top: 49px;
+    margin-left: 16px;
+    width: calc(100% - 32px);
+}
+
+.carusel {
+    position: absolute;
+    top: calc(50% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+}
