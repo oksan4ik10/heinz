@@ -1,16 +1,64 @@
 .modal {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.modal__wrapper {
     padding: 16px 10px;
     border-radius: 8px;
     background: rgb(255, 255, 255);
     color: var(--color-darkBlue);
+    border-radius: 8px;
+    box-shadow: 2px 2px 16px 0px rgba(0, 0, 0, 0.08);
+    background: rgb(255, 255, 255);
+    padding: 12px 16px 16px;
+}
+
+.modal__name {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 23px;
+}
+
+.modal__text {
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
-    text-align: center;
+    text-align: left;
+}
+
+.modal__img {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    width: 100%;
+    position: relative;
+    padding-bottom: 54.6%;
+}
+
+.modal__img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.modal__list {
+    list-style: none;
+}
+
+.list__item {
+    display: flex;
+    gap: 4px;
+    align-items: start;
+    justify-content: start;
+
+}
+
+.list__item:not(:last-child) {
+    margin-bottom: 12px;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+
 }

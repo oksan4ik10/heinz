@@ -173,6 +173,23 @@
     gap: 8px;
 }
 
+
+.section__item span::after {
+    content: url("../../assets/4arrow.svg");
+    color: var(--color-miamie);
+    opacity: 0;
+
+
+}
+
+.section__item span::after {
+    content: url("../../assets/4arrow.svg");
+    color: var(--color-miamie);
+    opacity: 0;
+
+
+}
+
 .section__item.answer span::before {
     content: url("../../assets/4arrow.svg");
     color: var(--color-miamie);

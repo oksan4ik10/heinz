@@ -5,4 +5,19 @@
     top: 0px;
     left: 0px;
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: calc(100% - 32px);
+}
+
+.btn {
+    margin-top: 16px;
 }

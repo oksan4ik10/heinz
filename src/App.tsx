@@ -9,6 +9,8 @@ import Screen4 from './screens/Screen4/Screen4'
 import Screen5 from './screens/Screen5/Screen5';
 import Screen6FinalTask1 from './screens/Screen6FinalTask1/Screen6FinalTask1';
 
+
+
 function App() {
   const [screen, setScreen] = useState(4);
 
@@ -19,8 +21,8 @@ function App() {
     {isScreenPersona && <ScreenPersona></ScreenPersona>}
 
 
-    {screen === 4 && <Screen4 changeScreen={() => setScreen(4)}></Screen4>}
-    {screen === 5 && <Screen5 changeScreen={() => setScreen(5)} />}
+    {screen === 4 && <Screen4 changeScreen={() => setScreen(5)}></Screen4>}
+    {screen === 5 && <Screen5 changeScreen={() => setScreen(6)} />}
     {screen === 6 && <Screen6FinalTask1 />}
   </div>
 }

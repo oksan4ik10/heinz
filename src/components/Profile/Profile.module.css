@@ -7,8 +7,14 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .person img {
     width: 60px;
+    margin-top: 5px;
+}
+
+img.person2 {
+    margin-top: 10px;
 }
