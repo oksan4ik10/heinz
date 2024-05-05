@@ -12,7 +12,7 @@ import ScreenPersona from './screens/ScreenPersona/ScreenPersona';
 
 
 function App() {
-  const [screen, setScreen] = useState(2);
+  const [screen, setScreen] = useState(4);
 
   const isScreenPersona = useAppSelector((state) => state.screenPersonaReducser).isScreen;
 

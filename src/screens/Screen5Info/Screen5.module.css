@@ -259,6 +259,7 @@ img.photo {
 }
 
 .btn {
+    margin-top: 16px;
     position: relative;
     z-index: 2;
 }

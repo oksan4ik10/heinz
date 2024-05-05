@@ -42,6 +42,7 @@ function Screen5Info(props: IProps) {
     const userPhoto = [photoPerson0, photoPerson1, photoPerson2]
 
     const openTask = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (isEndGame) return
         const target = e.target as HTMLElement;
         const elem = target.closest(`.${style.section__item}`) as HTMLElement;
         if (!elem) return

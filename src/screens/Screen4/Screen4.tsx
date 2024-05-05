@@ -440,9 +440,9 @@ function Screen4(props: IProps) {
         setIdLast(+idAnswer)
         createFackeElem(`${style.facke__elem} ${style.sectionItem}`, idAnswer, target, iduser)
 
-
     }
 
+    const [isMove, setIsMove] = useState(false);
     const moveAnswerTouch = (e: React.TouchEvent<HTMLDivElement>) => {
         const data = e.changedTouches[0];
         moveAnswer(data.clientX, data.clientY)
@@ -450,7 +450,7 @@ function Screen4(props: IProps) {
     }
     const moveAnswer = (userX: number, userY: number) => {
         if (!targetFackeElem || !targetElem || !refWrapperSection.current || !refAnswerElem.current) return;
-
+        setIsMove(true)
         const clientX = userX;
         const clientY = userY;
 
@@ -519,8 +519,12 @@ function Screen4(props: IProps) {
         let isWin = false;
 
         const arr: number[] = []
+
+
         setAnswersList(answersList.map((item) => {
+
             if (item.hoverAnswer) {
+
                 isWin = true
 
                 item.hoverAnswer = false;
@@ -539,10 +543,10 @@ function Screen4(props: IProps) {
         setTargetFackeElem(undefined)
         targetFackeElem.remove();
         setUserAnswers(arr)
-        if (isWin && iduser) {
-
+        if ((isWin && iduser) || (!isMove)) {
             return
         }
+
         changeAnswersItem(iduser, false)
         targetElem.classList.remove(style.none)
 
