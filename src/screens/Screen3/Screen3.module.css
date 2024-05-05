@@ -1,0 +1,72 @@
+.wrapper {
+    height: 100%;
+}
+
+.head {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+}
+
+.head>* {
+    position: absolute;
+    z-index: 2;
+}
+
+.head::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0px 0px 16px 0px rgba(29, 207, 255, 0.8);
+
+}
+
+.modal2 {
+    width: calc(100% - 32px);
+    position: absolute;
+    top: 90px;
+    margin: auto;
+}
+
+.arrow {
+    position: absolute;
+    top: -49px;
+    width: 60px;
+    left: calc(100% - 141px);
+    overflow: hidden;
+    animation: arrow .8s infinite ease-out;
+}
+
+@keyframes arrow {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 60px;
+    }
+
+}
+
+.modal1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: calc(100% - 32px);
+}
+
+.wrapper {
+    background-image: url("../../assets/bg-items/3sheet-1.png"), url("../../assets/bg-items/3sheet-2.png"), url("../../assets/bg-items/3tomato.png"), url("../../assets/bg-items/3tomato-2.png"), url("../../assets/bg-items/3circle.svg"), url("../../assets/bg-items/3star.svg"), url("../../assets/bg-items/3star-2.svg");
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 98px, 79px, 125px, 133px, min(100%, 400px), 233px, 200px;
+    background-position: right 28%, left 65%, 23px 20px, right bottom, center, right top, left bottom;
+}
