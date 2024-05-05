@@ -57,12 +57,18 @@
   font-weight: 700;
   padding: 11px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn_grey {
   background: var(--color-grey);
   cursor: auto;
 }
+
+.btn_blue {
+  background: var(--color-miamie);
+}
+
 
 .modal__start {
   position: absolute;
