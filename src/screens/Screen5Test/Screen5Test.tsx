@@ -57,7 +57,10 @@ function Screen5Test(props: IProps) {
     }
 
     const clickPrev = () => {
-        dispatch(setStateAnswer({ section: infoSection, stateAnswer: "wait" }))
+        let state = stateAnswer;
+        if (stateUserArr.length > 0) state = "error"
+
+        dispatch(setStateAnswer({ section: infoSection, stateAnswer: state }))
         setInfoSection()
     }
 

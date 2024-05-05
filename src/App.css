@@ -98,3 +98,13 @@
 .mySwiper .swiper-slide {
   width: 306px;
 }
+
+
+body::after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  content: url("./assets/bg-items/3circle.svg") url("./assets/bg-items/3sheet-1.png") url("./assets/bg-items/3sheet-2.png") url("./assets/bg-items/3star.svg") url("./assets/bg-items/3star-2.svg") url("./assets/bg-items/3tomato-2.png") url("./assets/bg-items/3tomato.png") url("./assets/bg-items/6circle-2.svg") url("./assets/bg-items/6circle.svg") url("./assets/bg-items/6sheet-1.png") url("./assets/bg-items/6sheet-2.png") url("./assets/bg-items/6tomato-1.png") url("./assets/bg-items/6tomato-2.png")
+}
