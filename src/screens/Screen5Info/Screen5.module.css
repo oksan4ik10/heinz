@@ -113,7 +113,7 @@
     grid-template-columns: 1.15fr .85fr;
 }
 
-.section__item.check img.plus {
+.section__item.check .plus {
     display: none;
 
 }

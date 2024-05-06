@@ -100,3 +100,10 @@
 .arrowNone {
     opacity: 0;
 }
+
+.wrapper {
+    background-image: url("../../assets/bg-items/bg-tomato.png"), url("../../assets/bg-items/bg-tomato.png"), url("../../assets/bg-items/bg-sheetUpRight.png");
+    background-repeat: no-repeat;
+    background-size: 170px, 234px, 129px;
+    background-position: top -35px left -33px, bottom -87px left -66px, top calc(50vh - 30px) right -50px;
+}

@@ -64,6 +64,7 @@
 
 .inputCheck:checked~label .square {
     background-color: var(--color-darkBlue);
+    border-color: var(--color-darkBlue);
 }
 
 .inputCheck:checked~label .answers__item {
@@ -77,14 +78,17 @@
 
 .inputCheck:checked~label.error .square {
     background-color: var(--color-red);
+    border-color: var(--color-red);
 }
 
 .inputCheck:checked~label.error .answer__wrapper {
-    color: var(--color-red)
+    color: var(--color-red);
+
 }
 
 .inputCheck:checked~label.success .square {
     background-color: var(--color-green);
+    border-color: var(--color-green);
 }
 
 .inputCheck:checked~label.success .answer__wrapper {

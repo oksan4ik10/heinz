@@ -10,9 +10,7 @@ import urlInfoIcon from "../../assets/infoIcons.svg"
 import bgStart from "../../assets/5bg-starTest.svg"
 import bgCircle from "../../assets/5bg-circleTest.svg"
 import bgCircle2 from "../../assets/5bg-circle2Test.svg"
-import bgTomato from "../../assets/5bg-tomatoTest.png"
-import bgTomato2 from "../../assets/5bg-tomatoTest2.png"
-import bgSheet from "../../assets/5bg-sheetTest.png"
+
 
 import { useAppSelector, useAppDispatch } from "../../store/store";
 import { setStateAnswer, setAnswerUser } from "../../store/reducers/task1UserAnswerReducer";
@@ -71,9 +69,7 @@ function Screen5Test(props: IProps) {
             <img src={bgCircle} alt="circle" className={style.bgCircle} />
             <img src={bgCircle2} alt="circle" className={style.bgCircle2} />
             <img src={bgStart} alt="star" className={style.bgStart} />
-            <img src={bgTomato} alt="tomato" className={style.bgTomato} />
-            <img src={bgTomato2} alt="tomato" className={style.bgTomato2} />
-            <img src={bgSheet} alt="sheet" className={style.bgSheet} />
+
             <div className={style.head} onClick={clickPrev}>
                 <div className={style.arrow + " " + (stateAnswer === "success" ? style.arrowNone : "")}>
                     <img src={urlArrow} alt="arrow" />
