@@ -77,7 +77,7 @@ function Screen5Info(props: IProps) {
 
                         {sectionAnswers.info && <ul className={style.list}>
                             {info.text.map((item, index) => <li key={index}>
-                                <span>  {item}</span>
+                                <span dangerouslySetInnerHTML={{ __html: item }}></span>
                             </li>)}
                         </ul>
                         }
@@ -88,7 +88,7 @@ function Screen5Info(props: IProps) {
                     <div className={style.section__head}>Желаемая должность</div>
                     <div className={style.section__content + " " + (sectionAnswers.job ? style.check : "")}>
                         <img src={urlPlusYellow} className={style.plus} alt="plus" />
-                        {sectionAnswers.job && job.text}
+                        {sectionAnswers.job && <span dangerouslySetInnerHTML={{ __html: job.text }}></span>}
 
                     </div>
                 </div>
@@ -105,7 +105,7 @@ function Screen5Info(props: IProps) {
                         <img src={urlPlusBlue} className={style.plus} alt="plus" />
                         {sectionAnswers.education && <ul className={style.list}>
                             {education.text.map((item, index) => <li key={index}>
-                                <span>  {item}</span>
+                                <span dangerouslySetInnerHTML={{ __html: item }}> </span>
                             </li>)}
                         </ul>
                         }
@@ -122,13 +122,13 @@ function Screen5Info(props: IProps) {
                                     <ul className={style.list + " " + style.listSecond}>
                                         {experience.textIN.map((i, j) =>
                                             <li key={j}>
-                                                <span>{i}</span>
+                                                <span dangerouslySetInnerHTML={{ __html: i }}></span>
                                             </li>)
                                         }
                                     </ul>
                                 </li>
                                 return <li key={index}>
-                                    <span>  {item}</span>
+                                    <span dangerouslySetInnerHTML={{ __html: item }}></span>
                                 </li>
                             })}
                         </ul>
@@ -141,7 +141,7 @@ function Screen5Info(props: IProps) {
                         <img src={urlPlusMiamie} className={style.plus} alt="plus" />
                         {sectionAnswers.skills && <ul className={style.list + " " + (user === 2 ? style.listMenLast : "")}>
                             {skills.text.map((item, index) => <li key={index}>
-                                <span>  {item}</span>
+                                <span dangerouslySetInnerHTML={{ __html: item }}></span>
                             </li>)}
                         </ul>
                         }
