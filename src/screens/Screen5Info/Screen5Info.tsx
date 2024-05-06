@@ -105,7 +105,7 @@ function Screen5Info(props: IProps) {
                         <img src={urlPlusBlue} className={style.plus} alt="plus" />
                         {sectionAnswers.education && <ul className={style.list}>
                             {education.text.map((item, index) => <li key={index}>
-                                <span dangerouslySetInnerHTML={{ __html: item }}> </span>
+                                <span dangerouslySetInnerHTML={{ __html: item }}></span>
                             </li>)}
                         </ul>
                         }
@@ -118,11 +118,11 @@ function Screen5Info(props: IProps) {
                         <img src={urlPlusRed} className={style.plus} alt="plus" />
                         {sectionAnswers.experience && <ul className={style.list}>
                             {experience.text.map((item, index) => {
-                                if (index === 2) return <li key={index}> <span>{item}</span>
+                                if (index === 2) return <li key={index} > <span >{item}</span>
                                     <ul className={style.list + " " + style.listSecond}>
                                         {experience.textIN.map((i, j) =>
                                             <li key={j}>
-                                                <span dangerouslySetInnerHTML={{ __html: i }}></span>
+                                                <span>{i}</span>
                                             </li>)
                                         }
                                     </ul>
