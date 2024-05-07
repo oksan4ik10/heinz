@@ -334,3 +334,8 @@
 .facke__elem.cursorHere .cursor {
     bottom: -4px;
 }
+
+.section__item.modalAnswer span::after,
+.section__item.modalAnswer span::before {
+    opacity: 0;
+}

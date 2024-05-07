@@ -787,7 +787,7 @@ function Screen4(props: IProps) {
                     <div className={style.error__modal} ref={refErrorModal}>
                         <section className={style.sections}>
                             {answersList.map((item, index) => <div
-                                key={index} className={style.section__item + " " + (item.win ? "" : style.error)}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
+                                key={index} className={style.section__item + " " + style.answer + " " + style.modalAnswer + " " + (item.win ? "" : style.error)}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
                         </section>
                         <Modal border={false} btnText="Исправить ошибки" funcBtn={() => setDataWin("")} text={datakWin === "loser" ? 'В резюме необходимо размещать только<br/>самую важную информацию, которая<br/>поможет HR-специалисту быстро оценить,<br/>насколько твой опыт соответствует<br/>вакансии. Побольше о себе ты сможешь<br/>рассказать на собеседовании :)' : "Ты молодец и выбрал верные разделы,<br/>однако в составлении резюме важно то,<br/>в каком порядке они расположены.<br/>Попробуй поменять местами те заголовки,<br/>которые загорелись красным."} />
                     </div>
