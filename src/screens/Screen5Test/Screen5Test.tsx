@@ -43,7 +43,7 @@ function Screen5Test(props: IProps) {
     const stateAnswer = infoState.stateAnswer
 
     const { question, answers, wins } = data[user][infoSection];
-    const { textSuccess, textError } = dataModal[infoSection];
+    const { textSuccess, textError } = (infoSection === "experience") ? dataModal[infoSection][user] : dataModal[infoSection];
 
     const funcCheckUserAnswer = (userAnswers: number[]) => {
         const checkWin = userAnswers.sort((a, b) => a - b).toString() === wins.sort((a, b) => a - b).toString();
