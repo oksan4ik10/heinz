@@ -23,6 +23,7 @@ import dataModal from "../../data/task1Modal.json"
 import TestPhoto from "../../components/TestPhoto/TestPhoto";
 import Test from "../../components/Test/Test";
 import TestMultiple from "../../components/TestMultiple/TestMultiple";
+import { useEffect, useRef } from "react";
 
 interface IProps {
     infoSection: TNamesQuestion;
@@ -62,10 +63,15 @@ function Screen5Test(props: IProps) {
         setInfoSection()
     }
 
-
+    const refWrapper = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        const wrapper = refWrapper.current;
+        if (!wrapper) return
+        wrapper.scrollIntoView();
+    }, [])
 
     return (
-        <div className={style.wrapper + " wrapper"}>
+        <div className={style.wrapper + " wrapper"} ref={refWrapper}>
             <img src={bgCircle} alt="circle" className={style.bgCircle} />
             <img src={bgCircle2} alt="circle" className={style.bgCircle2} />
             {stateAnswer !== "wait" && <img src={bgStart} alt="star" className={style.bgStart} />}
@@ -80,9 +86,9 @@ function Screen5Test(props: IProps) {
                 <img src={urlInfoIcon} alt="icon" />
                 <p className={style.question__text} dangerouslySetInnerHTML={{ __html: question }}></p>
             </div>
-            {infoSection !== "photo" && infoSection !== "job" && <TestMultiple funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></TestMultiple>}
+            {infoSection !== "photo" && infoSection !== "job" && infoSection !== "experience" && <TestMultiple funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></TestMultiple>}
             {infoSection === "photo" && <TestPhoto funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></TestPhoto>}
-            {infoSection === "job" && <Test funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></Test>}
+            {(infoSection === "job" || infoSection === "experience") && <Test funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></Test>}
 
             <div className={style.modal}>
                 {stateAnswer === "error" && <Modal border={true} btnText="Выбрать заново" text={textError} funcBtn={clickModalError} />}

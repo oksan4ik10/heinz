@@ -14,6 +14,7 @@ function Screen5(props: IProps) {
 
     const { changeScreen } = props;
 
+
     const [infoTask, setInfoTask] = useState<TNamesQuestion | "">("");
     const changeInfoTask = (str: TNamesQuestion) => {
         setInfoTask(str);

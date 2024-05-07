@@ -19,6 +19,7 @@ import data from "../../data/screen5data.json"
 import { arrNameQuestion } from "../../models/type";
 
 import { TNamesQuestion, ICheckSection } from "../../models/type";
+import { useEffect, useRef } from "react";
 
 interface IProps {
     changeInfoTask: (str: TNamesQuestion) => void
@@ -33,7 +34,12 @@ interface IProps {
 function Screen5Info(props: IProps) {
     const { changeInfoTask, isEndGame, changeScreen, sectionAnswers, user } = props;
 
-
+    const refWrapper = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        const wrapper = refWrapper.current;
+        if (!wrapper) return
+        wrapper.scrollIntoView();
+    }, [])
 
     const { info, job, experience, education, skills } = data[user];
 
@@ -50,8 +56,10 @@ function Screen5Info(props: IProps) {
 
     }
 
+
+
     return (
-        <div className={style.wrapper + " wrapper"}>
+        <div className={style.wrapper + " wrapper"} ref={refWrapper}>
             <img src={bgCircle} alt="" className={style.bgCircle} />
             <img src={bgCircle2} alt="" className={style.bgCircle2} />
             <img src={bgStart} alt="" className={style.bgStart} />

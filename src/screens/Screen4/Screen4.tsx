@@ -546,6 +546,7 @@ function Screen4(props: IProps) {
         if ((isWin && iduser) || (!isMove)) {
             return
         }
+        setIsMove(false)
 
         changeAnswersItem(iduser, false)
         targetElem.classList.remove(style.none)
