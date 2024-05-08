@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-import task1InfoReducer from './reducers/task1InfoReducer';
+import task1InfoReducer from './reducers/tasksInfoReducer';
 import personaReducer from './reducers/personaReducer';
 import task1UserAnswerReducer from './reducers/task1UserAnswerReducer';
 import screenPersonaReducser from './reducers/screenPersonaReducser';

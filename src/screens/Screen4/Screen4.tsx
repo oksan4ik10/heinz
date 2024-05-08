@@ -544,6 +544,7 @@ function Screen4(props: IProps) {
         targetFackeElem.remove();
         setUserAnswers(arr)
         if ((isWin && iduser) || (!isMove)) {
+            setIsMove(false)
             return
         }
         setIsMove(false)

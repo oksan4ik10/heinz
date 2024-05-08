@@ -14,7 +14,7 @@ import bgCircle2 from "../../assets/5bg-circle2Test.svg"
 
 import { useAppSelector, useAppDispatch } from "../../store/store";
 import { setStateAnswer, setAnswerUser } from "../../store/reducers/task1UserAnswerReducer";
-import { setChekSection } from "../../store/reducers/task1InfoReducer";
+import { setChekSection } from "../../store/reducers/tasksInfoReducer";
 
 
 import data from "../../data/task1Info.json"
