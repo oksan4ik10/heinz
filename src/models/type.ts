@@ -10,6 +10,7 @@ export interface IPropsTask1Test {
     stateAnswer: TStateQuestion,
     stateUserArr: number[],
     funcCheckUserAnswer: (arr: number[]) => void
+    user?: number
 }
 
 export interface ICheckSection {

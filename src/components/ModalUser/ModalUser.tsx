@@ -9,6 +9,8 @@ import urlPhoto2 from "../../assets/personsInfo/2.png"
 import urlIcon2 from "../../assets/personsInfo/2icons.svg"
 import urlPhoto3 from "../../assets/personsInfo/3.png"
 import urlIcon3 from "../../assets/personsInfo/3icons.svg"
+import urlPhoto4 from "../../assets/personsInfo/4.png"
+import urlIcon4 from "../../assets/personsInfo/4icons.svg"
 
 import dataUsers from "../../data/personaScreen.json"
 
@@ -20,7 +22,7 @@ interface IProps {
 
 const imgArr = [{
     img: urlPhoto1, icon: urlIcon1
-}, { img: urlPhoto2, icon: urlIcon2 }, { img: urlPhoto3, icon: urlIcon3 }
+}, { img: urlPhoto2, icon: urlIcon2 }, { img: urlPhoto3, icon: urlIcon3 }, { img: urlPhoto4, icon: urlIcon4 }
 ]
 function ModalUser(props: IProps) {
     const { user, padding } = props;

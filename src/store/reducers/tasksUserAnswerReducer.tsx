@@ -43,9 +43,17 @@ export const task1UserAnswerReducer = createSlice({
         },
         setStateAnswer(state, action: PayloadAction<ISetStateUser>) {
             state[action.payload.section].stateAnswer = action.payload.stateAnswer;
+        },
+        resetStateAnswer(state) {
+            for (const key in state) {
+                state[key as TNamesQuestion] = {
+                    user: [],
+                    stateAnswer: "wait"
+                }
+            }
         }
     },
 });
 
 export default task1UserAnswerReducer.reducer;
-export const { setAnswerUser, setStateAnswer } = task1UserAnswerReducer.actions;
+export const { setAnswerUser, setStateAnswer, resetStateAnswer } = task1UserAnswerReducer.actions;

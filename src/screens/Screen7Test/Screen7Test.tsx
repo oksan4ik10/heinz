@@ -1,4 +1,5 @@
-import style from "./Screen5Test.module.css"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import style from "./Screen7Test.module.css"
 import { TNamesQuestion } from "../../models/type";
 
 import Profile from "../../components/Profile/Profile";
@@ -10,6 +11,7 @@ import urlInfoIcon from "../../assets/infoIcons.svg"
 import bgStart from "../../assets/5bg-starTest.svg"
 import bgCircle from "../../assets/5bg-circleTest.svg"
 import bgCircle2 from "../../assets/5bg-circle2Test.svg"
+import userPhoto from "../../assets/screen7/photoInfo1.png"
 
 
 import { useAppSelector, useAppDispatch } from "../../store/store";
@@ -17,23 +19,23 @@ import { setStateAnswer, setAnswerUser } from "../../store/reducers/tasksUserAns
 import { setChekSection } from "../../store/reducers/tasksInfoReducer";
 
 
-import data from "../../data/task1Info.json"
-import dataModal from "../../data/task1Modal.json"
+import data from "../../data/task2InfoTest.json"
+import dataModal from "../../data/task2Modal.json"
+import dataQuestion from "../../data/screen7data.json"
 
-import TestPhoto from "../../components/TestPhoto/TestPhoto";
+
 import Test from "../../components/Test/Test";
-import TestMultiple from "../../components/TestMultiple/TestMultiple";
+
 import { useEffect, useRef } from "react";
 
 interface IProps {
     infoSection: TNamesQuestion;
     setInfoSection: () => void
-    user: number
 
 }
 
-function Screen5Test(props: IProps) {
-    const { infoSection, setInfoSection, user } = props;
+function Screen7Test(props: IProps) {
+    const { infoSection, setInfoSection } = props;
     const dispatch = useAppDispatch();
 
 
@@ -42,8 +44,8 @@ function Screen5Test(props: IProps) {
     const stateUserArr = infoState.user
     const stateAnswer = infoState.stateAnswer
 
-    const { question, answers, wins } = data[user][infoSection];
-    const { textSuccess, textError } = (infoSection === "experience") ? dataModal[infoSection][user] : dataModal[infoSection];
+    const { answers, wins } = data[infoSection];
+    const { textSuccess, textError } = dataModal[infoSection];
 
     const funcCheckUserAnswer = (userAnswers: number[]) => {
         const checkWin = userAnswers.sort((a, b) => a - b).toString() === wins.sort((a, b) => a - b).toString();
@@ -70,11 +72,23 @@ function Screen5Test(props: IProps) {
         wrapper.scrollIntoView();
     }, [])
 
+
+    const infoQuestion: any = dataQuestion[infoSection];
+    const titles = {
+        info: "Личная и контактная информация",
+        job: "Желаемая должность",
+        photo: "Фото",
+        education: "Образование и дополнительные курсы",
+        experience: "Опыт работы",
+        skills: "Навыки"
+    }
+
+
     return (
         <div className={style.wrapper + " wrapper"} ref={refWrapper}>
             <img src={bgCircle} alt="circle" className={style.bgCircle} />
             <img src={bgCircle2} alt="circle" className={style.bgCircle2} />
-            {stateAnswer !== "wait" && <img src={bgStart} alt="star" className={style.bgStart} />}
+            <img src={bgStart} alt="star" className={style.bgStart} />
 
             <div className={style.head} onClick={clickPrev}>
                 <div className={style.arrow + " " + (stateAnswer === "success" ? style.arrowNone : "")}>
@@ -82,13 +96,26 @@ function Screen5Test(props: IProps) {
                 </div>
                 <Profile></Profile>
             </div>
-            <div className={style.question} >
-                <img src={urlInfoIcon} alt="icon" />
-                <p className={style.question__text} dangerouslySetInnerHTML={{ __html: question }}></p>
+            <div className={style.section__item + " " + style.check + " " + style[infoSection]} >
+                <div className={style.section__head}>{titles[infoSection]}</div>
+                <div className={style.section__content + " " + style.check}>
+
+                    {infoSection !== "photo" && infoSection !== "job" && <ul className={style.list + " " + (infoSection === "skills" ? style.listMenLast : "")}>
+                        {infoQuestion.text.map((item: any, index: number) => <li key={index}>
+                            <span dangerouslySetInnerHTML={{ __html: item }}></span>
+                        </li>)}
+                    </ul>}
+                    {infoSection === "job" && <span dangerouslySetInnerHTML={{ __html: infoQuestion.text }}></span>}
+                    {infoSection === "photo" && <img src={userPhoto} alt="photo" className={style.photo} />}
+
+
+                </div>
             </div>
-            {infoSection !== "photo" && infoSection !== "job" && infoSection !== "experience" && <TestMultiple funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></TestMultiple>}
-            {infoSection === "photo" && <TestPhoto user={user} funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></TestPhoto>}
-            {(infoSection === "job" || infoSection === "experience") && <Test funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></Test>}
+            {stateAnswer === "wait" && <div className={style.question} >
+                <img src={urlInfoIcon} alt="icon" />
+                <p className={style.question__text} dangerouslySetInnerHTML={{ __html: "Какая допущена ошибка?" }}></p>
+            </div>}
+            <Test funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></Test>
 
             <div className={style.modal}>
                 {stateAnswer === "error" && <Modal border={true} btnText="Выбрать заново" text={textError} funcBtn={clickModalError} />}
@@ -102,4 +129,4 @@ function Screen5Test(props: IProps) {
     );
 }
 
-export default Screen5Test;
+export default Screen7Test;

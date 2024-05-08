@@ -1,7 +1,10 @@
 .head {
     display: flex;
-    align-items: start;
-    justify-content: space-between;
+    align-items: end;
+    justify-content: end;
+    -webkit-justify-content: flex-end;
+    -webkit-align-items: flex-end;
+
     width: 100%;
     margin-bottom: 15px;
     position: relative;
@@ -264,10 +267,47 @@ img.photo {
     z-index: 2;
 }
 
-.section.check .personPhoto .section__head {
+.section__item.check {
+    cursor: pointer;
+}
+
+.section__head {
+    display: flex;
+    gap: 8px;
+    align-items: start;
+    justify-content: center;
+}
+
+.section__head::before {
+    content: url("../../assets/iconCheck.svg");
+    flex: 0 0 16px;
+
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--color-green);
+    border-radius: 3px;
+    display: none;
+    align-items: end;
+    justify-content: center;
+    background: var(--color-green);
+
+}
+
+.section__head.check::before {
+    display: flex;
+}
+
+.wrapper {
+    background-image: url("../../assets/bg-items/bg-tomato.png");
+    background-repeat: no-repeat;
+    background-size: 124px;
+    background-position: top -36px left -19px;
+}
+
+.personPhoto .section__head {
     height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 0 0 42px;
+    flex: 1 0 42px;
 }

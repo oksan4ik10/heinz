@@ -3,7 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import task1InfoReducer from './reducers/tasksInfoReducer';
 import personaReducer from './reducers/personaReducer';
-import task1UserAnswerReducer from './reducers/task1UserAnswerReducer';
+import task1UserAnswerReducer from './reducers/tasksUserAnswerReducer';
 import screenPersonaReducser from './reducers/screenPersonaReducser';
 
 const rootReducer = combineReducers({

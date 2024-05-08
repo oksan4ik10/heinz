@@ -12,6 +12,8 @@ import Screen5 from './screens/Screen5/Screen5';
 import Screen6FinalTask1 from './screens/Screen6FinalTask1/Screen6FinalTask1';
 import ScreenPersona from './screens/ScreenPersona/ScreenPersona';
 
+import Screen7 from './screens/Screen7/Screen7';
+
 
 function App() {
   const [screen, setScreen] = useState(1);
@@ -20,14 +22,15 @@ function App() {
 
 
 
-  return <div className="container scroll__elem">
+  return <div className={"container scroll__elem " + (screen === 6 ? "screen7" : "")}>
     {isScreenPersona && <ScreenPersona></ScreenPersona>}
     {screen === 1 && <Screen1 changeScreen={() => setScreen(2)} />}
     {screen === 2 && <Screen2 changeScreen={() => setScreen(3)} />}
     {screen === 3 && <Screen3 changeScreen={() => setScreen(4)} />}
     {screen === 4 && <Screen4 changeScreen={() => setScreen(5)}></Screen4>}
     {screen === 5 && <Screen5 changeScreen={() => setScreen(6)} />}
-    {screen === 6 && <Screen6FinalTask1 changeScreen={() => setScreen(1)} />}
+    {screen === 6 && <Screen6FinalTask1 changeScreen={() => setScreen(7)} />}
+    {screen === 7 && <Screen7 changeScreen={() => setScreen(8)} />}
   </div>
 }
 
