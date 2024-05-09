@@ -264,10 +264,21 @@ img.photo {
     z-index: 2;
 }
 
-.section.check .personPhoto .section__head {
+.section.check .personPhoto .section__head,
+.section.check .personInfo .section__head {
     height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 0 0 42px;
+}
+
+.section.check .personInfo.check .section__content.check,
+.section.check .personJob.check .section__content.check {
+    padding-left: 9px;
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
 }

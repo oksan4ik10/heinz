@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Screen5Info from "../Screen5Info/Screen5Info";
 import Screen5Test from "../Screen5Test/Screen5Test";
 import { TNamesQuestion } from "../../models/type";
 import ScreenBlur from "../../components/ScreenBlur/ScreenBlur";
 import Modal from "../../components/Modal/Modal";
+
+import { useAppDispatch } from "../../store/store";
+import { setIsScroll } from "../../store/reducers/scrollReducer";
 
 import { useAppSelector } from "../../store/store";
 
@@ -13,6 +16,7 @@ interface IProps {
 function Screen5(props: IProps) {
 
     const { changeScreen } = props;
+    const dispatch = useAppDispatch()
 
 
     const [infoTask, setInfoTask] = useState<TNamesQuestion | "">("");
@@ -29,6 +33,15 @@ function Screen5(props: IProps) {
 
     const [isFinal, setIsFinalGame] = useState(false);
 
+    useEffect(() => {
+        dispatch(setIsScroll(false))
+    }, [])
+
+    const clickStart = () => {
+        dispatch(setIsScroll(true))
+        setIsStartGame(false)
+    }
+
 
     const setInfoSection = () => {
         setInfoTask("")
@@ -37,18 +50,24 @@ function Screen5(props: IProps) {
             setIsFinalGame(true)
             setIsEndGame(true)
             setInfoTask("")
+            dispatch(setIsScroll(false))
         }
+    }
+
+    const clickShowResume = () => {
+        dispatch(setIsScroll(true))
+        setIsEndGame(false)
     }
     return (
         <>
             <ScreenBlur screen={isStartGame}>
                 <div className="modal__start">
-                    <Modal border={false} btnText="Приступить" funcBtn={() => setIsStartGame(false)} text={"Отлично! Ты выбрал верные заголовки.<br/>Со структурой резюме определились.<br/>Теперь загляни в каждый раздел и заполни<br/>его, нажав на плюсик."} />
+                    <Modal border={false} btnText="Приступить" funcBtn={clickStart} text={"Отлично! Ты выбрал верные заголовки.<br/>Со структурой резюме определились.<br/>Теперь загляни в каждый раздел и заполни<br/>его, нажав на плюсик."} />
                 </div>
             </ScreenBlur>
             <ScreenBlur screen={isEndGame}>
                 <div className="modal__start">
-                    <Modal border={false} btnText="Приступить" funcBtn={() => setIsEndGame(false)} text={`Генри Хайнц говорил: «Делайте<br/>обыкновенные вещи необыкновенно хорошо,<br/>и в этом залог успеха». Это относится<br/>и к резюме — если оно хорошее<br/>и структурированное, тебе будет проще<br/>выделиться среди кандидатов.<br/><br/>Посмотри, что у тебя получилось — ${textModalEnd[user]} уже готов отправлять своё резюме!`} />
+                    <Modal border={false} btnText="Приступить" funcBtn={clickShowResume} text={`Генри Хайнц говорил: «Делайте<br/>обыкновенные вещи необыкновенно хорошо,<br/>и в этом залог успеха». Это относится<br/>и к резюме — если оно хорошее<br/>и структурированное, тебе будет проще<br/>выделиться среди кандидатов.<br/><br/>Посмотри, что у тебя получилось — ${textModalEnd[user]} уже готов отправлять своё резюме!`} />
                 </div>
             </ScreenBlur>
             {!infoTask && <Screen5Info user={user} sectionAnswers={sectionAnswers} isEndGame={isFinal} changeInfoTask={changeInfoTask} changeScreen={changeScreen}></Screen5Info>}

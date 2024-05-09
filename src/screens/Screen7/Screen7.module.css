@@ -1,0 +1,128 @@
+.profile {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
+.modal2 {
+    width: calc(100% - 32px);
+    position: absolute;
+    top: 90px;
+    margin: auto;
+}
+
+.arrow {
+    position: absolute;
+    top: -49px;
+    width: 60px;
+    left: calc(100% - 141px);
+    overflow: hidden;
+    animation: arrow .8s infinite ease-out;
+}
+
+@keyframes arrow {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 60px;
+    }
+
+}
+
+.modal3 {
+    display: block;
+    --widthElem: 0;
+    --heightElem: 0;
+    position: absolute;
+    top: var(--topElem);
+    left: var(--leftElem);
+    width: calc(100% - 32px);
+}
+
+.modal3.none {
+    display: none;
+}
+
+.section__item {
+    min-height: 114px;
+    display: flex;
+    flex-direction: column;
+    width: var(--widthElem);
+    height: var(--heightElem);
+}
+
+.section__head {
+    border-radius: 8px 8px 0px 0px;
+    background: var(--color-yellow);
+    color: var(--color-darkBlue);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: left;
+    padding: 3px 10px;
+    flex-grow: 0;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section__content {
+    background-color: var(--color-lightYellow);
+    color: var(--color-darkBlue);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: left;
+    list-style: none;
+    padding: 10px 10px 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    height: auto;
+    flex-grow: 1;
+    cursor: pointer;
+    border-radius: 0px 0px 8px 8px;
+}
+
+
+
+.list {
+    list-style: none;
+}
+
+.list>li span {
+    display: flex;
+    align-items: start;
+    gap: 5px;
+
+}
+
+.list>li span::before {
+    content: "";
+    height: 3px;
+    width: 3px;
+    background: var(--color-darkBlue);
+    border-radius: 50%;
+    flex: 0 0 3px;
+    margin-top: 6px;
+}
+
+.section__item:nth-child(1) .list>li:not(:last-child) {
+    margin-bottom: 4px;
+}
+
+.modalStart {
+    margin-top: 20px;
+    position: relative;
+}
+
+.modalStart .arrow {
+    transform: scale(-1, 1);
+    left: auto;
+    top: -55px;
+
+    right: calc(100% - var(--widthElem) - 65px);
+}

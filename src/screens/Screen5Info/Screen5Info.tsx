@@ -80,7 +80,7 @@ function Screen5Info(props: IProps) {
                     <div className={style.section__head}>Личная и контактная информация</div>
                     <div className={style.section__content + " " + (sectionAnswers.info ? style.check : "")}>
                         <svg className={style.plus} width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 0.5H8.5V8.5L0.5 8.5V12.5H8.5V20.5H12.5V12.5H20.5V8.5L12.5 8.5V0.5Z" fill="#FEBD01" />
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12.5 0.5H8.5V8.5L0.5 8.5V12.5H8.5V20.5H12.5V12.5H20.5V8.5L12.5 8.5V0.5Z" fill="#FEBD01" />
                         </svg>
 
 
@@ -93,11 +93,11 @@ function Screen5Info(props: IProps) {
 
                     </div>
                 </div>
-                <div className={style.section__item + " " + (sectionAnswers.job ? style.check : "")} data-id={arrNameQuestion[1]}>
+                <div className={style.section__item + " " + (sectionAnswers.job ? style.check : "") + " " + style.personJob} data-id={arrNameQuestion[1]}>
                     <div className={style.section__head}>Желаемая должность</div>
                     <div className={style.section__content + " " + (sectionAnswers.job ? style.check : "")}>
                         <svg className={style.plus} width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 0.5H8.5V8.5L0.5 8.5V12.5H8.5V20.5H12.5V12.5H20.5V8.5L12.5 8.5V0.5Z" fill="#FEBD01" />
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12.5 0.5H8.5V8.5L0.5 8.5V12.5H8.5V20.5H12.5V12.5H20.5V8.5L12.5 8.5V0.5Z" fill="#FEBD01" />
                         </svg>
                         {sectionAnswers.job && <span dangerouslySetInnerHTML={{ __html: job.text }}></span>}
 
@@ -107,7 +107,7 @@ function Screen5Info(props: IProps) {
                     <div className={style.section__head}>Фото</div>
                     <div className={style.section__content}>
                         <svg className={style.plus} width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 0.5H8.5V8.5L0.5 8.5V12.5H8.5V20.5H12.5V12.5H20.5V8.5L12.5 8.5V0.5Z" fill="#FEBD01" />
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12.5 0.5H8.5V8.5L0.5 8.5V12.5H8.5V20.5H12.5V12.5H20.5V8.5L12.5 8.5V0.5Z" fill="#FEBD01" />
                         </svg>
                         <img src={userPhoto[user]} alt="photo" className={style.photo} />
                     </div>
@@ -116,7 +116,7 @@ function Screen5Info(props: IProps) {
                     <div className={style.section__head}>Образование и дополнительные курсы</div>
                     <div className={style.section__content + " " + (sectionAnswers.education ? style.check : "")}>
                         <svg className={style.plus} width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 0H8.5V8L0.5 8V12H8.5V20H12.5V12H20.5V8L12.5 8V0Z" fill="#1B3D6D" />
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12.5 0H8.5V8L0.5 8V12H8.5V20H12.5V12H20.5V8L12.5 8V0Z" fill="#1B3D6D" />
                         </svg>
 
                         {sectionAnswers.education && <ul className={style.list}>
@@ -132,7 +132,7 @@ function Screen5Info(props: IProps) {
                     <div className={style.section__head}>Опыт работы</div>
                     <div className={style.section__content + " " + (sectionAnswers.experience ? style.check : "")}>
                         <svg className={style.plus} width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 0H8.5V8L0.5 8V12H8.5V20H12.5V12H20.5V8L12.5 8V0Z" fill="#E02725" />
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12.5 0H8.5V8L0.5 8V12H8.5V20H12.5V12H20.5V8L12.5 8V0Z" fill="#E02725" />
                         </svg>
 
                         {sectionAnswers.experience && <ul className={style.list}>
@@ -158,7 +158,7 @@ function Screen5Info(props: IProps) {
                     <div className={style.section__head}>Навыки</div>
                     <div className={style.section__content + " " + (sectionAnswers.skills ? style.check : "")}>
                         <svg className={style.plus} width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 0H8.5V8L0.5 8V12H8.5V20H12.5V12H20.5V8L12.5 8V0Z" fill="#08AFDC" />
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12.5 0H8.5V8L0.5 8V12H8.5V20H12.5V12H20.5V8L12.5 8V0Z" fill="#08AFDC" />
                         </svg>
                         {sectionAnswers.skills && <ul className={style.list + " " + (user === 2 ? style.listMenLast : "")}>
                             {skills.text.map((item, index) => <li key={index}>

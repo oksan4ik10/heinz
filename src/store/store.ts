@@ -5,12 +5,14 @@ import task1InfoReducer from './reducers/tasksInfoReducer';
 import personaReducer from './reducers/personaReducer';
 import task1UserAnswerReducer from './reducers/tasksUserAnswerReducer';
 import screenPersonaReducser from './reducers/screenPersonaReducser';
+import scrollReducer from './reducers/scrollReducer';
 
 const rootReducer = combineReducers({
     task1InfoReducer,
     personaReducer,
     task1UserAnswerReducer,
-    screenPersonaReducser
+    screenPersonaReducser,
+    scrollReducer
 
 });
 

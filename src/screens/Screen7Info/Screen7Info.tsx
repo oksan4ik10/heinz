@@ -23,18 +23,28 @@ interface IProps {
     isEndGame: boolean
     changeScreen: () => void
     sectionAnswers: ICheckSection
+    changeRefElem: (x: number, y: number, width: number, height: number) => void
+    isStartGame: boolean
 }
 
 
 
 function Screen5Info(props: IProps) {
-    const { changeInfoTask, isEndGame, changeScreen, sectionAnswers } = props;
+    const { changeInfoTask, isEndGame, changeScreen, sectionAnswers, changeRefElem, isStartGame } = props;
 
     const refWrapper = useRef<HTMLDivElement>(null)
     useEffect(() => {
         const wrapper = refWrapper.current;
         if (!wrapper) return
         wrapper.scrollIntoView();
+        if (!isStartGame) return
+        if (refElem.current) {
+            const dataWrapper = wrapper.getBoundingClientRect();
+            const dataRef = refElem.current.getBoundingClientRect();
+            const x = dataRef.x - dataWrapper.x;
+            const y = dataRef.y - dataWrapper.y;
+            changeRefElem(x, y, dataRef.width, dataRef.height)
+        }
     }, [])
 
     const { info, job, experience, education, skills } = data;
@@ -43,6 +53,7 @@ function Screen5Info(props: IProps) {
 
     const openTask = (e: React.MouseEvent<HTMLDivElement>) => {
         if (isEndGame) return
+
         const target = e.target as HTMLElement;
         const elem = target.closest(`.${style.section__item}`) as HTMLElement;
         if (!elem) return
@@ -51,6 +62,8 @@ function Screen5Info(props: IProps) {
         changeInfoTask(dataInfo)
 
     }
+
+    const refElem = useRef<HTMLDivElement>(null)
 
 
 
@@ -67,7 +80,7 @@ function Screen5Info(props: IProps) {
 
             </div>}
             <div className={style.section + " " + style.check} onClick={openTask}>
-                <div className={style.section__item + " " + style.personInfo + " " + style.check} data-id={arrNameQuestion[0]}>
+                <div ref={refElem} className={style.section__item + " " + style.personInfo + " " + style.check} data-id={arrNameQuestion[0]}>
                     <div className={style.section__head + " " + (sectionAnswers.info ? style.check : "")}>Личная и контактная информация</div>
                     <div className={style.section__content + " " + style.check}>
 
@@ -87,7 +100,7 @@ function Screen5Info(props: IProps) {
 
                     </div>
                 </div>
-                <div className={style.section__item + " " + style.check} data-id={arrNameQuestion[1]}>
+                <div className={style.section__item + " " + style.check + " " + style.personJob} data-id={arrNameQuestion[1]}>
                     <div className={style.section__head + " " + (sectionAnswers.job ? style.check : "")}>Желаемая должность</div>
                     <div className={style.section__content + " " + style.check}>
                         <span dangerouslySetInnerHTML={{ __html: (sectionAnswers.job) ? job.textWin : job.text }}></span>

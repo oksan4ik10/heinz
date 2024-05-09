@@ -190,7 +190,7 @@
     flex-grow: 0;
     flex-basis: auto;
     position: relative;
-    padding-bottom: min(145%, 250px);
+    padding-bottom: min(140%, 250px);
     cursor: auto;
 }
 
@@ -304,10 +304,34 @@ img.photo {
     background-position: top -36px left -19px;
 }
 
-.personPhoto .section__head {
+.personPhoto .section__head,
+.personInfo .section__head {
     height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1 0 42px;
+    flex: 0 0 42px;
+}
+
+.personInfo .section__head {
+    justify-content: center;
+}
+
+@media (max-width:506px) {
+    .personInfo .check.section__head::before {
+        margin-top: -13px;
+
+    }
+}
+
+.personJob.check .section__content.check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.personInfo.check .section__content.check {
+    display: flex;
+    align-items: center;
+    justify-content: start;
 }

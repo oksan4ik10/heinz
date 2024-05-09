@@ -19,10 +19,10 @@ function App() {
   const [screen, setScreen] = useState(1);
 
   const isScreenPersona = useAppSelector((state) => state.screenPersonaReducser).isScreen;
+  const isScroll = useAppSelector((state) => state.scrollReducer).isScroll;
 
 
-
-  return <div className={"container scroll__elem " + (screen === 6 ? "screen7" : "")}>
+  return <div className={"container " + (screen === 6 ? " screen7" : "") + " " + (isScroll ? "scroll__elem" : "")}>
     {isScreenPersona && <ScreenPersona></ScreenPersona>}
     {screen === 1 && <Screen1 changeScreen={() => setScreen(2)} />}
     {screen === 2 && <Screen2 changeScreen={() => setScreen(3)} />}

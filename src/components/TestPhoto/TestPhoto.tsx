@@ -31,18 +31,20 @@ function TestPhoto(props: IPropsTask1Test) {
         setIsChecked(e.target.value)
     }
 
-    const arrPhotos = [[urlPhoto1, urlPhoto2, urlPhoto3, urlPhoto4], [urlPhoto5, urlPhoto6, urlPhoto7, urlPhoto8], urlPhoto9, urlPhoto10, urlPhoto11, urlPhoto12]
+
+    const arrPhotos = [[urlPhoto1, urlPhoto2, urlPhoto3, urlPhoto4], [urlPhoto5, urlPhoto6, urlPhoto7, urlPhoto8], [urlPhoto9, urlPhoto10, urlPhoto11, urlPhoto12]]
 
     return (
         <>
-            {user && <form onSubmit={clickBtn} className={style.form}>
+            <form onSubmit={clickBtn} className={style.form}>
                 <div className={style.photosWrapper}>
                     <div className={style.photos}>
                         {answers.map((item, index) => <div key={index} className={style.photos__item}>
                             <input type="radio" name="photo" id={`item${index}`} className={style.inputRadio} value={index} checked={((isChecked !== "") && (+isChecked === index) && (stateAnswer === "wait"))} onChange={changeInput} disabled={stateAnswer !== "wait" ? true : false} />
                             <label htmlFor={`item${index}`} className={((stateAnswer === "wait" || (stateUserArr.indexOf(index) === -1)) ? "" : (stateUserArr.indexOf(index) !== -1 && item.isWin) ? style.success : style.error)} >
                                 <div className={style.wrapImg}>
-                                    <img src={arrPhotos[user][index]} alt={`photo${index}`} />
+                                    {item.info}
+                                    <img src={arrPhotos[user ? user : 0][index]} alt={`photo${index}`} />
                                 </div>
 
                             </label>
@@ -51,7 +53,7 @@ function TestPhoto(props: IPropsTask1Test) {
                     </div>
                 </div>
                 {stateAnswer === "wait" && <button className={"btn " + style.btn + (isChecked ? "" : " btn_grey")}>Выбрать</button>}
-            </form>}
+            </form>
 
         </>
     );
