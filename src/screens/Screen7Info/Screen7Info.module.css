@@ -157,6 +157,13 @@
     margin-top: 6px;
 }
 
+.listWinExp>li span::before {
+    width: 0;
+    height: 0;
+    flex-basis: 0;
+    margin-top: 0;
+}
+
 .section__item:nth-child(1) .list>li:not(:last-child) {
     margin-bottom: 4px;
 }
@@ -182,6 +189,16 @@
 
 .listSecond>li:not(:last-child) {
     margin-bottom: 4px;
+}
+
+.listWinExp .listSecond>li span::before {
+    content: "";
+    height: 3px;
+    width: 3px;
+    background: var(--color-darkBlue);
+    border-radius: 50%;
+    flex: 0 0 3px;
+    margin-top: 6px;
 }
 
 .personPhoto.check .section__content {

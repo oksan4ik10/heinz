@@ -29,15 +29,17 @@ interface IProps {
     infoSection: TNamesQuestion;
     setInfoSection: () => void
     user: number
+    scrollWindow: () => void
 
 }
 
 function Screen5Test(props: IProps) {
-    const { infoSection, setInfoSection, user } = props;
+    const { infoSection, setInfoSection, user, scrollWindow } = props;
     const dispatch = useAppDispatch();
 
 
     const infoState = useAppSelector((state) => state.task1UserAnswerReducer)[infoSection];
+    const isScroll = useAppSelector((state) => state.scrollReducer).isScroll;
 
     const stateUserArr = infoState.user
     const stateAnswer = infoState.stateAnswer
@@ -46,7 +48,7 @@ function Screen5Test(props: IProps) {
     const { textSuccess, textError } = (infoSection === "experience") ? dataModal[infoSection][user] : dataModal[infoSection];
 
     const funcCheckUserAnswer = (userAnswers: number[]) => {
-        const checkWin = userAnswers.sort((a, b) => a - b).toString() === wins.sort((a, b) => a - b).toString();
+        const checkWin = [...userAnswers].sort((a, b) => a - b).toString() === [...wins].sort((a, b) => a - b).toString();
         dispatch(setAnswerUser({ section: infoSection, stateAnswer: checkWin ? "success" : "error", arr: userAnswers }))
         if (checkWin) dispatch(setChekSection(infoSection))
     }
@@ -64,15 +66,21 @@ function Screen5Test(props: IProps) {
     }
 
     const refWrapper = useRef<HTMLDivElement>(null)
+
     useEffect(() => {
         const wrapper = refWrapper.current;
         if (!wrapper) return
         wrapper.scrollIntoView();
+
+
+
     }, [])
 
 
+
+
     return (
-        <div className={style.wrapper + " wrapper"} ref={refWrapper}>
+        <div className={style.wrapper + " wrapper " + (!isScroll ? style.isScroll : "")} ref={refWrapper} >
             <img src={bgCircle} alt="circle" className={style.bgCircle} />
             <img src={bgCircle2} alt="circle" className={style.bgCircle2} />
             {stateAnswer !== "wait" && <img src={bgStart} alt="star" className={style.bgStart} />}
@@ -87,7 +95,7 @@ function Screen5Test(props: IProps) {
                 <img src={urlInfoIcon} alt="icon" />
                 <p className={style.question__text} dangerouslySetInnerHTML={{ __html: question }}></p>
             </div>
-            {infoSection !== "photo" && infoSection !== "job" && infoSection !== "experience" && <TestMultiple funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></TestMultiple>}
+            {infoSection !== "photo" && infoSection !== "job" && infoSection !== "experience" && <TestMultiple scrollWindow={scrollWindow} funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></TestMultiple>}
             {infoSection === "photo" && <TestPhoto user={user} funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></TestPhoto>}
             {(infoSection === "job" || infoSection === "experience") && <Test funcCheckUserAnswer={funcCheckUserAnswer} answers={answers} stateUserArr={stateUserArr} stateAnswer={stateAnswer}></Test>}
 

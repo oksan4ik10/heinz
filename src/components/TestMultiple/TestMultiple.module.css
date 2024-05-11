@@ -113,3 +113,7 @@
     z-index: 3;
     cursor: help;
 }
+
+.modalStart {
+    top: calc(50% + calc(var(--top) / 2))
+}

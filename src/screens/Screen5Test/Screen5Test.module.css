@@ -107,3 +107,9 @@
     background-size: 150px, 234px, 129px;
     background-position: top -36px left -19px, bottom -87px left -66px, top calc(50vh - 30px) right -50px;
 }
+
+.wrapper.isScroll {
+    margin-top: calc(var(--top) * (-1));
+    position: absolute;
+    height: calc(100% - calc(var(--top) * (-1)));
+}

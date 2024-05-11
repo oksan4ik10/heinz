@@ -12,10 +12,11 @@ import { useAppSelector } from "../../store/store";
 
 interface IProps {
     changeScreen: () => void
+    scrollWindow: () => void
 }
 function Screen5(props: IProps) {
 
-    const { changeScreen } = props;
+    const { changeScreen, scrollWindow } = props;
     const dispatch = useAppDispatch()
 
 
@@ -71,7 +72,7 @@ function Screen5(props: IProps) {
                 </div>
             </ScreenBlur>
             {!infoTask && <Screen5Info user={user} sectionAnswers={sectionAnswers} isEndGame={isFinal} changeInfoTask={changeInfoTask} changeScreen={changeScreen}></Screen5Info>}
-            {infoTask && <Screen5Test user={user} setInfoSection={setInfoSection} infoSection={infoTask}></Screen5Test>}
+            {infoTask && <Screen5Test scrollWindow={scrollWindow} user={user} setInfoSection={setInfoSection} infoSection={infoTask}></Screen5Test>}
         </>
     );
 }

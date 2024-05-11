@@ -119,7 +119,7 @@ function Screen7(props: IProps) {
 
             <ScreenBlur screen={isEndGame}>
                 <div className="modal__start">
-                    <Modal border={false} btnText="Приступить" funcBtn={clickShowResume} text={`Супер! Все ошибки исправлены. Теперь Ира готова<br/>к поиску работы.`} />
+                    <Modal border={false} minFont={true} btnText="Приступить" funcBtn={clickShowResume} text={`Супер! Все ошибки исправлены. Теперь Ира готова<br/>к поиску работы.`} />
                 </div>
             </ScreenBlur>
             {!infoTask && <Screen7Info isStartGame={isStartGame} changeRefElem={changeRefElem} isEndGame={isFinal} sectionAnswers={sectionAnswers} changeInfoTask={changeInfoTask} changeScreen={changeScreen}></Screen7Info>}

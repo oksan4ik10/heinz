@@ -5,9 +5,14 @@ import Modal from "../Modal/Modal";
 
 import { IPropsTask1Test } from "../../models/type";
 
+import { useAppDispatch } from "../../store/store";
+import { setIsScroll } from "../../store/reducers/scrollReducer";
+
 function TestMultiple(props: IPropsTask1Test) {
 
-    const { answers, stateAnswer, stateUserArr, funcCheckUserAnswer } = props;
+    const { answers, stateAnswer, stateUserArr, funcCheckUserAnswer, scrollWindow } = props;
+
+    const dispatch = useAppDispatch();
 
     const [checked, setChecked] = useState<number[]>(stateUserArr)
     const changeInput = (c: number) => {
@@ -34,15 +39,21 @@ function TestMultiple(props: IPropsTask1Test) {
     const clickInfo = (i: number) => {
 
         setIsModal(i)
+        dispatch(setIsScroll(false))
 
+    }
+    const closeModal = () => {
+        setIsModal(-1)
+        dispatch(setIsScroll(true))
+        if (scrollWindow) scrollWindow();
     }
 
 
     return (
         <>
             <ScreenBlur screen={Boolean(isModal !== -1)}>
-                <div className="modal__start">
-                    <Modal border={false} btnText="Продолжить" text={isModal === -1 ? "" : answers[isModal].info} funcBtn={() => setIsModal(-1)}></Modal>
+                <div className={"modal__start " + style.modalStart}>
+                    <Modal border={false} btnText="Продолжить" text={isModal === -1 ? "" : answers[isModal].info} funcBtn={closeModal}></Modal>
                 </div>
             </ScreenBlur>
             <form onSubmit={clickBtn} className={style.form}>

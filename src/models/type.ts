@@ -11,6 +11,7 @@ export interface IPropsTask1Test {
     stateUserArr: number[],
     funcCheckUserAnswer: (arr: number[]) => void
     user?: number
+    scrollWindow?: () => void
 }
 
 export interface ICheckSection {

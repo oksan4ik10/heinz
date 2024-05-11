@@ -15,6 +15,10 @@
     text-align: center;
 }
 
+.fontText {
+    font-size: 12px;
+}
+
 .modal.border .modal__text {
     border: 1px solid var(--color-darkBlue);
 }

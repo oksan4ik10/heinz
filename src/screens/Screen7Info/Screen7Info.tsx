@@ -106,7 +106,7 @@ function Screen5Info(props: IProps) {
                         <span dangerouslySetInnerHTML={{ __html: (sectionAnswers.job) ? job.textWin : job.text }}></span>
                     </div>
                 </div>
-                <div className={style.section__item + " " + style.personPhoto + " " + style.check} data-id={arrNameQuestion[2]}>
+                <div className={`${style.section__item} ${style.personPhoto} ${style.check}`} data-id={arrNameQuestion[2]}>
                     <div className={style.section__head + " " + (sectionAnswers.photo ? style.check : "")}>Фото</div>
                     <div className={style.section__content}>
                         <img src={sectionAnswers["photo"] ? userPhoto[1] : userPhoto[0]} alt="photo" className={style.photo} />
@@ -144,7 +144,7 @@ function Screen5Info(props: IProps) {
                         </ul>
                         }
 
-                        {sectionAnswers.experience && <ul className={style.list}>
+                        {sectionAnswers.experience && <ul className={style.list + " " + style.listWinExp}>
                             {experience.textWin.map((item, index) => {
                                 if (index === 2) return <li key={index} > <span >{item}</span>
                                     <ul className={style.list + " " + style.listSecond}>
