@@ -13,10 +13,12 @@ import Screen6FinalTask1 from './screens/Screen6FinalTask1/Screen6FinalTask1';
 import ScreenPersona from './screens/ScreenPersona/ScreenPersona';
 
 import Screen7 from './screens/Screen7/Screen7';
+import Screen8 from './screens/Screen8/Screen8';
+import Screen9 from './screens/Screen9/Screen9';
 
 
 function App() {
-  const [screen, setScreen] = useState(1);
+  const [screen, setScreen] = useState(6);
 
   const isScreenPersona = useAppSelector((state) => state.screenPersonaReducser).isScreen;
   const isScroll = useAppSelector((state) => state.scrollReducer).isScroll;
@@ -31,6 +33,8 @@ function App() {
     {screen === 5 && <Screen5 changeScreen={() => setScreen(6)} />}
     {screen === 6 && <Screen6FinalTask1 changeScreen={() => setScreen(7)} />}
     {screen === 7 && <Screen7 changeScreen={() => setScreen(8)} />}
+    {screen === 8 && <Screen8 changeScreen={() => setScreen(9)} />}
+    {screen === 9 && <Screen9 />}
   </div>
 }
 

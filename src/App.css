@@ -74,6 +74,9 @@
   background: var(--color-miamie);
 }
 
+.btn_darkBlue {
+  background: var(--color-darkBlue);
+}
 
 .modal__start {
   position: absolute;
@@ -120,5 +123,5 @@ body::after {
   height: 0;
   overflow: hidden;
   z-index: -1;
-  content: url("./assets/personsInfo/4.png") url("./assets/photo4-icon.png") url("./assets/screen7/photoInfo1.png") url("./assets/screen7/photoInfo2.png")
+  content: url("./assets/personsInfo/4.png") url("./assets/photo4-icon.png") url("./assets/screen7/photoInfo1.png") url("./assets/screen7/photoInfo2.png") url("./assets/bg-items/8circle-1.svg") url("./assets/bg-items/8circle-2.svg") url("./assets/bg-items/8star-1.svg") url("./assets/bg-items/8tomato.png") url("./assets/bg-items/9circle.svg") url("./assets/bg-items/9star-1.svg") url("./assets/bg-items/9star-2.svg")
 }
