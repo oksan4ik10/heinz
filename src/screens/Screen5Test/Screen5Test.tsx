@@ -85,8 +85,8 @@ function Screen5Test(props: IProps) {
             <img src={bgCircle2} alt="circle" className={style.bgCircle2} />
             {stateAnswer !== "wait" && <img src={bgStart} alt="star" className={style.bgStart} />}
 
-            <div className={style.head} onClick={clickPrev}>
-                <div className={style.arrow + " " + (stateAnswer === "success" ? style.arrowNone : "")}>
+            <div className={style.head}>
+                <div className={style.arrow + " " + (stateAnswer === "success" ? style.arrowNone : "")} onClick={clickPrev}>
                     <img src={urlArrow} alt="arrow" />
                 </div>
                 <Profile></Profile>
