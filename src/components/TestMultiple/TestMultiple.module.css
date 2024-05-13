@@ -115,5 +115,7 @@
 }
 
 .modalStart {
-    top: calc(50% + calc(var(--top) / 2))
+    position: fixed;
+
+    top: calc(50% + (max(var(--top), 1px) / 2));
 }

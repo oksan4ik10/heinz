@@ -71,9 +71,6 @@ function Screen5Test(props: IProps) {
         const wrapper = refWrapper.current;
         if (!wrapper) return
         wrapper.scrollIntoView();
-
-
-
     }, [])
 
 

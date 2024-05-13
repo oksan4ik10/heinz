@@ -47,7 +47,7 @@ function App() {
     {isScreenPersona && <ScreenPersona></ScreenPersona>}
     {screen === 1 && <Screen1 changeScreen={() => setScreen(2)} />}
     {screen === 2 && <Screen2 changeScreen={() => setScreen(3)} />}
-    {screen === 3 && <Screen3 changeScreen={() => setScreen(4)} />}
+    {screen === 3 && <Screen3 changeScreen={() => setScreen(5)} />}
     {screen === 4 && <Screen4 changeScreen={() => setScreen(5)}></Screen4>}
     {screen === 5 && <Screen5 scrollWindow={scrollTopScreen5} changeScreen={() => setScreen(6)} />}
     {screen === 6 && <Screen6FinalTask1 changeScreen={() => setScreen(7)} />}
