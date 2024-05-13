@@ -78,7 +78,6 @@ function Screen5Test(props: IProps) {
 
 
 
-
     return (
         <div className={style.wrapper + " wrapper " + (!isScroll ? style.isScroll : "")} ref={refWrapper} >
             <img src={bgCircle} alt="circle" className={style.bgCircle} />

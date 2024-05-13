@@ -6,7 +6,7 @@ import { IPropsTask1Test } from "../../models/type";
 function Test(props: IPropsTask1Test) {
     const { answers, stateAnswer, stateUserArr, funcCheckUserAnswer } = props;
 
-    const [isChecked, setIsChecked] = useState(stateUserArr[0] + "")
+    const [isChecked, setIsChecked] = useState(stateUserArr[0] ? stateUserArr[0] + "" : "")
     const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(e.target.value)
     }
@@ -16,6 +16,7 @@ function Test(props: IPropsTask1Test) {
         if (!isChecked) return
         funcCheckUserAnswer([+isChecked])
     }
+
 
     return (
         <form onSubmit={clickBtn} className={style.form}>
