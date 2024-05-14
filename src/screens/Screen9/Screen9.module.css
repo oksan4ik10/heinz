@@ -140,3 +140,9 @@
     transform: rotate(-20deg);
     background-position: bottom -61px right 82px;
 }
+
+@media screen and (min-width: 600px) {
+    .wrapper::before {
+        top: 78px;
+    }
+}
