@@ -155,6 +155,8 @@ function Screen4(props: IProps) {
 
     }, [])
 
+
+
     //данные для ответов
     const [answersItem, setAnswersItem] = useState([
         [
@@ -401,6 +403,8 @@ function Screen4(props: IProps) {
             arr.push(item.id)
             return item
         }))
+
+
         setTargetElem(undefined);
         setTargetFackeElem(undefined)
         targetFackeElem.remove();
@@ -429,6 +433,8 @@ function Screen4(props: IProps) {
 
     }
 
+    const [startList, setStartList] = useState([...answersList]);
+
     const startAnswer = (targetDiv: HTMLElement) => {
 
         if (!targetDiv) return
@@ -438,6 +444,7 @@ function Screen4(props: IProps) {
         const iduser = targetDiv.dataset.iduser ? targetDiv.dataset.iduser : "0";
         setIdLast(+idAnswer)
         createFackeElem(`${style.facke__elem} ${style.sectionItem}`, idAnswer, target, iduser)
+        setStartList([...answersList])
 
     }
 
@@ -468,12 +475,14 @@ function Screen4(props: IProps) {
         targetFackeElem.style.top = y + "px";
         targetFackeElem.style.left = x + "px";
         let id = -1;
+        let goal = false;
 
         setAnswersList(answersList.map((item, index) => {
             const coordinate = answersListCoordinate[index];
-            const isGoal = coordinate.top <= y && coordinate.bottom + 1 >= y;
+            const isGoal = coordinate.top <= y && coordinate.bottom >= y;
             const obj = Object.assign({}, item)
             if (isGoal) {
+                goal = true;
                 obj.hoverAnswer = true;
                 id = index
             } else {
@@ -491,14 +500,15 @@ function Screen4(props: IProps) {
             return
         }
 
-        if (id === -1 && idLast === 5) {
-
-            setAnswersList(answersList.map((item, index) => {
-                if (index === 5) {
-                    item.check = false
+        if (!goal) {
+            const iduser = +(targetFackeElem.dataset.iduser ? targetFackeElem.dataset.iduser : "")
+            setAnswersList(startList.map((item) => {
+                if (item.id === iduser) {
+                    item.check = false;
+                    item.hover = false;
                     item.hoverAnswer = false;
+                    item.id = 0;
                     item.text = "";
-                    item.id = 0
                 }
                 return item
             }))
@@ -537,10 +547,15 @@ function Screen4(props: IProps) {
             return item
         }))
 
+        if (refWrapperElem.current) {
+            refWrapperElem.current.removeChild(targetFackeElem)
+        }
 
         setTargetElem(undefined);
         setTargetFackeElem(undefined)
+
         targetFackeElem.remove();
+
         setUserAnswers(arr)
         if ((isWin && iduser) || (!isMove)) {
             setIsMove(false)
@@ -791,7 +806,7 @@ function Screen4(props: IProps) {
                             {answersList.map((item, index) => <div
                                 key={index} className={style.section__item + " " + style.answer + " " + style.modalAnswer + " " + (item.win ? style.success : answersRight.indexOf(item.id) === -1 ? style.error : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
                         </section>
-                        <Modal border={false} btnText="Исправить ошибки" funcBtn={() => setDataWin("")} text={datakWin === "loser" ? 'В резюме необходимо размещать только<br/>самую важную информацию, которая<br/>поможет HR-специалисту быстро оценить,<br/>насколько твой опыт соответствует<br/>вакансии. Побольше о себе ты сможешь<br/>рассказать на собеседовании :)' : "Ты молодец и выбрал верные разделы,<br/>однако в составлении резюме важно то,<br/>в каком порядке они расположены.<br/>Попробуй поменять местами те заголовки,<br/>которые загорелись красным."} />
+                        <Modal border={false} btnText="Исправить ошибки" funcBtn={() => setDataWin("")} text={datakWin === "loser" ? 'В резюме необходимо размещать только<br/>самую важную информацию, которая<br/>поможет HR-специалисту быстро оценить,<br/>насколько твой опыт соответствует<br/>вакансии. Побольше о себе ты сможешь<br/>рассказать на собеседовании :)' : "Ты молодец и выбрал верные разделы,<br/>однако в составлении резюме важно то,<br/>в каком порядке они расположены.<br/>Попробуй поменять местами те заголовки,<br/>которые не загорелись зелёным."} />
                     </div>
                 </ScreenBlur>
                 <img src={urlBgCircle} alt="circle" className={style.bg__circle + " " + style.bg} />
