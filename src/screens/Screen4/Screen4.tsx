@@ -493,7 +493,7 @@ function Screen4(props: IProps) {
         }))
 
 
-        if ((id !== -1) && (idLast !== id)) {
+        if ((id !== -1) && (idLast !== id) && (idLast !== -1)) {
 
 
             const temp1 = answersList[id];
@@ -503,11 +503,32 @@ function Screen4(props: IProps) {
             setIdLast(id)
             return
         }
+        if ((id !== -1) && (idLast === -1)) {
+            const idEmpty = answersList.findLastIndex((item) => !item.check)
+            const arr = answersList.slice(idEmpty + 1, answersList.length)
+
+
+            const a = answersList.splice(idEmpty + 1, arr.length);
+
+            const arrFinish = [...answersList.slice(0, idEmpty), ...a]
+            arrFinish.push({
+                id: 0,
+                check: false,
+                hover: false,
+                hoverAnswer: false,
+                text: "",
+                win: false
+            })
+            setAnswersList(arrFinish)
+            setIdLast(5)
+
+
+        }
 
         if (!goal) {
             const iduser = +(targetFackeElem.dataset.iduser ? targetFackeElem.dataset.iduser : "")
 
-            setIdLast(4)
+            setIdLast(-1)
             setAnswersList(startList.map((item) => {
                 if (item.id === iduser) {
                     item.check = false;
