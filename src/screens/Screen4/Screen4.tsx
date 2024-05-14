@@ -580,7 +580,7 @@ function Screen4(props: IProps) {
     const answersRight = [4, 5, 6, 7, 9, 10];
     const clickCheckWin = () => {
 
-        if (userAnswers.length !== 6) return
+        if (userAnswers.filter((item) => item).length !== 6) return
         const sortUserAnswer = [...userAnswers].sort((a, b) => a - b);
 
 
