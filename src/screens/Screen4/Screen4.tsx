@@ -491,7 +491,11 @@ function Screen4(props: IProps) {
             return obj
 
         }))
+
+
         if ((id !== -1) && (idLast !== id)) {
+
+
             const temp1 = answersList[id];
             answersList[id] = answersList[idLast];
             answersList[idLast] = temp1;
@@ -502,6 +506,8 @@ function Screen4(props: IProps) {
 
         if (!goal) {
             const iduser = +(targetFackeElem.dataset.iduser ? targetFackeElem.dataset.iduser : "")
+
+            setIdLast(4)
             setAnswersList(startList.map((item) => {
                 if (item.id === iduser) {
                     item.check = false;
