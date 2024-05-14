@@ -20,7 +20,6 @@ interface IAnswerUser {
     check: boolean,
     hover: boolean, //при наведении элемента из ответов
     hoverAnswer: boolean, //при перестановке разделов
-    rightAnswer: number[],
     win: boolean
 }
 interface IAnswerCoordinate {
@@ -83,7 +82,7 @@ function Screen4(props: IProps) {
         text: ``,
         check: false,
         hover: false,
-        rightAnswer: [10, 7],
+
         win: false,
         hoverAnswer: false
     }, {
@@ -91,7 +90,7 @@ function Screen4(props: IProps) {
         text: ``,
         check: false,
         hover: false,
-        rightAnswer: [10, 7],
+
         win: false,
         hoverAnswer: false
     },
@@ -100,7 +99,7 @@ function Screen4(props: IProps) {
         text: ``,
         check: false,
         hover: false,
-        rightAnswer: [9],
+
         win: false,
         hoverAnswer: false
     },
@@ -109,7 +108,7 @@ function Screen4(props: IProps) {
         text: ``,
         check: false,
         hover: false,
-        rightAnswer: [4],
+
         win: false,
         hoverAnswer: false
     },
@@ -118,7 +117,7 @@ function Screen4(props: IProps) {
         text: ``,
         check: false,
         hover: false,
-        rightAnswer: [5],
+
         win: false,
         hoverAnswer: false
     },
@@ -127,7 +126,7 @@ function Screen4(props: IProps) {
         text: ``,
         check: false,
         hover: false,
-        rightAnswer: [6],
+
         win: false,
         hoverAnswer: false
     },
@@ -557,13 +556,12 @@ function Screen4(props: IProps) {
     const refErrorModal = useRef<HTMLDivElement>(null);
     const [datakWin, setDataWin] = useState("");
     //алгоритм для кнопки Проверить
+    const answersRight = [4, 5, 6, 7, 9, 10];
     const clickCheckWin = () => {
 
         if (userAnswers.length !== 6) return
-
-
         const sortUserAnswer = [...userAnswers].sort((a, b) => a - b);
-        const answersRight = [4, 5, 6, 7, 9, 10];
+
 
         //если правильность ответов
         let winOrLouser = sortUserAnswer.toString() !== answersRight.toString() ? "loser" : ""
@@ -577,6 +575,8 @@ function Screen4(props: IProps) {
             if (rightAnswer[index].indexOf(item.id) !== -1) {
                 item.win = true;
                 countRightAnswer++
+            } else {
+                item.win = false
             }
             return item
         }))
@@ -762,6 +762,7 @@ function Screen4(props: IProps) {
         setTimeout(() => {
             if (!refAnswer5.current) return
             refAnswer5.current.classList.remove(style.none);
+            refFackeElem.current = null;
             setIsStopGame(false)
         }, 5200)
 
@@ -788,7 +789,7 @@ function Screen4(props: IProps) {
                     <div className={style.error__modal} ref={refErrorModal}>
                         <section className={style.sections}>
                             {answersList.map((item, index) => <div
-                                key={index} className={style.section__item + " " + style.answer + " " + style.modalAnswer + " " + (item.win ? "" : style.error)}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
+                                key={index} className={style.section__item + " " + style.answer + " " + style.modalAnswer + " " + (item.win ? style.success : answersRight.indexOf(item.id) === -1 ? style.error : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
                         </section>
                         <Modal border={false} btnText="Исправить ошибки" funcBtn={() => setDataWin("")} text={datakWin === "loser" ? 'В резюме необходимо размещать только<br/>самую важную информацию, которая<br/>поможет HR-специалисту быстро оценить,<br/>насколько твой опыт соответствует<br/>вакансии. Побольше о себе ты сможешь<br/>рассказать на собеседовании :)' : "Ты молодец и выбрал верные разделы,<br/>однако в составлении резюме важно то,<br/>в каком порядке они расположены.<br/>Попробуй поменять местами те заголовки,<br/>которые загорелись красным."} />
                     </div>

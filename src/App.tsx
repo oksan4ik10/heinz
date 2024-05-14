@@ -18,7 +18,7 @@ import Screen9 from './screens/Screen9/Screen9';
 
 
 function App() {
-  const [screen, setScreen] = useState(1);
+  const [screen, setScreen] = useState(7);
 
   const isScreenPersona = useAppSelector((state) => state.screenPersonaReducser).isScreen;
   const isScroll = useAppSelector((state) => state.scrollReducer).isScroll;

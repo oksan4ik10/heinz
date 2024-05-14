@@ -280,3 +280,9 @@
     object-fit: cover;
     border-radius: 0px 0px 8px 8px;
 }
+
+.skills .section__content {
+    width: 100%;
+    flex-basis: 100%;
+    display: block;
+}
