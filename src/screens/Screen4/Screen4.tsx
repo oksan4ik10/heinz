@@ -143,8 +143,8 @@ function Screen4(props: IProps) {
         for (let index = 1; index < 7; index++) {
             const bottom = (index === 1) ? defSectionWrapper + 43 : ((index === 6)) ? defSectionWrapper + 43 : defSectionWrapper + 37;
             const obj: IAnswerCoordinate = {
-                top: defSectionWrapper,
-                bottom: bottom,
+                top: Math.floor(defSectionWrapper),
+                bottom: Math.floor(bottom),
             }
             arr.push(obj)
             defSectionWrapper = bottom + 1
