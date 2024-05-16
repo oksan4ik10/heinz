@@ -80,7 +80,7 @@ function Screen5Test(props: IProps) {
             } else {
                 state = "error"
             }
-
+            checkWin = state === "success";
             dispatch(setAnswerUser({ section: infoSection, stateAnswer: state, arr: userAnswers }))
 
 

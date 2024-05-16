@@ -46,6 +46,7 @@ function Screen5(props: IProps) {
 
     const setInfoSection = () => {
         setInfoTask("")
+
         const isWin = Object.values(sectionAnswers).filter((item) => item).length === 6
         if (isWin) {
             setIsFinalGame(true)
