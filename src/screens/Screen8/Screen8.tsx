@@ -18,7 +18,7 @@ function Screen8(props: IProps) {
                     <p className={style.text}>
                         Наша тренировка подошла к концу!<br />Теперь ты умеешь не только<br />составлять идеальное резюме,<br />но и находить ошибки в чужих.<br />Мы с Kraft Heinz дарим тебе шаблон<br />для резюме! Оно будет не только<br />грамотно составленным,<br />но и красивым ❤️
                     </p>
-                    <a href="http://vk.com" target="_blank" className={"btn " + style.link}>Открыть шаблон</a>
+                    <a href="https://disk.yandex.ru/i/OJR2ntHHlpJD6Q" target="_blank" className={"btn " + style.link}>Открыть шаблон</a>
                     <button className="btn btn_darkBlue" onClick={changeScreen}>Далее</button>
                 </div>
 

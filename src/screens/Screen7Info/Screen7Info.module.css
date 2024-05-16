@@ -352,3 +352,23 @@ img.photo {
     align-items: center;
     justify-content: start;
 }
+
+.blur {
+    position: sticky;
+    bottom: 0;
+    width: calc(100% - 32px);
+    height: 120px;
+    margin: auto;
+    z-index: 2;
+    background: linear-gradient(0.00deg, rgb(246, 246, 246), rgba(246, 246, 246, 0.5) 38.5%, rgba(246, 246, 246, 0.3) 79.5%, rgba(246, 246, 246, 0) 100%);
+    display: flex;
+    align-items: end;
+    -webkit-align-items: end;
+    justify-content: center;
+}
+
+.btn {
+    margin-bottom: 40px;
+    width: 100%;
+    background-color: var(--color-darkBlue)
+}

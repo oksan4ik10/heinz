@@ -47,6 +47,11 @@ function TestMultiple(props: IPropsTask1Test) {
         dispatch(setIsScroll(true))
         if (scrollWindow) scrollWindow();
     }
+    console.log(answers);
+    console.log(stateUserArr);
+    console.log(stateAnswer);
+
+
 
 
     return (

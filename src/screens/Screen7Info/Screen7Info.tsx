@@ -68,125 +68,129 @@ function Screen5Info(props: IProps) {
 
 
     return (
-        <div className={style.wrapper + " wrapper"} ref={refWrapper}>
-            <img src={bgCircle} alt="" className={style.bgCircle} />
-            <img src={bgCircle2} alt="" className={style.bgCircle2} />
-            <img src={bgStart} alt="" className={style.bgStart} />
-            <img src={bgTomato} alt="" className={style.bgTomato} />
-            <img src={bgSheet} alt="" className={style.bgSheet} />
-            {!isEndGame && <div className={style.head}>
+        <>
+            <div className={style.wrapper + " wrapper"} ref={refWrapper}>
+                <img src={bgCircle} alt="" className={style.bgCircle} />
+                <img src={bgCircle2} alt="" className={style.bgCircle2} />
+                <img src={bgStart} alt="" className={style.bgStart} />
+                <img src={bgTomato} alt="" className={style.bgTomato} />
+                <img src={bgSheet} alt="" className={style.bgSheet} />
+                {!isEndGame && <div className={style.head}>
 
-                <Profile></Profile>
+                    <Profile></Profile>
 
-            </div>}
-            <div className={style.section + " " + style.check} onClick={openTask}>
-                <div ref={refElem} className={style.section__item + " " + style.personInfo + " " + style.check} data-id={arrNameQuestion[0]}>
-                    <div className={style.section__head + " " + (sectionAnswers.info ? style.check : "")}>Личная и контактная информация</div>
-                    <div className={style.section__content + " " + style.check}>
+                </div>}
+                <div className={style.section + " " + style.check} onClick={openTask}>
+                    <div ref={refElem} className={style.section__item + " " + style.personInfo + " " + style.check} data-id={arrNameQuestion[0]}>
+                        <div className={style.section__head + " " + (sectionAnswers.info ? style.check : "")}>Личная и контактная информация</div>
+                        <div className={style.section__content + " " + style.check}>
 
 
-                        {sectionAnswers.info && <ul className={style.list}>
-                            {info.textWin.map((item, index) => <li key={index}>
-                                <span dangerouslySetInnerHTML={{ __html: item }}></span>
-                            </li>)}
-                        </ul>
-                        }
-                        {!sectionAnswers.info && <ul className={style.list}>
-                            {info.text.map((item, index) => <li key={index}>
-                                <span dangerouslySetInnerHTML={{ __html: item }}></span>
-                            </li>)}
-                        </ul>
-                        }
-
-                    </div>
-                </div>
-                <div className={style.section__item + " " + style.check + " " + style.personJob} data-id={arrNameQuestion[1]}>
-                    <div className={style.section__head + " " + (sectionAnswers.job ? style.check : "")}>Желаемая должность</div>
-                    <div className={style.section__content + " " + style.check}>
-                        <span dangerouslySetInnerHTML={{ __html: (sectionAnswers.job) ? job.textWin : job.text }}></span>
-                    </div>
-                </div>
-                <div className={`${style.section__item} ${style.personPhoto} ${style.check}`} data-id={arrNameQuestion[2]}>
-                    <div className={style.section__head + " " + (sectionAnswers.photo ? style.check : "")}>Фото</div>
-                    <div className={style.section__content}>
-                        <img src={sectionAnswers["photo"] ? userPhoto[1] : userPhoto[0]} alt="photo" className={style.photo} />
-                    </div>
-                </div>
-                <div className={style.section__item + " " + style.personEducation + " " + style.check} data-id={arrNameQuestion[3]}>
-                    <div className={style.section__head + " " + (sectionAnswers.education ? style.check : "")}>Образование и дополнительные курсы</div>
-                    <div className={style.section__content + " " + style.check}>
-
-                        {!sectionAnswers.education && <ul className={style.list}>
-                            {education.text.map((item, index) => <li key={index}>
-                                <span dangerouslySetInnerHTML={{ __html: item }}></span>
-                            </li>)}
-                        </ul>
-                        }
-                        {sectionAnswers.education && <ul className={style.list}>
-                            {education.textWin.map((item, index) => <li key={index}>
-                                <span dangerouslySetInnerHTML={{ __html: item }}></span>
-                            </li>)}
-                        </ul>
-                        }
-                    </div>
-
-                </div>
-                <div data-id={arrNameQuestion[4]} className={style.section__item + " " + style.personExper + " " + style.check}>
-                    <div className={style.section__head + " " + (sectionAnswers.experience ? style.check : "")} >Опыт работы</div>
-                    <div className={style.section__content + " " + style.check}>
-
-                        {!sectionAnswers.experience && <ul className={style.list}>
-                            {experience.text.map((item, index) => {
-                                return <li key={index}>
+                            {sectionAnswers.info && <ul className={style.list}>
+                                {info.textWin.map((item, index) => <li key={index}>
                                     <span dangerouslySetInnerHTML={{ __html: item }}></span>
-                                </li>
-                            })}
-                        </ul>
-                        }
-
-                        {sectionAnswers.experience && <ul className={style.list + " " + style.listWinExp}>
-                            {experience.textWin.map((item, index) => {
-                                if (index === 2) return <li key={index} > <span >{item}</span>
-                                    <ul className={style.list + " " + style.listSecond}>
-                                        {experience.textIN.map((i, j) =>
-                                            <li key={j}>
-                                                <span>{i}</span>
-                                            </li>)
-                                        }
-                                    </ul>
-                                </li>
-                                return <li key={index}>
+                                </li>)}
+                            </ul>
+                            }
+                            {!sectionAnswers.info && <ul className={style.list}>
+                                {info.text.map((item, index) => <li key={index}>
                                     <span dangerouslySetInnerHTML={{ __html: item }}></span>
-                                </li>
-                            })}
-                        </ul>
-                        }
+                                </li>)}
+                            </ul>
+                            }
+
+                        </div>
+                    </div>
+                    <div className={style.section__item + " " + style.check + " " + style.personJob} data-id={arrNameQuestion[1]}>
+                        <div className={style.section__head + " " + (sectionAnswers.job ? style.check : "")}>Желаемая должность</div>
+                        <div className={style.section__content + " " + style.check}>
+                            <span dangerouslySetInnerHTML={{ __html: (sectionAnswers.job) ? job.textWin : job.text }}></span>
+                        </div>
+                    </div>
+                    <div className={`${style.section__item} ${style.personPhoto} ${style.check}`} data-id={arrNameQuestion[2]}>
+                        <div className={style.section__head + " " + (sectionAnswers.photo ? style.check : "")}>Фото</div>
+                        <div className={style.section__content}>
+                            <img src={sectionAnswers["photo"] ? userPhoto[1] : userPhoto[0]} alt="photo" className={style.photo} />
+                        </div>
+                    </div>
+                    <div className={style.section__item + " " + style.personEducation + " " + style.check} data-id={arrNameQuestion[3]}>
+                        <div className={style.section__head + " " + (sectionAnswers.education ? style.check : "")}>Образование и дополнительные курсы</div>
+                        <div className={style.section__content + " " + style.check}>
+
+                            {!sectionAnswers.education && <ul className={style.list}>
+                                {education.text.map((item, index) => <li key={index}>
+                                    <span dangerouslySetInnerHTML={{ __html: item }}></span>
+                                </li>)}
+                            </ul>
+                            }
+                            {sectionAnswers.education && <ul className={style.list}>
+                                {education.textWin.map((item, index) => <li key={index}>
+                                    <span dangerouslySetInnerHTML={{ __html: item }}></span>
+                                </li>)}
+                            </ul>
+                            }
+                        </div>
+
+                    </div>
+                    <div data-id={arrNameQuestion[4]} className={style.section__item + " " + style.personExper + " " + style.check}>
+                        <div className={style.section__head + " " + (sectionAnswers.experience ? style.check : "")} >Опыт работы</div>
+                        <div className={style.section__content + " " + style.check}>
+
+                            {!sectionAnswers.experience && <ul className={style.list}>
+                                {experience.text.map((item, index) => {
+                                    return <li key={index}>
+                                        <span dangerouslySetInnerHTML={{ __html: item }}></span>
+                                    </li>
+                                })}
+                            </ul>
+                            }
+
+                            {sectionAnswers.experience && <ul className={style.list + " " + style.listWinExp}>
+                                {experience.textWin.map((item, index) => {
+                                    if (index === 2) return <li key={index} > <span >{item}</span>
+                                        <ul className={style.list + " " + style.listSecond}>
+                                            {experience.textIN.map((i, j) =>
+                                                <li key={j}>
+                                                    <span>{i}</span>
+                                                </li>)
+                                            }
+                                        </ul>
+                                    </li>
+                                    return <li key={index}>
+                                        <span dangerouslySetInnerHTML={{ __html: item }}></span>
+                                    </li>
+                                })}
+                            </ul>
+                            }
+                        </div>
+                    </div>
+                    <div data-id={arrNameQuestion[5]} className={style.section__item + " " + style.personSkills + " " + style.check}>
+                        <div className={style.section__head + " " + (sectionAnswers.skills ? style.check : "")}>Навыки</div>
+                        <div className={style.section__content + " " + style.check}>
+
+                            {!sectionAnswers.skills && <ul className={style.list + " " + style.listMenLast}>
+                                {skills.text.map((item, index) => <li key={index}>
+                                    <span dangerouslySetInnerHTML={{ __html: item }}></span>
+                                </li>)}
+
+                            </ul>
+                            }
+                            {sectionAnswers.skills && <ul className={style.list + " " + style.listMenLast}>
+                                {skills.textWin.map((item, index) => <li key={index}>
+                                    <span dangerouslySetInnerHTML={{ __html: item }}></span>
+                                </li>)}
+
+                            </ul>
+                            }
+                        </div>
                     </div>
                 </div>
-                <div data-id={arrNameQuestion[5]} className={style.section__item + " " + style.personSkills + " " + style.check}>
-                    <div className={style.section__head + " " + (sectionAnswers.skills ? style.check : "")}>Навыки</div>
-                    <div className={style.section__content + " " + style.check}>
 
-                        {!sectionAnswers.skills && <ul className={style.list + " " + style.listMenLast}>
-                            {skills.text.map((item, index) => <li key={index}>
-                                <span dangerouslySetInnerHTML={{ __html: item }}></span>
-                            </li>)}
 
-                        </ul>
-                        }
-                        {sectionAnswers.skills && <ul className={style.list + " " + style.listMenLast}>
-                            {skills.textWin.map((item, index) => <li key={index}>
-                                <span dangerouslySetInnerHTML={{ __html: item }}></span>
-                            </li>)}
-
-                        </ul>
-                        }
-                    </div>
-                </div>
             </div>
-            {isEndGame && <button className={"btn " + style.btn} onClick={changeScreen}>Далее</button>}
-
-        </div>
+            {isEndGame && <div className={style.blur}>
+                <button className={"btn " + style.btn} onClick={changeScreen}>Далее</button>
+            </div>}</>
     );
 }
 

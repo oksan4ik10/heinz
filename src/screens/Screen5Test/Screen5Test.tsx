@@ -1,29 +1,34 @@
-import style from "./Screen5Test.module.css"
-import { TNamesQuestion } from "../../models/type";
-
-import Profile from "../../components/Profile/Profile";
-import Modal from "../../components/Modal/Modal";
-
-import urlArrow from "../../assets/5arrow-prev.svg"
-import urlInfoIcon from "../../assets/infoIcons.svg"
-
-import bgStart from "../../assets/5bg-starTest.svg"
-import bgCircle from "../../assets/5bg-circleTest.svg"
-import bgCircle2 from "../../assets/5bg-circle2Test.svg"
+import { useEffect, useRef } from "react";
 
 
 import { useAppSelector, useAppDispatch } from "../../store/store";
 import { setStateAnswer, setAnswerUser } from "../../store/reducers/tasksUserAnswerReducer";
 import { setChekSection } from "../../store/reducers/tasksInfoReducer";
 
+import Profile from "../../components/Profile/Profile";
+import Modal from "../../components/Modal/Modal";
+import TestPhoto from "../../components/TestPhoto/TestPhoto";
+import Test from "../../components/Test/Test";
+import TestMultiple from "../../components/TestMultiple/TestMultiple";
+
+import { TNamesQuestion } from "../../models/type";
+
+import style from "./Screen5Test.module.css"
+
+import urlArrow from "../../assets/5arrow-prev.svg"
+import urlInfoIcon from "../../assets/infoIcons.svg"
+import bgStart from "../../assets/5bg-starTest.svg"
+import bgCircle from "../../assets/5bg-circleTest.svg"
+import bgCircle2 from "../../assets/5bg-circle2Test.svg"
+
+
+
 
 import data from "../../data/task1Info.json"
 import dataModal from "../../data/task1Modal.json"
 
-import TestPhoto from "../../components/TestPhoto/TestPhoto";
-import Test from "../../components/Test/Test";
-import TestMultiple from "../../components/TestMultiple/TestMultiple";
-import { useEffect, useRef } from "react";
+
+
 
 interface IProps {
     infoSection: TNamesQuestion;
