@@ -11,7 +11,7 @@ import TestPhoto from "../../components/TestPhoto/TestPhoto";
 import Test from "../../components/Test/Test";
 import TestMultiple from "../../components/TestMultiple/TestMultiple";
 
-import { TNamesQuestion } from "../../models/type";
+import { TNamesQuestion, TStateQuestion } from "../../models/type";
 
 import style from "./Screen5Test.module.css"
 
@@ -52,9 +52,43 @@ function Screen5Test(props: IProps) {
     const { question, answers, wins } = data[user][infoSection];
     const { textSuccess, textError } = (infoSection === "experience") ? dataModal[infoSection][user] : dataModal[infoSection];
 
+    const textMiddle = (infoSection === "skills") ? dataModal["skills"].textMiddle[user] : "";
     const funcCheckUserAnswer = (userAnswers: number[]) => {
-        const checkWin = [...userAnswers].sort((a, b) => a - b).toString() === [...wins].sort((a, b) => a - b).toString();
-        dispatch(setAnswerUser({ section: infoSection, stateAnswer: checkWin ? "success" : "error", arr: userAnswers }))
+        let checkWin = false;
+        if (infoSection === "skills") {
+            const sortUserAnswer = [...userAnswers].sort((a, b) => a - b);
+            let state: TStateQuestion = "wait";
+            let countWinsAnwer = 0;
+            for (let index = 0; index < sortUserAnswer.length; index++) {
+
+
+                if (wins.indexOf(sortUserAnswer[index]) !== -1) {
+                    countWinsAnwer++;
+                }
+                else {
+                    state = "error"
+                    break
+                }
+            }
+
+
+
+            if ((countWinsAnwer >= 5) && (countWinsAnwer < wins.length) && (state !== "error")) {
+                state = "errorMiddle"
+            } else if ((state !== "error") && (countWinsAnwer === wins.length)) {
+                state = "success";
+            } else {
+                state = "error"
+            }
+
+            dispatch(setAnswerUser({ section: infoSection, stateAnswer: state, arr: userAnswers }))
+
+
+        } else {
+            checkWin = [...userAnswers].sort((a, b) => a - b).toString() === [...wins].sort((a, b) => a - b).toString();
+            dispatch(setAnswerUser({ section: infoSection, stateAnswer: checkWin ? "success" : "error", arr: userAnswers }))
+        }
+
         if (checkWin) dispatch(setChekSection(infoSection))
     }
 
@@ -64,7 +98,9 @@ function Screen5Test(props: IProps) {
 
     const clickPrev = () => {
         let state = stateAnswer;
-        if (stateUserArr.length > 0) state = "error"
+
+
+        if (stateUserArr.length > 0 && state !== "errorMiddle") state = "error"
 
         dispatch(setStateAnswer({ section: infoSection, stateAnswer: state }))
         setInfoSection()
@@ -102,6 +138,7 @@ function Screen5Test(props: IProps) {
 
             <div className={style.modal}>
                 {stateAnswer === "error" && <Modal border={true} btnText="Выбрать заново" text={textError} funcBtn={clickModalError} />}
+                {stateAnswer === "errorMiddle" && <Modal border={true} btnText="Выбрать заново" text={textMiddle} funcBtn={clickModalError} />}
                 {stateAnswer === "success" && <Modal border={true} btnText="Выбрать следующий раздел" text={textSuccess} funcBtn={() => setInfoSection()} />}
             </div>
 

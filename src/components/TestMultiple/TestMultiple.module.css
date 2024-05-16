@@ -119,3 +119,13 @@
 
     top: calc(50% + (max(var(--top), 1px) / 2));
 }
+
+label.middle .square {
+    border: 1px solid var(--color-green);
+}
+
+label.middle .square::after {
+    content: url("../../assets/iconCheckGreen.svg");
+    margin-top: -2px;
+    margin-left: 1px;
+}

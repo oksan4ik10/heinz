@@ -1,6 +1,6 @@
 export type TNamesQuestion = "info" | "skills" | "job" | "photo" | "education" | "experience"
 
-export type TStateQuestion = "wait" | "success" | "error";
+export type TStateQuestion = "wait" | "success" | "error" | "errorMiddle";
 export interface IPropsTask1Test {
     answers: {
         text: string,

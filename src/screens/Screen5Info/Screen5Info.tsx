@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useInView } from "react-intersection-observer";
+
 
 import Profile from "../../components/Profile/Profile";
 
@@ -57,11 +57,6 @@ function Screen5Info(props: IProps) {
         changeInfoTask(dataInfo)
 
     }
-    const { ref, inView } = useInView({
-        threshold: .5,
-    });
-
-    console.log(inView);
 
 
     return (
@@ -162,7 +157,7 @@ function Screen5Info(props: IProps) {
                             }
                         </div>
                     </div>
-                    <div data-id={arrNameQuestion[5]} ref={ref} className={(isEndGame ? (inView ? "" : style.inView) : "") + " " + style.section__item + " " + style.personSkills + " " + (sectionAnswers.skills ? style.check : "")}>
+                    <div data-id={arrNameQuestion[5]} className={style.section__item + " " + style.personSkills + " " + (sectionAnswers.skills ? style.check : "")}>
                         <div className={style.section__head}>Навыки</div>
                         <div className={style.section__content + " " + (sectionAnswers.skills ? style.check : "")}>
                             <svg className={style.plus} width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">

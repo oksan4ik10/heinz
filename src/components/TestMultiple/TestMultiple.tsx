@@ -47,10 +47,6 @@ function TestMultiple(props: IPropsTask1Test) {
         dispatch(setIsScroll(true))
         if (scrollWindow) scrollWindow();
     }
-    console.log(answers);
-    console.log(stateUserArr);
-    console.log(stateAnswer);
-
 
 
 
@@ -65,7 +61,7 @@ function TestMultiple(props: IPropsTask1Test) {
                 <div className={style.answers}>
                     {answers.map((item, index) => <div key={index} className={style.infoElem}>
                         <input type="checkbox" name={`check${index}`} id={`item${index}`} className={style.inputCheck + " " + style.inputRadio} checked={checked.indexOf(index) !== -1} onChange={() => changeInput(index)} disabled={stateAnswer !== "wait" ? true : false} />
-                        <label htmlFor={`item${index}`} className={style.answers__item + " " + ((stateAnswer === "wait" || (stateUserArr.indexOf(index) === -1)) ? "" : (stateUserArr.indexOf(index) !== -1 && item.isWin) ? style.success : style.error)}>
+                        <label htmlFor={`item${index}`} className={style.answers__item + " " + ((stateAnswer === "wait" || (stateUserArr.indexOf(index) === -1)) ? "" : (stateUserArr.indexOf(index) !== -1 && item.isWin) ? style.success : style.error) + " " + (((stateAnswer === "errorMiddle") && (item.isWin) && (stateUserArr.indexOf(index) === -1)) ? style.middle : "")}>
                             <div className={style.answer__wrapper}>
                                 <span className={style.square}></span>
                                 <span dangerouslySetInnerHTML={{ __html: item.text }}></span>
