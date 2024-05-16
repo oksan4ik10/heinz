@@ -156,7 +156,6 @@ function Screen4(props: IProps) {
     }, [])
 
 
-
     //данные для ответов
     const [answersItem, setAnswersItem] = useState([
         [
@@ -444,8 +443,17 @@ function Screen4(props: IProps) {
         const iduser = targetDiv.dataset.iduser ? targetDiv.dataset.iduser : "0";
         setIdLast(+idAnswer)
         createFackeElem(`${style.facke__elem} ${style.sectionItem}`, idAnswer, target, iduser)
+        setAnswersList(answersList.map((item) => {
+            if (item.id === +iduser) {
+                item.check = false;
+                item.hover = false;
+                item.hoverAnswer = true;
+                item.id = +iduser;
+                item.text = "";
+            }
+            return item
+        }))
         setStartList([...answersList])
-
     }
 
     const [isMove, setIsMove] = useState(false);
@@ -472,10 +480,13 @@ function Screen4(props: IProps) {
 
         const yTopAnswer = refAnswerElem.current.getBoundingClientRect().y + answerCoordinate.height - wrapperCoordinate.y;
         if (y + targetFackeElem.clientHeight > yTopAnswer) y = yTopAnswer - targetFackeElem.clientHeight;
+        y = Math.floor(y)
         targetFackeElem.style.top = y + "px";
         targetFackeElem.style.left = x + "px";
         let id = -1;
         let goal = false;
+        console.log(y);
+
 
         setAnswersList(answersList.map((item, index) => {
             const coordinate = answersListCoordinate[index];
@@ -494,6 +505,8 @@ function Screen4(props: IProps) {
 
 
         if ((id !== -1) && (idLast !== id) && (idLast !== -1)) {
+            console.log("win");
+            console.log(id);
 
 
             const temp1 = answersList[id];
@@ -515,7 +528,7 @@ function Screen4(props: IProps) {
                 id: 0,
                 check: false,
                 hover: false,
-                hoverAnswer: false,
+                hoverAnswer: true,
                 text: "",
                 win: false
             })
