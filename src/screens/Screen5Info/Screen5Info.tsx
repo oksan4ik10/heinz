@@ -10,11 +10,8 @@ import { TNamesQuestion, ICheckSection } from "../../models/type";
 import style from "./Screen5.module.css"
 
 import urlIconInfo from "../../assets/infoIcons.svg"
-import bgStart from "../../assets/bg-items/5bg-star.svg"
-import bgCircle from "../../assets/bg-items/5bg-circle.svg"
-import bgCircle2 from "../../assets/bg-items/5bg-circle2.svg"
-import bgTomato from "../../assets/bg-items/5bg-tomato.png"
-import bgSheet from "../../assets/bg-items/5bg-sheet.png"
+
+
 import photoPerson0 from "../../assets/5photoMen.png"
 import photoPerson1 from "../../assets/5photoUser1.png"
 import photoPerson2 from "../../assets/5photoUser2.png"
@@ -62,11 +59,8 @@ function Screen5Info(props: IProps) {
     return (
         <>
             <div className={style.wrapper + " wrapper"} ref={refWrapper}>
-                <img src={bgCircle} alt="" className={style.bgCircle} />
-                <img src={bgCircle2} alt="" className={style.bgCircle2} />
-                <img src={bgStart} alt="" className={style.bgStart} />
-                <img src={bgTomato} alt="" className={style.bgTomato} />
-                <img src={bgSheet} alt="" className={style.bgSheet} />
+
+
                 {!isEndGame && <div className={style.head}>
                     <div className={style.head__info}>
                         <div className={style.infoIcon}>

@@ -270,8 +270,8 @@ img.photo {
 }
 
 .wrapper {
-    overflow: hidden;
     min-height: 100%;
+    padding-bottom: 0px;
 }
 
 .section.check .personInfo .section__head {
@@ -312,13 +312,6 @@ img.photo {
 
 .section__head.check::before {
     display: flex;
-}
-
-.wrapper {
-    background-image: url("../../assets/bg-items/bg-tomato.png");
-    background-repeat: no-repeat;
-    background-size: 124px;
-    background-position: top -36px left -19px;
 }
 
 .personPhoto .section__head,
@@ -371,4 +364,13 @@ img.photo {
     margin-bottom: 40px;
     width: 100%;
     background-color: var(--color-darkBlue)
+}
+
+.wrapper {
+    overflow: hidden;
+    min-height: 100%;
+    background-image: url("../../assets/bg-items/bg-sheetUpRight.png"), url("../../assets/bg-items/bg-tomato.png"), url("../../assets/bg-items/5bg-star.svg"), url("../../assets/bg-items/5bg-circle.svg"), url("../../assets/bg-items/5bg-circle2.svg"), url("../../assets/bg-items/bg-tomato.png");
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 94px, 116px, auto, auto, auto, 124px;
+    background-position: top 562px left -13px, top 352px right -52px, top right, top 225px left, top 489px right, top -36px left -19px;
 }

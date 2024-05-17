@@ -73,7 +73,7 @@ function Screen5Test(props: IProps) {
 
 
 
-            if ((countWinsAnwer >= 4) && (countWinsAnwer < wins.length) && (state !== "error")) {
+            if ((countWinsAnwer >= 5) && (countWinsAnwer < wins.length) && (state !== "error")) {
                 state = "errorMiddle"
             } else if ((state !== "error") && (countWinsAnwer === wins.length)) {
                 state = "success";
