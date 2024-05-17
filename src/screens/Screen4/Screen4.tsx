@@ -485,9 +485,6 @@ function Screen4(props: IProps) {
         targetFackeElem.style.left = x + "px";
         let id = -1;
         let goal = false;
-        console.log(y);
-
-
         setAnswersList(answersList.map((item, index) => {
             const coordinate = answersListCoordinate[index];
             const isGoal = coordinate.top <= y && coordinate.bottom >= y;
@@ -505,10 +502,6 @@ function Screen4(props: IProps) {
 
 
         if ((id !== -1) && (idLast !== id) && (idLast !== -1)) {
-            console.log("win");
-            console.log(id);
-
-
             const temp1 = answersList[id];
             answersList[id] = answersList[idLast];
             answersList[idLast] = temp1;

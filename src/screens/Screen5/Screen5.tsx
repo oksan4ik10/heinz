@@ -69,7 +69,7 @@ function Screen5(props: IProps) {
             </ScreenBlur>
             <ScreenBlur screen={isEndGame}>
                 <div className="modal__start">
-                    <Modal border={false} btnText="Приступить" funcBtn={clickShowResume} text={`Генри Хайнц говорил: «Делайте<br/>обыкновенные вещи необыкновенно хорошо,<br/>и в этом залог успеха». Это относится<br/>и к резюме — если оно хорошее<br/>и структурированное, тебе будет проще<br/>выделиться среди кандидатов.<br/><br/>Посмотри, что у тебя получилось — ${textModalEnd[user]} уже готов отправлять своё резюме!`} />
+                    <Modal border={false} btnText="Приступить" funcBtn={clickShowResume} text={`Генри Хайнц говорил: «Делайте<br/>обыкновенные вещи необыкновенно хорошо,<br/>и в этом залог успеха». Это относится<br/>и к резюме — если оно хорошее<br/>и структурированное, тебе будет проще<br/>выделиться среди кандидатов.<br/><br/>Посмотри, что у тебя получилось — ${textModalEnd[user]} отправлять своё резюме!`} />
                 </div>
             </ScreenBlur>
             {!infoTask && <Screen5Info user={user} sectionAnswers={sectionAnswers} isEndGame={isFinal} changeInfoTask={changeInfoTask} changeScreen={changeScreen}></Screen5Info>}
