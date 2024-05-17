@@ -73,14 +73,14 @@ function Screen5Test(props: IProps) {
 
 
 
-            if ((countWinsAnwer >= 5) && (countWinsAnwer < wins.length) && (state !== "error")) {
+            if ((countWinsAnwer >= 4) && (countWinsAnwer < wins.length) && (state !== "error")) {
                 state = "errorMiddle"
             } else if ((state !== "error") && (countWinsAnwer === wins.length)) {
                 state = "success";
             } else {
                 state = "error"
             }
-            checkWin = state === "success";
+            checkWin = ((state === "success") || (state === "errorMiddle"));
             dispatch(setAnswerUser({ section: infoSection, stateAnswer: state, arr: userAnswers }))
 
 
@@ -123,7 +123,7 @@ function Screen5Test(props: IProps) {
             {stateAnswer !== "wait" && <img src={bgStart} alt="star" className={style.bgStart} />}
 
             <div className={style.head}>
-                <div className={style.arrow + " " + (stateAnswer === "success" ? style.arrowNone : "")} onClick={clickPrev}>
+                <div className={style.arrow + " " + ((stateAnswer === "success" || stateAnswer === "errorMiddle") ? style.arrowNone : "")} onClick={clickPrev}>
                     <img src={urlArrow} alt="arrow" />
                 </div>
                 <Profile></Profile>
@@ -138,7 +138,7 @@ function Screen5Test(props: IProps) {
 
             <div className={style.modal}>
                 {stateAnswer === "error" && <Modal border={true} btnText="Выбрать заново" text={textError} funcBtn={clickModalError} />}
-                {stateAnswer === "errorMiddle" && <Modal border={true} btnText="Выбрать заново" text={textMiddle} funcBtn={clickModalError} />}
+                {stateAnswer === "errorMiddle" && <Modal border={true} btnText="Выбрать следующий раздел" text={textMiddle} funcBtn={() => setInfoSection()} />}
                 {stateAnswer === "success" && <Modal border={true} btnText="Выбрать следующий раздел" text={textSuccess} funcBtn={() => setInfoSection()} />}
             </div>
 
