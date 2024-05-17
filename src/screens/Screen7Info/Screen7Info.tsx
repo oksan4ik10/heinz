@@ -3,11 +3,7 @@ import Profile from "../../components/Profile/Profile";
 
 
 
-import bgStart from "../../assets/bg-items/5bg-star.svg"
-import bgCircle from "../../assets/bg-items/5bg-circle.svg"
-import bgCircle2 from "../../assets/bg-items/5bg-circle2.svg"
-import bgTomato from "../../assets/bg-items/5bg-tomato.png"
-import bgSheet from "../../assets/bg-items/5bg-sheet.png"
+
 
 import photoPerson from "../../assets/screen7/photoInfo1.png"
 import photoPersonWin from "../../assets/screen7/photoInfo2.png"
@@ -70,11 +66,7 @@ function Screen5Info(props: IProps) {
     return (
         <>
             <div className={style.wrapper + " wrapper"} ref={refWrapper}>
-                <img src={bgCircle} alt="" className={style.bgCircle} />
-                <img src={bgCircle2} alt="" className={style.bgCircle2} />
-                <img src={bgStart} alt="" className={style.bgStart} />
-                <img src={bgTomato} alt="" className={style.bgTomato} />
-                <img src={bgSheet} alt="" className={style.bgSheet} />
+
                 {!isEndGame && <div className={style.head}>
 
                     <Profile></Profile>
