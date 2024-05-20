@@ -554,6 +554,21 @@ function Screen4(props: IProps) {
 
     const endAnswer = () => {
         if (!targetFackeElem || !targetElem) return
+        if (!isMove) {
+            setAnswersList(answersList.map((item) => {
+                item.hoverAnswer = false
+                return item
+            }))
+            setIsMove(false)
+            targetElem.classList.remove(style.none)
+            if (refWrapperElem.current) {
+                refWrapperElem.current.removeChild(targetFackeElem)
+            }
+            targetFackeElem.remove();
+            targetElem.classList.remove(style.none)
+            setIdLast(-1)
+            return
+        }
 
 
         const iduser = +(targetFackeElem.dataset.iduser ? targetFackeElem.dataset.iduser : "")
@@ -584,6 +599,7 @@ function Screen4(props: IProps) {
             refWrapperElem.current.removeChild(targetFackeElem)
         }
 
+        setIdLast(-1)
         setTargetElem(undefined);
         setTargetFackeElem(undefined)
 
