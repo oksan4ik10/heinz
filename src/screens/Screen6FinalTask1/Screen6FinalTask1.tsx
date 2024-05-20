@@ -29,7 +29,7 @@ function Screen6FinalTask1(props: IProps) {
                     <div className={style.modals__text}>
                         Теперь твоя очередь — отправь своё резюме<br />и попади на стажировку мечты в Kraft Heinz,<br />где производят всемирно известные<br />кетчупы и соусы.
                     </div>
-                    <a href="http://vk.com" target="_blank" className={"btn " + style.btn}>Стажировка Kraft Heinz</a>
+                    <a href="https://fut.ru/programs/kraftheinz_gmtp/" target="_blank" className={"btn " + style.btn}>Стажировка Kraft Heinz</a>
                 </div>
                 <div className={style.modals__item}>
                     <div className={style.modals__text}>

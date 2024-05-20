@@ -16,7 +16,7 @@ function Screen9() {
                     <p className={style.text}>
                         Пришло время отправлять своё<br />идеальное резюме в компанию мечты!<br />Если ты хочешь работать<br />на производстве, переходи на сайт<br />Kraft Heinz и подавай заявку<br />на&nbsp;стажировку.
                     </p>
-                    <a href="http://vk.com" target="_blank" className={"btn " + style.link}>Стажировка Kraft Heinz</a>
+                    <a href="https://fut.ru/programs/kraftheinz_gmtp/" target="_blank" className={"btn " + style.link}>Стажировка Kraft Heinz</a>
                     <p className={style.text}>
                         А посмотреть варианты для других<br />направлений ты можешь в каталоге<br />стажировок FutureToday.
                     </p>
