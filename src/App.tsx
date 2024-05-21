@@ -43,7 +43,7 @@ function App() {
     }, 0)
   }
 
-  return <div onScroll={scrollWrapperCoordinate} ref={refContainer} className={"container " + (screen === 6 ? " screen7" : "") + " " + (isScroll ? "scroll__elem" : "")}>
+  return <div onScroll={scrollWrapperCoordinate} ref={refContainer} className={"container " + (screen === 1 ? " screen1" : "") + (screen === 6 ? " screen7" : "") + " " + (isScroll ? "scroll__elem" : "")}>
     {isScreenPersona && <ScreenPersona></ScreenPersona>}
     {screen === 1 && <Screen1 changeScreen={() => setScreen(2)} />}
     {screen === 2 && <Screen2 changeScreen={() => setScreen(3)} />}
