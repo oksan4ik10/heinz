@@ -515,8 +515,6 @@ function Screen4(props: IProps) {
 
 
             const temp1 = t[id]; //куда answersList[id]
-            // console.log(temp1);
-            console.log(answersList[idLast]);
 
 
             t[id] = t[idLast]; //facke answersList[idLast]
