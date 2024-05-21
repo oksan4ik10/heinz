@@ -80,7 +80,7 @@ function Screen7(props: IProps) {
         <>
             <ScreenBlur screen={isStartGame}>
                 {modalNum === 0 && <div className="modal__start">
-                    <Modal border={false} btnText="Давай" funcBtn={() => setModalNum(1)} text={"Все основные правила мы обсудили<br/>при составлении резюме. Теперь давай<br/>закрепим навыки и найдём ошибки<br/>в резюме Иры, которая собирается стать<br/>дизайнером в Kraft Heinz. Она учится<br/>в НИУ ВШЭ и участвует в учебных<br/>проектах. Ира работала экскурсоводом<br/>в музее, а ещё проходила курсы по Figma."} />
+                    <Modal border={false} btnText="Приступить" funcBtn={() => setModalNum(1)} text={"Все основные правила мы обсудили<br/>при составлении резюме. Теперь давай<br/>закрепим навыки и найдём ошибки<br/>в резюме Иры, которая собирается стать<br/>дизайнером в Kraft Heinz. Она учится<br/>в НИУ ВШЭ и участвует в учебных<br/>проектах. Ира работала экскурсоводом<br/>в музее, а ещё проходила курсы по Figma."} />
                 </div>}
                 {modalNum === 1 && <>
                     <div className={style.profile}>
@@ -119,7 +119,7 @@ function Screen7(props: IProps) {
 
             <ScreenBlur screen={isEndGame}>
                 <div className="modal__start">
-                    <Modal border={false} minFont={true} btnText="Приступить" funcBtn={clickShowResume} text={`Супер! Все ошибки исправлены. Теперь Ира готова<br/>к поиску работы.`} />
+                    <Modal border={false} minFont={true} btnText="Далее" funcBtn={clickShowResume} text={`Супер! Все ошибки исправлены. Теперь Ира готова<br/>к поиску работы.`} />
                 </div>
             </ScreenBlur>
             {!infoTask && <Screen7Info isStartGame={isStartGame} changeRefElem={changeRefElem} isEndGame={isFinal} sectionAnswers={sectionAnswers} changeInfoTask={changeInfoTask} changeScreen={changeScreen}></Screen7Info>}
