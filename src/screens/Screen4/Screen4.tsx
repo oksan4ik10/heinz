@@ -878,13 +878,13 @@ function Screen4(props: IProps) {
 
                     <section className={style.answers + " " + (datakWin ? style.answersError : "")}
                         ref={refAnswerElem}
-                        onTouchStart={startTouch}
-                        onTouchMove={moveTouch}
-                        onTouchEnd={endTouch}
+
 
                     >
                         {answersItem.map((item, index) => <div className={style.answers__row} key={index}>
-                            {item.map(i => <div key={i.id} dangerouslySetInnerHTML={{ __html: i.text }} ref={i.id === 5 ? refAnswer5 : refAnswerOther} className={style.answer__item + " " + (i.check ? style.none : "")} data-id={i.id} ></div>)}
+                            {item.map(i => <div key={i.id} onTouchStart={startTouch}
+                                onTouchMove={moveTouch}
+                                onTouchEnd={endTouch} dangerouslySetInnerHTML={{ __html: i.text }} ref={i.id === 5 ? refAnswer5 : refAnswerOther} className={style.answer__item + " " + (i.check ? style.none : "")} data-id={i.id} ></div>)}
                         </div>)}
                     </section>
                     <button className={"btn  " + (userAnswers.filter(item => item).length !== 6 ? "btn_grey" : datakWin ? style.errorBtn : "")} onClick={clickCheckWin}>
