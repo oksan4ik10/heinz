@@ -502,10 +502,26 @@ function Screen4(props: IProps) {
 
 
         if ((id !== -1) && (idLast !== id) && (idLast !== -1)) {
-            const temp1 = answersList[id];
-            answersList[id] = answersList[idLast];
-            answersList[idLast] = temp1;
-            setAnswersList(answersList)
+            // const idEmpty = answersList.findLastIndex((item) => !item.check)
+            // const arr = answersList.slice(idEmpty + 1, answersList.length)
+            // const t = [...answersList];
+            // console.log([...t]);
+
+            // const a = t.splice(idEmpty + 1, arr.length);
+            // console.log(idEmpty);
+            // console.log(a);
+
+            const t = [...answersList]
+
+
+            const temp1 = t[id]; //куда answersList[id]
+            // console.log(temp1);
+            console.log(answersList[idLast]);
+
+
+            t[id] = t[idLast]; //facke answersList[idLast]
+            t[idLast] = temp1;
+            setAnswersList(t)
             setIdLast(id)
             return
         }
@@ -554,21 +570,7 @@ function Screen4(props: IProps) {
 
     const endAnswer = () => {
         if (!targetFackeElem || !targetElem) return
-        // if (!isMove) {
-        //     setAnswersList(answersList.map((item) => {
-        //         item.hoverAnswer = false
-        //         return item
-        //     }))
-        //     setIsMove(false)
-        //     targetElem.classList.remove(style.none)
-        //     if (refWrapperElem.current) {
-        //         refWrapperElem.current.removeChild(targetFackeElem)
-        //     }
-        //     targetFackeElem.remove();
-        //     targetElem.classList.remove(style.none)
-        //     setIdLast(-1)
-        //     return
-        // }
+
 
 
         const iduser = +(targetFackeElem.dataset.iduser ? targetFackeElem.dataset.iduser : "")
@@ -598,7 +600,6 @@ function Screen4(props: IProps) {
         if (refWrapperElem.current) {
             refWrapperElem.current.removeChild(targetFackeElem)
         }
-
         setIdLast(-1)
         setTargetElem(undefined);
         setTargetFackeElem(undefined)
@@ -883,6 +884,7 @@ function Screen4(props: IProps) {
                     >
                         {answersItem.map((item, index) => <div className={style.answers__row} key={index}>
                             {item.map(i => <div key={i.id} onTouchStart={startTouch}
+
                                 onTouchMove={moveTouch}
                                 onTouchEnd={endTouch} dangerouslySetInnerHTML={{ __html: i.text }} ref={i.id === 5 ? refAnswer5 : refAnswerOther} className={style.answer__item + " " + (i.check ? style.none : "")} data-id={i.id} ></div>)}
                         </div>)}
