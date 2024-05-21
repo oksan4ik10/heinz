@@ -27,7 +27,7 @@
 
 @media (max-width: 600px) {
   .screen1 {
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
 
 }
