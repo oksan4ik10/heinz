@@ -52,7 +52,7 @@ function Screen2(props: IProps) {
                 centeredSlides={true}
 
                 centeredSlidesBounds={false}
-                slidesPerView={1.23}
+                slidesPerView={window.innerWidth >= 600 ? 1.5 : 1.23}
                 coverflowEffect={{
                     rotate: 0,
                     stretch: 0,
