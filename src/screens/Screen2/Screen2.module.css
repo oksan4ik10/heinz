@@ -22,17 +22,17 @@
     width: 100%;
 }
 
-@media (min-width: 600px) and (max-height: 725px) {
+@media (min-width: 600px) and (max-height: 750px) {
     .carusel {
-        top: 49px;
+        top: 70px;
         transform: translateX(-50%) translateY(0%);
     }
 
 }
 
-@media (min-width: 600px) and (max-height: 713px) {
+@media (min-width: 600px) and (max-height: 733px) {
     .btn {
-        margin-top: 14px;
+        margin-top: 20px;
     }
 
 }
