@@ -40,7 +40,7 @@ function Screen2(props: IProps) {
     return <>
         <div className={"wrapper " + style.infoText}>
             <img src={urlIcon} alt="info" />
-            <p className={style.text}>Для каждой позиции резюме должно быть разным.<br />Выбери персонажа, вместе с которым ты будешь его составлять</p>
+            <p className={style.text}>Для каждой позиции резюме должно быть разным.<br />Выбери персонажа, вместе с которым ты будешь его составлять:</p>
         </div>
         <div className={style.carusel}>
             <Swiper
