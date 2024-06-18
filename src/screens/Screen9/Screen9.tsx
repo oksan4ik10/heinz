@@ -14,13 +14,17 @@ function Screen9() {
                 </header>
                 <div className={style.sectionInfo__text}>
                     <p className={style.text}>
-                        Пришло время отправлять своё<br />идеальное резюме в компанию мечты!<br />Если ты хочешь работать<br />на производстве, переходи на сайт<br />Kraft Heinz и подавай заявку<br />на&nbsp;стажировку.
-                    </p>
-                    <a href="https://fut.ru/programs/kraftheinz_gmtp/" target="_blank" className={"btn " + style.link}>Стажировка Kraft Heinz</a>
-                    <p className={style.text}>
-                        А посмотреть варианты для других<br />направлений ты можешь в каталоге<br />стажировок FutureToday.
+                        Пришло время теперь тебе<br />составить своё резюме и отправить<br /> его в компанию мечты!
                     </p>
                     <p className={style.text}>
+                        Если тебе интересны карьерные перспективы<br />в Kraft Heinz, то переходи<br />на cайт и узнавай больше<br />о работе в компании.
+                    </p>
+                    <a href="https://fut.ru/programs/kraftheinz_gmtp/" target="_blank" className={"btn " + style.link}>Kraft Heinz</a>
+                    <p className={style.text}>
+                        А посмотреть информацию о стажировках<br />в других компаниях ты сможешь<br />на сайте <a className={style.textLink} href=" https://fut.ru/" target="_blank">FutureToday</a>
+
+                    </p>
+                    <p className={style.text + " " + style.text2}>
                         До новых встреч и удачи в&nbsp;поиске работы!
                     </p>
 
