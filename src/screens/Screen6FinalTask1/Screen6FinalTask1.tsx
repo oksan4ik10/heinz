@@ -27,9 +27,10 @@ function Screen6FinalTask1(props: IProps) {
             <div className={style.modals}>
                 <div className={style.modals__item}>
                     <div className={style.modals__text}>
-                        Теперь твоя очередь — отправь своё резюме<br />и попади на стажировку мечты в Kraft Heinz,<br />где производят всемирно известные<br />кетчупы и соусы.
+                        Теперь ты можешь приступать<br />к поиску работы! Узнай больше о работе<br />в Kraft Heinz и карьерных перспективах<br />в компании.
                     </div>
-                    <a href="https://fut.ru/programs/kraftheinz_gmtp/" target="_blank" className={"btn " + style.btn}>Стажировка Kraft Heinz</a>
+                    {/* <a href="https://fut.ru/programs/kraftheinz_gmtp/" target="_blank" className={"btn " + style.btn}>Kraft Heinz</a> */}
+                    <button className={"btn " + style.btn}>Kraft Heinz</button>
                 </div>
                 <div className={style.modals__item}>
                     <div className={style.modals__text}>
