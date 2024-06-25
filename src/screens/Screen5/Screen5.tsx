@@ -13,10 +13,11 @@ import { useAppSelector } from "../../store/store";
 interface IProps {
     changeScreen: () => void
     scrollWindow: () => void
+    isLouserModal: boolean;
 }
 function Screen5(props: IProps) {
 
-    const { changeScreen, scrollWindow } = props;
+    const { changeScreen, scrollWindow, isLouserModal } = props;
     const dispatch = useAppDispatch()
 
 
@@ -64,7 +65,7 @@ function Screen5(props: IProps) {
         <>
             <ScreenBlur screen={isStartGame}>
                 <div className="modal__start">
-                    <Modal border={false} btnText="Приступить" funcBtn={clickStart} text={"Отлично! Ты выбрал верные заголовки.<br/>Со структурой резюме определились.<br/>Теперь загляни в каждый раздел и заполни<br/>его, нажав на плюсик."} />
+                    <Modal border={false} btnText="Приступить" funcBtn={clickStart} text={isLouserModal ? "Отлично! Со структурой резюме<br/>определились. Теперь загляни в каждый<br/>раздел и заполни его, нажав на плюсик." : "Отлично! Ты выбрал верные заголовки.<br/>Со структурой резюме определились.<br/>Теперь загляни в каждый раздел и заполни<br/>его, нажав на плюсик."} />
                 </div>
             </ScreenBlur>
             <ScreenBlur screen={isEndGame}>

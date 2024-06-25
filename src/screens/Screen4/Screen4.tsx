@@ -29,10 +29,11 @@ interface IAnswerCoordinate {
 
 interface IProps {
     changeScreen: () => void;
+    setIsLouserModal: () => void;
 }
 
 function Screen4(props: IProps) {
-    const { changeScreen } = props;
+    const { changeScreen, setIsLouserModal } = props;
 
     //логика по таску
     const refAnswerElem = useRef<HTMLDivElement>(null);
@@ -677,6 +678,7 @@ function Screen4(props: IProps) {
             setLouserList(answers)
             setDataWin("");
             setIsLouserScreen(true);
+            setIsLouserModal()
             return
 
 

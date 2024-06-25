@@ -43,13 +43,15 @@ function App() {
     }, 0)
   }
 
+  const [isLouserModal, setIsLouserModal] = useState(false);
+
   return <div onScroll={scrollWrapperCoordinate} ref={refContainer} className={"container " + (screen === 1 ? " screen1" : "") + (screen === 6 ? " screen7" : "") + " " + (isScroll ? "scroll__elem" : "")}>
     {isScreenPersona && <ScreenPersona></ScreenPersona>}
     {screen === 1 && <Screen1 changeScreen={() => setScreen(2)} />}
     {screen === 2 && <Screen2 changeScreen={() => setScreen(3)} />}
     {screen === 3 && <Screen3 changeScreen={() => setScreen(4)} />}
-    {screen === 4 && <Screen4 changeScreen={() => setScreen(5)}></Screen4>}
-    {screen === 5 && <Screen5 scrollWindow={scrollTopScreen5} changeScreen={() => setScreen(6)} />}
+    {screen === 4 && <Screen4 changeScreen={() => setScreen(5)} setIsLouserModal={() => setIsLouserModal(true)}></Screen4>}
+    {screen === 5 && <Screen5 isLouserModal={isLouserModal} scrollWindow={scrollTopScreen5} changeScreen={() => setScreen(6)} />}
     {screen === 6 && <Screen6FinalTask1 changeScreen={() => setScreen(7)} />}
     {screen === 7 && <Screen7 changeScreen={() => setScreen(8)} />}
     {screen === 8 && <Screen8 changeScreen={() => setScreen(9)} />}
