@@ -138,7 +138,7 @@ function Screen4(props: IProps) {
 
         let defSectionWrapper = refSection.current.getBoundingClientRect().top - refWrapperElem.current.getBoundingClientRect().top - 1;
         refErrorModal.current?.style.setProperty("--top-section", defSectionWrapper + "px")
-
+        refLouserModal.current?.style.setProperty("--top-section", defSectionWrapper + "px")
         const arr: IAnswerCoordinate[] = []
         for (let index = 1; index < 7; index++) {
             const bottom = (index === 1) ? defSectionWrapper + 43 : ((index === 6)) ? defSectionWrapper + 43 : defSectionWrapper + 37;
@@ -619,10 +619,17 @@ function Screen4(props: IProps) {
     }
 
     const refErrorModal = useRef<HTMLDivElement>(null);
+    const refLouserModal = useRef<HTMLDivElement>(null);
     const [datakWin, setDataWin] = useState("");
+
+    const [attempt, setAttempt] = useState(0);
+    const [isLouserScreen, setIsLouserScreen] = useState(false);
+    const [louserList, setLouserList] = useState<string[]>([]);
     //алгоритм для кнопки Проверить
     const answersRight = [4, 5, 6, 7, 9, 10];
     const clickCheckWin = () => {
+        setAttempt(attempt + 1);
+
 
         if (userAnswers.filter((item) => item).length !== 6) return
         const sortUserAnswer = [...userAnswers].sort((a, b) => a - b);
@@ -636,8 +643,11 @@ function Screen4(props: IProps) {
 
         const rightAnswer = [[10, 7], [10, 7], [9], [4], [5], [6]]
 
+        const arrFirstSecond = ["", ""]
+
         setAnswersList(answersList.map((item, index) => {
             if (rightAnswer[index].indexOf(item.id) !== -1) {
+                if (index < 2) arrFirstSecond[index] = item.text;
                 item.win = true;
                 countRightAnswer++
             } else {
@@ -646,10 +656,33 @@ function Screen4(props: IProps) {
             return item
         }))
 
+
         //если все ответы правильные, проверяем очередность
         if (countRightAnswer !== 6 && !winOrLouser) {
             winOrLouser = "hash"
         }
+
+        //если 4я попытка
+        if (winOrLouser && (attempt === 3)) {
+            console.log(arrFirstSecond);
+            const t = arrFirstSecond.map((item, index) => {
+                if (item) return item
+                if (index === 0) {
+                    return arrFirstSecond[1] === "Фотография" ? "Личная и контактная информация" : "Фотография"
+                }
+                return (arrFirstSecond[0] === "Фотография" || !arrFirstSecond[0]) ? "Личная и контактная информация" : "Фотография"
+            })
+            const textAnswerRight = ["Желаемая должность", "Образование и дополнительные курсы", "Опыт работы", "Навыки"]
+            const answers = [...t, ...textAnswerRight]
+            setLouserList(answers)
+            setDataWin("");
+            setIsLouserScreen(true);
+            return
+
+
+        }
+
+
         if (winOrLouser) {
             setDataWin(winOrLouser)
             return
@@ -850,6 +883,8 @@ function Screen4(props: IProps) {
                         <Modal border={false} btnText="Приступить" funcBtn={startGame} text={"Сначала выбери, из каких разделов будет<br/>состоять резюме. Перетащи необходимые<br/>пункты в правильном порядке. Ты можешь<br/>менять местами и переносить обратно<br/>выбранные ответы."} />
                     </div>
                 </ScreenBlur>
+
+
                 <ScreenBlur screen={Boolean(datakWin)}>
                     <div className={style.error__modal} ref={refErrorModal}>
                         <section className={style.sections}>
@@ -857,6 +892,15 @@ function Screen4(props: IProps) {
                                 key={index} className={style.section__item + " " + style.answer + " " + style.modalAnswer + " " + (item.win ? style.success : answersRight.indexOf(item.id) === -1 ? style.error : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
                         </section>
                         <Modal border={false} btnText="Исправить ошибки" funcBtn={() => setDataWin("")} text={datakWin === "loser" ? 'В резюме необходимо размещать только<br/>самую важную информацию, которая<br/>поможет HR-специалисту быстро оценить,<br/>насколько твой опыт соответствует<br/>вакансии. Побольше о себе ты сможешь<br/>рассказать на собеседовании :)' : "Ты молодец и выбрал верные разделы,<br/>однако в составлении резюме важно то,<br/>в каком порядке они расположены.<br/>Попробуй поменять местами те заголовки,<br/>которые не загорелись зелёным."} />
+                    </div>
+                </ScreenBlur>
+                <ScreenBlur screen={isLouserScreen}>
+                    <div className={style.error__modal} ref={refLouserModal}>
+                        <section className={style.sections}>
+                            {louserList.map((item, index) => <div
+                                key={index} className={style.section__item + " " + style.answer + " " + style.modalAnswer}><span>{item}</span></div>)}
+                        </section>
+                        <Modal border={false} btnText="Теперь понятно" funcBtn={() => changeScreen()} text={"Давай мы тебе тут поможем!<br/>Смотри, это верная структура резюме<br/>Именно в таком порядке стоит разбивать<br/>информацию по блокам."} />
                     </div>
                 </ScreenBlur>
                 <img src={urlBgCircle} alt="circle" className={style.bg__circle + " " + style.bg} />
@@ -877,8 +921,6 @@ function Screen4(props: IProps) {
 
                     <section className={style.answers + " " + (datakWin ? style.answersError : "")}
                         ref={refAnswerElem}
-
-
                     >
                         {answersItem.map((item, index) => <div className={style.answers__row} key={index}>
                             {item.map(i => <div key={i.id} onTouchStart={startTouch}
@@ -887,7 +929,7 @@ function Screen4(props: IProps) {
                                 onTouchEnd={endTouch} dangerouslySetInnerHTML={{ __html: i.text }} ref={i.id === 5 ? refAnswer5 : refAnswerOther} className={style.answer__item + " " + (i.check ? style.none : "")} data-id={i.id} ></div>)}
                         </div>)}
                     </section>
-                    <button className={"btn  " + (userAnswers.filter(item => item).length !== 6 ? "btn_grey" : datakWin ? style.errorBtn : "")} onClick={clickCheckWin}>
+                    <button className={"btn  " + (userAnswers.filter(item => item).length !== 6 ? "btn_grey" : (datakWin || isLouserScreen) ? style.errorBtn : "")} onClick={clickCheckWin}>
                         Проверить
                     </button>
                 </div>
