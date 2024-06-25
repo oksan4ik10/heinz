@@ -900,7 +900,7 @@ function Screen4(props: IProps) {
                             {louserList.map((item, index) => <div
                                 key={index} className={style.section__item + " " + style.answer + " " + style.modalAnswer}><span>{item}</span></div>)}
                         </section>
-                        <Modal border={false} btnText="Теперь понятно" funcBtn={() => changeScreen()} text={"Давай мы тебе тут поможем!<br/>Смотри, это верная структура резюме<br/>Именно в таком порядке стоит разбивать<br/>информацию по блокам."} />
+                        <Modal border={false} btnText="Теперь понятно" funcBtn={() => changeScreen()} text={"Спешим к тебе на помощь!<br/>Лови подсказку — верный порядок блоков.<br/>Запоминай и используй его в своём <br/>резюме."} />
                     </div>
                 </ScreenBlur>
                 <img src={urlBgCircle} alt="circle" className={style.bg__circle + " " + style.bg} />
