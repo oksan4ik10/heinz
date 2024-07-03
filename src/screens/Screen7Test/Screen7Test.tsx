@@ -43,11 +43,18 @@ function Screen7Test(props: IProps) {
 
     const stateUserArr = infoState.user
     const stateAnswer = infoState.stateAnswer
+    const countUserAnswer = infoState.count;
 
     const { answers, wins } = data[infoSection];
     const { textSuccess, textError } = dataModal[infoSection];
 
     const funcCheckUserAnswer = (userAnswers: number[]) => {
+        if (countUserAnswer === 3) {
+            dispatch(setAnswerUser({ section: infoSection, stateAnswer: "successMiddle", arr: wins }))
+            dispatch(setChekSection(infoSection))
+            return
+        }
+
         const checkWin = userAnswers.sort((a, b) => a - b).toString() === wins.sort((a, b) => a - b).toString();
         dispatch(setAnswerUser({ section: infoSection, stateAnswer: checkWin ? "success" : "error", arr: userAnswers }))
         if (checkWin) dispatch(setChekSection(infoSection))
@@ -120,6 +127,7 @@ function Screen7Test(props: IProps) {
             <div className={style.modal}>
                 {stateAnswer === "error" && <Modal border={true} btnText="Выбрать заново" text={textError} funcBtn={clickModalError} />}
                 {stateAnswer === "success" && <Modal border={true} btnText="Выбрать следующий раздел" text={textSuccess} funcBtn={() => setInfoSection()} />}
+                {stateAnswer === "successMiddle" && <Modal border={true} btnText="Теперь понятно" text={"Давай мы тебе подскажем. Правильные<br/>ответы на вопрос выделены зелёным."} funcBtn={() => setInfoSection()} />}
             </div>
 
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./TestMultiple.module.css"
 import ScreenBlur from "../ScreenBlur/ScreenBlur";
 import Modal from "../Modal/Modal";
@@ -15,6 +15,9 @@ function TestMultiple(props: IPropsTask1Test) {
     const dispatch = useAppDispatch();
 
     const [checked, setChecked] = useState<number[]>(stateUserArr)
+    useEffect(() => {
+        setChecked(stateUserArr)
+    }, [stateUserArr])
     const changeInput = (c: number) => {
 
         const clickedCategory = checked.indexOf(c);

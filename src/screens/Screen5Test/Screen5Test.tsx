@@ -48,12 +48,20 @@ function Screen5Test(props: IProps) {
 
     const stateUserArr = infoState.user
     const stateAnswer = infoState.stateAnswer
+    const countUserAnswer = infoState.count;
 
     const { question, answers, wins } = data[user][infoSection];
     const { textSuccess, textError } = (infoSection === "experience") ? dataModal[infoSection][user] : dataModal[infoSection];
 
     const textMiddle = (infoSection === "skills") ? dataModal["skills"].textMiddle[user] : "";
     const funcCheckUserAnswer = (userAnswers: number[]) => {
+        if (countUserAnswer === 3) {
+            dispatch(setAnswerUser({ section: infoSection, stateAnswer: "successMiddle", arr: wins }))
+            dispatch(setChekSection(infoSection))
+            return
+        }
+
+
         let checkWin = false;
         if (infoSection === "skills") {
             const sortUserAnswer = [...userAnswers].sort((a, b) => a - b);
@@ -123,7 +131,7 @@ function Screen5Test(props: IProps) {
             {stateAnswer !== "wait" && <img src={bgStart} alt="star" className={style.bgStart} />}
 
             <div className={style.head}>
-                <div className={style.arrow + " " + ((stateAnswer === "success" || stateAnswer === "errorMiddle") ? style.arrowNone : "")} onClick={clickPrev}>
+                <div className={style.arrow + " " + ((stateAnswer === "success" || stateAnswer === "successMiddle" || stateAnswer === "errorMiddle") ? style.arrowNone : "")} onClick={clickPrev}>
                     <img src={urlArrow} alt="arrow" />
                 </div>
                 <Profile></Profile>
@@ -140,6 +148,7 @@ function Screen5Test(props: IProps) {
                 {stateAnswer === "error" && <Modal border={true} btnText="Выбрать заново" text={textError} funcBtn={clickModalError} />}
                 {stateAnswer === "errorMiddle" && <Modal border={true} btnText="Выбрать следующий раздел" text={textMiddle} funcBtn={() => setInfoSection()} />}
                 {stateAnswer === "success" && <Modal border={true} btnText="Выбрать следующий раздел" text={textSuccess} funcBtn={() => setInfoSection()} />}
+                {stateAnswer === "successMiddle" && <Modal border={true} btnText="Теперь понятно" text={"Давай мы тебе подскажем. Правильные<br/>ответы на вопрос выделены зелёным."} funcBtn={() => setInfoSection()} />}
             </div>
 
 
