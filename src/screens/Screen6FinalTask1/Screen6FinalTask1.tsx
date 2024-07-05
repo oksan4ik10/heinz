@@ -29,8 +29,8 @@ function Screen6FinalTask1(props: IProps) {
                     <div className={style.modals__text}>
                         Теперь ты можешь приступать<br />к поиску работы! Узнай больше о работе<br />в Kraft Heinz и карьерных перспективах<br />в компании.
                     </div>
-                    {/* <a href="https://fut.ru/programs/kraftheinz_gmtp/" target="_blank" className={"btn " + style.btn}>Kraft Heinz</a> */}
-                    <button className={"btn " + style.btn}>Kraft Heinz</button>
+                    <a href="https://fut.ru/kraftheinz/about" target="_blank" className={"btn " + style.btn}>Kraft Heinz</a>
+
                 </div>
                 <div className={style.modals__item}>
                     <div className={style.modals__text}>

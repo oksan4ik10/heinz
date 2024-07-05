@@ -679,6 +679,7 @@ function Screen4(props: IProps) {
             setDataWin("");
             setIsLouserScreen(true);
             setIsLouserModal()
+            enablePageScroll()
             return
 
 

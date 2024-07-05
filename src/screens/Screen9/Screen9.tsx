@@ -19,7 +19,7 @@ function Screen9() {
                     <p className={style.text}>
                         Если тебе интересны карьерные перспективы<br />в Kraft Heinz, то переходи<br />на cайт и узнавай больше<br />о работе в компании.
                     </p>
-                    <a href="https://fut.ru/programs/kraftheinz_gmtp/" target="_blank" className={"btn " + style.link}>Kraft Heinz</a>
+                    <a href="https://fut.ru/kraftheinz/about" target="_blank" className={"btn " + style.link}>Kraft Heinz</a>
                     <p className={style.text}>
                         А посмотреть информацию о стажировках<br />в других компаниях ты сможешь<br />на сайте <a className={style.textLink} href=" https://fut.ru/" target="_blank">FutureToday</a>
 
