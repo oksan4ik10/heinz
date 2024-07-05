@@ -55,17 +55,13 @@ function Screen5Test(props: IProps) {
 
     const textMiddle = (infoSection === "skills") ? dataModal["skills"].textMiddle[user] : "";
     const funcCheckUserAnswer = (userAnswers: number[]) => {
-        if (countUserAnswer === 3) {
-            dispatch(setAnswerUser({ section: infoSection, stateAnswer: "successMiddle", arr: wins }))
-            dispatch(setChekSection(infoSection))
-            return
-        }
 
 
         let checkWin = false;
+        let state: TStateQuestion = "wait";
         if (infoSection === "skills") {
             const sortUserAnswer = [...userAnswers].sort((a, b) => a - b);
-            let state: TStateQuestion = "wait";
+
             let countWinsAnwer = 0;
             for (let index = 0; index < sortUserAnswer.length; index++) {
 
@@ -89,15 +85,23 @@ function Screen5Test(props: IProps) {
                 state = "error"
             }
             checkWin = ((state === "success") || (state === "errorMiddle"));
-            dispatch(setAnswerUser({ section: infoSection, stateAnswer: state, arr: userAnswers }))
-
 
         } else {
             checkWin = [...userAnswers].sort((a, b) => a - b).toString() === [...wins].sort((a, b) => a - b).toString();
-            dispatch(setAnswerUser({ section: infoSection, stateAnswer: checkWin ? "success" : "error", arr: userAnswers }))
+            state = checkWin ? "success" : "error"
+
+        }
+        if ((countUserAnswer === 3) && (!checkWin)) {
+            dispatch(setAnswerUser({ section: infoSection, stateAnswer: "successMiddle", arr: wins }))
+            dispatch(setChekSection(infoSection))
+            return
         }
 
-        if (checkWin) dispatch(setChekSection(infoSection))
+        dispatch(setAnswerUser({ section: infoSection, stateAnswer: state, arr: userAnswers }))
+        if (checkWin) {
+            dispatch(setChekSection(infoSection))
+            return
+        }
     }
 
     const clickModalError = () => {
