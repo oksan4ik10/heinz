@@ -49,13 +49,15 @@ function Screen7Test(props: IProps) {
     const { textSuccess, textError } = dataModal[infoSection];
 
     const funcCheckUserAnswer = (userAnswers: number[]) => {
-        if (countUserAnswer === 3) {
+
+
+        const checkWin = userAnswers.sort((a, b) => a - b).toString() === wins.sort((a, b) => a - b).toString();
+        if ((countUserAnswer === 3) && (!checkWin)) {
             dispatch(setAnswerUser({ section: infoSection, stateAnswer: "successMiddle", arr: wins }))
             dispatch(setChekSection(infoSection))
             return
         }
 
-        const checkWin = userAnswers.sort((a, b) => a - b).toString() === wins.sort((a, b) => a - b).toString();
         dispatch(setAnswerUser({ section: infoSection, stateAnswer: checkWin ? "success" : "error", arr: userAnswers }))
         if (checkWin) dispatch(setChekSection(infoSection))
     }
