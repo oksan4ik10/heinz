@@ -50,13 +50,12 @@ function Screen5Test(props: IProps) {
     const stateAnswer = infoState.stateAnswer
     const countUserAnswer = infoState.count;
 
+
     const { question, answers, wins } = data[user][infoSection];
     const { textSuccess, textError } = (infoSection === "experience") ? dataModal[infoSection][user] : dataModal[infoSection];
 
-    const textMiddle = (infoSection === "skills") ? dataModal["skills"].textMiddle[user] : "";
+    const textMiddle = (infoSection === "skills") ? dataModal["skills"].textMiddle[user] : (infoSection === "info") ? dataModal["info"].textSuccess : "";
     const funcCheckUserAnswer = (userAnswers: number[]) => {
-
-
         let checkWin = false;
         let state: TStateQuestion = "wait";
         if (infoSection === "skills") {
@@ -64,8 +63,6 @@ function Screen5Test(props: IProps) {
 
             let countWinsAnwer = 0;
             for (let index = 0; index < sortUserAnswer.length; index++) {
-
-
                 if (wins.indexOf(sortUserAnswer[index]) !== -1) {
                     countWinsAnwer++;
                 }
@@ -74,9 +71,6 @@ function Screen5Test(props: IProps) {
                     break
                 }
             }
-
-
-
             if ((countWinsAnwer >= 5) && (countWinsAnwer < wins.length) && (state !== "error")) {
                 state = "errorMiddle"
             } else if ((state !== "error") && (countWinsAnwer === wins.length)) {
@@ -86,11 +80,18 @@ function Screen5Test(props: IProps) {
             }
             checkWin = ((state === "success") || (state === "errorMiddle"));
 
-        } else {
+        }
+
+        else {
             checkWin = [...userAnswers].sort((a, b) => a - b).toString() === [...wins].sort((a, b) => a - b).toString();
             state = checkWin ? "success" : "error"
 
         }
+        if ((!checkWin) && (infoSection === "info")) {
+            checkWin = [...userAnswers].sort((a, b) => a - b).toString() === [...wins].slice(0, wins.length - 1).sort((a, b) => a - b).toString();
+            state = checkWin ? "errorMiddle" : "error"
+        }
+
         if ((countUserAnswer === 3) && (!checkWin)) {
             dispatch(setAnswerUser({ section: infoSection, stateAnswer: "successMiddle", arr: wins }))
             dispatch(setChekSection(infoSection))

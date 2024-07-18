@@ -41,12 +41,11 @@ export const task1UserAnswerReducer = createSlice({
     initialState,
     reducers: {
         setAnswerUser(state, action: PayloadAction<ISetAnswerUser>) {
-            console.log(action.payload);
 
             state[action.payload.section].user = action.payload.arr;
             state[action.payload.section].stateAnswer = action.payload.stateAnswer;
             state[action.payload.section].count++;
-            console.log(state[action.payload.section].count);
+
 
         },
         setStateAnswer(state, action: PayloadAction<ISetStateUser>) {
