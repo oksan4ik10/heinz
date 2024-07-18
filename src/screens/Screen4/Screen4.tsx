@@ -8,6 +8,8 @@ import urlSheet from "../../assets/4sheet.png"
 import urlBgStar from "../../assets/4bg-star.svg"
 import urlBgCircle from "../../assets/4bg-circle.svg"
 
+import { useAppDispatch } from '../../store/store';
+import { setIsScroll } from '../../store/reducers/scrollReducer';
 
 import ScreenBlur from '../../components/ScreenBlur/ScreenBlur'
 import Modal from '../../components/Modal/Modal'
@@ -692,7 +694,8 @@ function Screen4(props: IProps) {
         }
 
         //переход на следующий экран
-        changeScreen()
+        // changeScreen()
+        setDataWin("win")
         enablePageScroll()
 
 
@@ -870,6 +873,12 @@ function Screen4(props: IProps) {
 
     }
 
+    const dispatch = useAppDispatch()
+    const clickWinBtn = () => {
+        dispatch(setIsScroll(true))
+        changeScreen()
+    }
+
 
     return (
         <>
@@ -894,7 +903,7 @@ function Screen4(props: IProps) {
                             {answersList.map((item, index) => <div
                                 key={index} className={style.section__item + " " + style.answer + " " + style.modalAnswer + " " + (item.win ? style.success : answersRight.indexOf(item.id) === -1 ? style.error : "")}><span>{item.text ? item.text : `Раздел ${index + 1}`}</span></div>)}
                         </section>
-                        <Modal border={false} btnText="Исправить ошибки" funcBtn={() => setDataWin("")} text={datakWin === "loser" ? 'В резюме необходимо размещать только<br/>самую важную информацию, которая<br/>поможет HR-специалисту быстро оценить,<br/>насколько твой опыт соответствует<br/>вакансии. Побольше о себе ты сможешь<br/>рассказать на собеседовании :)' : "Ты молодец и выбрал верные разделы,<br/>однако в составлении резюме важно то,<br/>в каком порядке они расположены.<br/>Попробуй поменять местами те заголовки,<br/>которые не загорелись зелёным."} />
+                        <Modal border={false} btnText={datakWin !== "win" ? "Исправить ошибки" : "Далее"} funcBtn={datakWin !== "win" ? () => setDataWin("") : clickWinBtn} text={datakWin === "loser" ? 'В резюме необходимо размещать только<br/>самую важную информацию, которая<br/>поможет HR-специалисту быстро оценить,<br/>насколько твой опыт соответствует<br/>вакансии. Побольше о себе ты сможешь<br/>рассказать на собеседовании :)' : datakWin === "win" ? "Отлично! Ты выбрал верные заголовки.<br/>Со структурой резюме определились.<br/>Теперь загляни в каждый раздел и заполни<br/>его, нажав на плюсик." : "Ты молодец и выбрал верные разделы,<br/>однако в составлении резюме важно то,<br/>в каком порядке они расположены.<br/>Попробуй поменять местами те заголовки,<br/>которые не загорелись зелёным."} />
                     </div>
                 </ScreenBlur>
                 <ScreenBlur screen={isLouserScreen}>

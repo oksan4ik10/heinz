@@ -5,10 +5,9 @@ import { TNamesQuestion } from "../../models/type";
 import ScreenBlur from "../../components/ScreenBlur/ScreenBlur";
 import Modal from "../../components/Modal/Modal";
 
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setIsScroll } from "../../store/reducers/scrollReducer";
 
-import { useAppSelector } from "../../store/store";
 
 interface IProps {
     changeScreen: () => void
@@ -19,8 +18,6 @@ function Screen5(props: IProps) {
 
     const { changeScreen, scrollWindow, isLouserModal } = props;
     const dispatch = useAppDispatch()
-
-
     const [infoTask, setInfoTask] = useState<TNamesQuestion | "">("");
     const changeInfoTask = (str: TNamesQuestion) => {
         setInfoTask(str);
@@ -63,7 +60,7 @@ function Screen5(props: IProps) {
     }
     return (
         <>
-            <ScreenBlur screen={isStartGame}>
+            <ScreenBlur screen={isStartGame && isLouserModal}>
                 <div className="modal__start">
                     <Modal border={false} btnText="Приступить" funcBtn={clickStart} text={isLouserModal ? "Отлично! Со структурой резюме<br/>определились. Теперь загляни в каждый<br/>раздел и заполни его, нажав на плюсик." : "Отлично! Ты выбрал верные заголовки.<br/>Со структурой резюме определились.<br/>Теперь загляни в каждый раздел и заполни<br/>его, нажав на плюсик."} />
                 </div>
