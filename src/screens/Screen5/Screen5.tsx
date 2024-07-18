@@ -33,7 +33,7 @@ function Screen5(props: IProps) {
     const [isFinal, setIsFinalGame] = useState(false);
 
     useEffect(() => {
-        dispatch(setIsScroll(false))
+        if (isLouserModal) dispatch(setIsScroll(false))
     }, [])
 
     const clickStart = () => {

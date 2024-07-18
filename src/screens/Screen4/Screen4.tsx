@@ -693,8 +693,7 @@ function Screen4(props: IProps) {
             return
         }
 
-        //переход на следующий экран
-        // changeScreen()
+        //если выбрал все верные ответы
         setDataWin("win")
         enablePageScroll()
 
